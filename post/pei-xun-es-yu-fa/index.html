@@ -80,7 +80,7 @@ JavaScript（JS）：ECMAScript、DOM和BOM组成。
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1619013418822" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1619014754817" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -95,7 +95,7 @@ JavaScript（JS）：ECMAScript、DOM和BOM组成。
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/pei-xun-es-yu-fa.png');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-04-21"><i class="fa fa-calendar"></i><span class="lately">1 小时前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-04-21"><i class="fa fa-calendar"></i><span class="lately">2 小时前</span></time>
               
               <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/#comments" class="comments meta-info" title="">
                 <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/pei-xun-es-yu-fa/"> </span>
@@ -531,52 +531,48 @@ loadImageAsync(url).then(val =&gt; {})
  return setTimeout(resolve, ms, 'timeOut')
   })
 }
+// 打印顺序 timeOut, 1
+   let asyncMethod = async () =&gt; {
+     try {
+       let timeConsole = await timeOut(2000);
+       console.log(timeConsole); 
+       console.log(1)
+     } catch(e) {
+       console.log(e)
+     }
+   }
 
+   asyncMethod();
 </code></pre>
+<p>注意点：</p>
+<p>await 后面的Promise对象，运行有可能返回reject，最好把await放在try...catch里,这样能够捕捉异常。</p>
+<p>await只能用在async函数中，如果是普通函数就会报错。</p>
+<p>可以使用 promise.all 方法发起多个请求。</p>
+<pre><code class="language-javascript"></code></pre>
 </li>
 </ol>
-<p>// 打印顺序 timeOut, 1<br>
-let asyncMethod = async () =&gt; {<br>
-try {<br>
-let timeConsole = await timeOut(2000);<br>
-console.log(timeConsole);<br>
-console.log(1)<br>
-} catch(e) {<br>
-console.log(e)<br>
-}<br>
-}</p>
-<p>asyncMethod();</p>
+<p>async function dbFuc(db) {<br>
+let docs = [{}, {}, {}];<br>
+let promises = docs.map((doc) =&gt; db.post(doc));</p>
+<pre><code> let results = await Promise.all(promises);
+ console.log(results);
+</code></pre>
+<p>}</p>
+<p>// 或者使用下面的写法 ES9 异步迭代 await可以和for...of循环一起使用，以串行的方式运行异步操作<br>
+async function dbFuc(db) {<br>
+let docs = [{}, {}, {}];<br>
+let promises = docs.map((doc) =&gt; db.post(doc));</p>
+<pre><code> let results = [];
+ for (let promise of promises) {
+   results.push(await promise);
+ }
+ console.log(results);
+</code></pre>
+<p>}</p>
 <pre><code>
-注意点：
-
-await 后面的Promise对象，运行有可能返回reject，最好把await放在try...catch里,这样能够捕捉异常。
-
-await只能用在async函数中，如果是普通函数就会报错。
-
-如果确实希望多个请求并发执行，可以使用 Promise.all 方法。
+当出现多个Promise
 
 ```javascript
-async function dbFuc(db) {
-  let docs = [{}, {}, {}];
-  let promises = docs.map((doc) =&gt; db.post(doc));
-
-  let results = await Promise.all(promises);
-  console.log(results);
-}
-
-// 或者使用下面的写法 ES9 异步迭代 await可以和for...of循环一起使用，以串行的方式运行异步操作
-async function dbFuc(db) {
-  let docs = [{}, {}, {}];
-  let promises = docs.map((doc) =&gt; db.post(doc));
-
-  let results = [];
-  for (let promise of promises) {
-    results.push(await promise);
-  }
-  console.log(results);
-}
-</code></pre>
-<pre><code class="language-javascript">// 当出现多个Promise
 let timeOut1 = ms =&gt; {
   return new Promise((resolve, reject) =&gt; {
     return setTimeout(resolve, ms, 'timeOut1')
@@ -606,7 +602,7 @@ async function promiseFunc() {
 
 promiseFunc();
 </code></pre>
-<ol start="2">
+<ol>
 <li>
 <h3 id="arrayprototypeincludes">Array.prototype.includes</h3>
 <p>返回Boolean，表示某个数组是否包含指定值。</p>
@@ -635,14 +631,13 @@ if(arr.includes(1)) {
 </li>
 </ol>
 <h2 id="五-参考">五、参考</h2>
-<p><strong>Babel官网中文文档</strong>：https://www.babeljs.cn/docs/learn</p>
 <p><strong>Babel官网中文文档</strong>：https://www.liaoxuefeng.com/wiki/1022910821149312</p>
 <p><strong>阿西河ECMAScript 文档说明</strong>：https://www.axihe.com/api/js-es/api/api.html</p>
 <h2 id="六-补充">六、补充</h2>
 <ol>
 <li>
 <h3 id="原型-原型链关系">原型、原型链关系</h3>
-<img src="https://hviker.github.io/post-images/1619012106163.png" alt="" loading="lazy"></li>
+<img src="https://hviker.github.io/post-images/1619014385044.png" alt="" loading="lazy"></li>
 </ol>
 
                 </div>
