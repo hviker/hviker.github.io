@@ -9625,10 +9625,3 @@ photos .photo:last-child {
   border-top: 1px solid #aaa;
   padding-top: 8px;
 }
-form.search-form .submit {
-  top: 45%;
-}
-#header .logo a {
-  border-radius: 50%;
-  overflow: hidden;
-}
