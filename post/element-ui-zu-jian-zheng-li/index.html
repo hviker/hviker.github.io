@@ -1,0 +1,881 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vue文件上传 | 淼一</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、业务需求
+可以控制文件上传数量、格式，支持图片、pdf的预览、下载、删除，支持其他文件格式的下载删除。
+2、效果截图
+
+3、组件代码
+&lt;!--  --&gt;
+&lt;template&gt;
+  &lt;div class=&q..." />
+    <meta name="keywords" content="前端组件" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="\media\images\custom-headerLogo.JPG" alt=""></a>
+            </div>
+            <!-- <div class="avatar logo">
+              <a href="https://hviker.github.io" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+            </div> -->
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619007006740" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/element-ui-zu-jian-zheng-li.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-09-14"><i class="fa fa-calendar"></i><span class="lately">7 个月前</span></time>
+              
+              <a href="https://hviker.github.io/post/element-ui-zu-jian-zheng-li/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/element-ui-zu-jian-zheng-li/"> </span>
+              </a>
+              <span id="/element-ui-zu-jian-zheng-li/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-0 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">vue文件上传</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-业务需求">1、业务需求</h3>
+<p>可以控制文件上传数量、格式，支持图片、pdf的预览、下载、删除，支持其他文件格式的下载删除。</p>
+<h3 id="2-效果截图">2、效果截图</h3>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1605087778518.png" alt="" loading="lazy"></figure>
+<h3 id="3-组件代码">3、组件代码</h3>
+<pre><code>&lt;!--  --&gt;
+&lt;template&gt;
+  &lt;div class=&quot;mainContainer&quot;&gt;
+    &lt;el-form @submit.native.prevent&gt;
+      &lt;el-upload
+        class=&quot;upload-demo&quot;
+        :action=&quot;apiPath&quot;
+        :accept=&quot;acceptType&quot;
+        :limit=&quot;fileLimit&quot;
+        :file-list=&quot;fileList&quot;
+        :http-request=&quot;handleUploadFile&quot;
+      &gt;
+        &lt;img
+          src=&quot;@/assets/mainPage/uploadFile.png&quot;
+          alt=&quot;uploadFile&quot;
+          v-if=&quot;isChangeFiles&quot;
+        /&gt;
+        &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot; v-if=&quot;isChangeFiles&quot;&gt;
+          支持 {{ acceptType }} 格式，最多{{ fileLimit }}个
+        &lt;/div&gt;
+      &lt;/el-upload&gt;
+      &lt;ul class=&quot;uploadView clearfix&quot;&gt;
+        &lt;li v-for=&quot;item in fileList&quot; :key=&quot;item.id&quot;&gt;
+          &lt;div class=&quot;fileView&quot; :title=&quot;item.name&quot;&gt;
+            &lt;img :src=&quot;getFileIconByName(item.name)&quot; /&gt;
+            {{ item.name }}
+          &lt;/div&gt;
+          &lt;div class=&quot;uploadBtn&quot;&gt;
+            &lt;a
+              href=&quot;javascript:void(0)&quot;
+              @click=&quot;handleRemove(item.id)&quot;
+              v-if=&quot;isChangeFiles&quot;
+              &gt;删除&lt;/a
+            &gt;
+            &lt;a
+              href=&quot;javascript:void(0)&quot;
+              v-if=&quot;isHasViewFunc(item.name)&quot;
+              @click=&quot;handleView(item.url)&quot;
+              &gt;查看&lt;/a
+            &gt;
+            &lt;a
+              href=&quot;javascript:void(0)&quot;
+              @click=&quot;handleDownload(item.name, item.url)&quot;
+              &gt;下载&lt;/a
+            &gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;!-- &lt;el-upload class=&quot;upload-demo&quot; :action=&quot;apiPath&quot; :on-preview=&quot;handlePreview&quot; :before-remove=&quot;beforeRemove&quot;
+        :headers=&quot;headers&quot;
+        :on-remove=&quot;handleRemove&quot;
+        :accept=&quot;acceptType&quot; :before-upload=&quot;beforeUpload&quot; :limit=&quot;fileLimit&quot; :on-exceed=&quot;handleExceed&quot;
+        :file-list=&quot;fileList&quot; :on-success=&quot;handleFileAdd&quot;&gt;
+        &lt;img src=&quot;@/assets/mainPage/uploadFile.png&quot; alt=&quot;uploadFile&quot; /&gt;
+        &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot;&gt;支持 {{ acceptType }} 格式，最多{{ fileLimit }}个&lt;/div&gt;
+      &lt;/el-upload&gt; --&gt;
+    &lt;/el-form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import axios from &quot;axios&quot;;
+import { downloadIamge, downFile } from &quot;@/utils&quot;;
+export default {
+  components: {},
+  props: {
+    isChangeFiles: {
+      type: Boolean,
+      default: true,
+    },
+    fileLimit: {
+      type: Number,
+    },
+    bizType: {
+      type: Number,
+    },
+    offlineflag: {
+      type: String,
+    },
+    fileList: {
+      type: Array,
+      default: [],
+    },
+    fileBelongId: {
+      type: Number,
+    },
+    acceptType: {
+      type: String,
+      default:
+        &quot;.xlsx,.xls,.png,.jpeg,.jpg,.gif,.ppt,pptx,.doc,.docx,.zip,.rar,.txt,.bmp,.tif,.pdf,.avi,.mp4,.mov&quot;, // 默认文件类型
+    },
+  },
+  data() {
+    return {
+      // apiPath: &quot;/api/Attachment/UploadFile?bizType=&quot; + this.bizType,
+      apiPath: &quot;&quot;,
+      // headers: { &quot;AuthorizationToken&quot;: localStorage.getItem(&quot;token&quot;) },
+      httpRequestUrl: &quot;/api/Attachment/UploadFile?bizType=&quot; + this.bizType,
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    // 上传文件
+    handleUploadFile(params) {
+      let files = params.file;
+      // 文件上传前处理
+      this.beforeUploadFunc(files);
+      this.uploadFlieFunc(files);
+    },
+    // 文件上传方法
+    uploadFlieFunc(files) {
+      let self = this,
+        formData = new FormData();
+      formData.append(&quot;file&quot;, files);
+      try {
+        axios
+          .post(self.httpRequestUrl, formData, {
+            headers: {
+              AuthorizationToken: localStorage.getItem(&quot;token&quot;),
+              &quot;Content-Type&quot;: &quot;multipart/form-data&quot;,
+            },
+          })
+          .then((res) =&gt; {
+            if (res.data &amp;&amp; res.data.returnData) {
+              let response = res.data.returnData;
+              let obj = {
+                name: files.name,
+                url: response.AttachmentPath,
+                id: response.AttachmentID,
+              };
+              if (!self.fileBelongId) {
+                // 当文件存储位置不是数组对象时
+                self.$emit(&quot;AddAttachment&quot;, response.AttachmentID, obj);
+              } else {
+                // 当文件存储位置为数组对象时
+                self.$emit(
+                  &quot;AddAttachment&quot;,
+                  response.AttachmentID,
+                  obj,
+                  self.fileBelongId
+                );
+              }
+            } else {
+              self.$message.error(&quot;文件保存失败&quot;);
+            }
+          });
+      } catch (e) {
+        self.$message.error(&quot;文件保存失败&quot;);
+      }
+    },
+    // 文件上传成功时
+    // handleFileAdd(response, file, fileList) {
+    //   let self = this;
+    //   let obj = { name: file.name, url: response.returnData.AttachmentPath, id: response.returnData.AttachmentID }
+    //   if(!this.fileBelongId) {
+    //     // 当文件存储位置不是数组对象时
+    //     self.$emit('AddAttachment', response.returnData.AttachmentID, obj);
+    //   } else {
+    //     // 当文件存储位置为数组对象时
+    //     self.$emit(&quot;AddAttachment&quot;, response.returnData.AttachmentID, obj, this.fileBelongId);
+    //   }
+    // },
+    // 文件删除
+    handleRemove(id) {
+      this.$confirm(&quot;文件删除后无法恢复，确定要删除文件?&quot;, &quot;提示&quot;, {
+        confirmButtonText: &quot;确定&quot;,
+        cancelButtonText: &quot;取消&quot;,
+        type: &quot;warning&quot;,
+      }).then(() =&gt; {
+        let file = { id: id };
+        if (!this.fileBelongId) {
+          this.$emit(&quot;removeFile&quot;, file);
+        } else {
+          this.$emit(&quot;removeFile&quot;, file, this.fileBelongId);
+        }
+      });
+    },
+    // 文件上传前处理
+    beforeUploadFunc(files) {
+      // 判断是否超过最大上传数量
+      if (this.fileList.length + 1 &gt; this.fileLimit) {
+        this.$message.warning(&quot;已超过最大上传数量限制&quot;);
+        return;
+      }
+      let fileName = files.name;
+      // 获取文件类型
+      let typeArr = fileName.split(&quot;.&quot;);
+      let type = typeArr[typeArr.length - 1];
+      if (this.acceptType != &quot;任意数据&quot;) {
+        let standFileTypeArr = this.acceptType.split(&quot;,&quot;);
+        // 判断是否符合上传文件类型
+        let arr = standFileTypeArr.filter((item) =&gt; item.substr(1) == type);
+        if (arr.length == 0) {
+          this.$message.error(`仅支持上传${this.acceptType}格式!`);
+          return false;
+        }
+      }
+      // let size = files.size;
+      // if(size / 1024 / 1024 &gt; 10) {
+      //   this.$message.error('单个文件大小上限10M');
+      //   return false;
+      // }
+      // 如果是图片，这里要对图片进行压缩
+      // if(type == &quot;png&quot; || type == &quot;jpeg&quot; || type == &quot;jpg&quot; ) {
+      //   this.compressPic(files)
+      // }
+      if (this.offlineflag == &quot;1&quot;) {
+        this.$confirm(&quot;离线上传过程中不能关闭当前页面&quot;, &quot;提示&quot;, {
+          confirmButtonText: &quot;确定&quot;,
+          cancelButtonText: &quot;取消&quot;,
+          type: &quot;warning&quot;,
+        }).then(() =&gt; {
+          let newpage = this.$router.resolve({
+            name: &quot;offlineDataUpload&quot;,
+          });
+          window.open(newpage.href, &quot;_blank&quot;);
+        });
+      }
+    },
+    // 压缩图片
+    compressPic(file) {},
+    // 根据文件名称显示图标
+    getFileIconByName(fileName) {
+      let iconType = fileName.split(&quot;.&quot;)[1];
+      let iconPic;
+      switch (iconType) {
+        case &quot;xlsx&quot;:
+        case &quot;xls&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-xlsx.png&quot;);
+          break;
+        case &quot;png&quot;:
+        case &quot;jpeg&quot;:
+        case &quot;jpg&quot;:
+        case &quot;gif&quot;:
+        case &quot;tif&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-png.png&quot;);
+          break;
+        case &quot;ppt&quot;:
+        case &quot;pptx&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-ppt.png&quot;);
+          break;
+        case &quot;doc&quot;:
+        case &quot;docx&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-docx.png&quot;);
+          break;
+        case &quot;rar&quot;:
+        case &quot;zip&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-zip.png&quot;);
+          break;
+        case &quot;txt&quot;:
+        case &quot;bmp&quot;:
+          iconPic = require(&quot;@/assets/mainPage/ico-txt.png&quot;);
+          break;
+      }
+      return iconPic;
+    },
+    // 是否显示查看按钮，仅当文件是图片或者ppt时可以查看
+    isHasViewFunc(fileName) {
+      let flag = false;
+      let iconType = fileName.split(&quot;.&quot;)[1];
+      if (
+        iconType == &quot;png&quot; ||
+        iconType == &quot;jpeg&quot; ||
+        iconType == &quot;jpg&quot; ||
+        iconType == &quot;gif&quot; ||
+        iconType == &quot;ppt&quot; ||
+        iconType == &quot;pptx&quot;
+      ) {
+        flag = true;
+      }
+      return flag;
+    },
+    // 查看图片
+    handleView(url) {
+      let baseUrl = process.env.VUE_APP_DOWNLOAD_IP + url;
+      window.open(baseUrl, &quot;_blank&quot;);
+    },
+    // 文件下载
+    handleDownload(name, url) {
+      let iconType = name.split(&quot;.&quot;)[1];
+      let baseUrl = process.env.VUE_APP_DOWNLOAD_IP + url;
+      if (iconType == &quot;png&quot; || iconType == &quot;jpeg&quot; || iconType == &quot;jpg&quot;) {
+        downloadIamge(baseUrl, name);
+      } else {
+        downFile(baseUrl, name);
+      }
+    },
+  },
+  created() {},
+  mounted() {},
+};
+&lt;/script&gt;
+&lt;style lang='scss'&gt;
+.el-upload-list {
+  display: none;
+}
+.uploadView {
+  width: 100%;
+  height: auto;
+  li {
+    width: 100%;
+    float: left;
+    padding: 0px 50px 0px 0px;
+    div {
+      float: left;
+    }
+    .fileView {
+      width: calc(100% - 150px);
+      height: 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .uploadBtn {
+      padding-left: 15px;
+      float: right;
+      a {
+        color: #5b6cea;
+        text-decoration: underline;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+.upload-demo {
+  margin-bottom: 20px;
+}
+&lt;/style&gt;
+</code></pre>
+<pre><code>// 图片下载，只能在非跨域情况下使用
+export function downloadIamge(imgsrc, name) {//下载图片地址和图片名
+  let image = new Image();
+  // 解决跨域 Canvas 污染问题
+  image.setAttribute(&quot;crossOrigin&quot;, &quot;anonymous&quot;);
+  image.onload = function () {
+    let canvas = document.createElement(&quot;canvas&quot;);
+    canvas.width = image.width;
+    canvas.height = image.height;
+    let context = canvas.getContext(&quot;2d&quot;);
+    context.drawImage(image, 0, 0, image.width, image.height);
+    let url = canvas.toDataURL(&quot;image/png&quot;); //得到图片的base64编码数据
+    let a = document.createElement(&quot;a&quot;); // 生成一个a元素
+    let event = new MouseEvent(&quot;click&quot;); // 创建一个单击事件
+    a.download = name || &quot;photo&quot;; // 设置图片名称
+    a.href = url; // 将生成的URL设置为a.href属性
+    a.dispatchEvent(event); // 触发a的单击事件
+  };
+  image.src = imgsrc;
+}
+
+// 普通文件下载
+export function downFile(imgsrc, name) {
+  var a = document.createElement(&quot;a&quot;);
+  a.download = name;
+  a.href = imgsrc;
+  a.target=&quot;_blank&quot;;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</code></pre>
+<h3 id="4-组件使用">4、组件使用</h3>
+<pre><code>&lt;upload-multiple :bizType=&quot;bizType&quot; :fileLimit=&quot;fileLimit&quot; ref=&quot;addProjectUpload&quot; :fileList=&quot;addProjectForm.FileList&quot; :isChangeFiles=&quot;isChangeFiles&quot; @AddAttachment=&quot;AddAttachment&quot; @removeFile=&quot;removeFile&quot; &gt;&lt;/upload-multiple&gt;
+
+import { deleteFile } from &quot;@/api/commonDoc&quot;
+import UploadMultiple from '@/components/UploadFileMultiple' // 多附件上传
+export default {
+	components: { UploadMultiple },
+	data() {
+        return {
+        	bizType: 0, //区分文件上传模块
+        	fileLimit： 20， // 文件上传最大上限
+        	addProjectForm: {
+        		FileList: [] ,// 展示数组
+        		FileAttachmentList: [], // 参数上传数组
+        	}，
+        	isChangeFiles: true , // 是否需要新增、修改文件，控制内部按钮显示。true是 false否
+        }
+    },
+    methods: {
+    	// 保存文件
+        AddAttachment(attachmentId, obj) {
+            this.addProjectForm.FileAttachmentList.push({ AttachmentID: attachmentId }); // 这里根据后台要求拼装数据格式
+            this.addProjectForm.FileList.push(obj);
+            this.addProjectForm = JSON.parse(JSON.stringify(this.addProjectForm)); // 做一次深拷贝，防止对象数据监听不到变化
+        },
+         // 文件删除
+        removeFile(file) {
+            let id = file.id;
+            let obj = { id: id };
+            deleteFile(obj).then(res =&gt; {
+                if (res.returnData) {
+                    let index1 = 0;
+                    this.addProjectForm.FileAttachmentList.some(res =&gt; {
+                        if (res.AttachmentID == id) {
+                            this.addProjectForm.FileAttachmentList.splice(index1, 1)
+                            return true;
+                        }
+                        index1++;
+                    })
+                    let index2 = 0
+                    this.addProjectForm.FileList.some(res =&gt; {
+                        if (res.id == id) {
+                            this.addProjectForm.FileList.splice(index2, 1);
+                            return true;
+                        }
+                        index2++;
+                    })
+                    this.$message({
+                        type: &quot;success&quot;,
+                        message: &quot;删除成功&quot;
+                    })
+                    return;
+                } else {
+                    this.$message({
+                        type: &quot;error&quot;,
+                        message: &quot;删除失败&quot;
+                    })
+                    return;
+                }
+            })
+        }
+    }
+}
+
+</code></pre>
+<pre><code>// 文件删除方法
+export function deleteFile(id) {
+    return request({
+        url: &quot;/Attachment/DeleteFile&quot;,
+        method: 'get',
+        params: id
+    })
+}
+</code></pre>
+<h3 id="5-备注">5、备注</h3>
+<p>图标:<br>
+<img src="https://hviker.github.io/post-images/1605087795277.png" alt="" loading="lazy"><br>
+<img src="https://hviker.github.io/post-images/1605087800546.png" alt="" loading="lazy"><br>
+<img src="https://hviker.github.io/post-images/1605087803809.png" alt="" loading="lazy"><br>
+<img src="https://hviker.github.io/post-images/1605087807691.png" alt="" loading="lazy"><br>
+<img src="https://hviker.github.io/post-images/1605087811488.png" alt="" loading="lazy"><br>
+<img src="https://hviker.github.io/post-images/1605087815297.png" alt="" loading="lazy"></p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/v-model-dong-tai-bang-ding-shi-li.jpg');"></div>
+                 <a href="https://hviker.github.io/post/v-model-dong-tai-bang-ding-shi-li/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-09-17">2020-09-17</time>
+                  <h4 class="title white no-margin">v-model动态绑定实例</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vue-fang-tab-shi-xian.jpg');"></div>
+                 <a href="https://hviker.github.io/post/vue-fang-tab-shi-xian/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-09-04">2020-09-04</time>
+                  <h4 class="title white no-margin">vue仿tab实现</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-16">2021-03-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">vue强制跳转</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">el-table表格合并</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">高级搜索实现</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-1 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-2 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-3 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-4 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-5 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-6 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-7 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-8 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-9 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-10 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">淼一</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- <div class="logo">
+          <a href="https://hviker.github.io"><img src="\media\images\custom-footerLogo.JPG" alt=""></a>
+        </div> -->
+        <p class="published border-effect">
+          ©2019 共 46 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

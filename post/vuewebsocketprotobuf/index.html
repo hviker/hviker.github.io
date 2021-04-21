@@ -1,0 +1,835 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VUE+Websocket+Protobuf | 淼一</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、项目场景
+监控某工程状态变化，将后台推送信息解析并实时展示，推送数据量较大。
+2、使用技术
+vue+websocket+protobuf
+3、技术介绍
+Websocket
+
+通信协议,基于tcp。与http协议不同，http是短连接，浏..." />
+    <meta name="keywords" content="前端" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="\media\images\custom-headerLogo.JPG" alt=""></a>
+            </div>
+            <!-- <div class="avatar logo">
+              <a href="https://hviker.github.io" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+            </div> -->
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619007006740" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/vuewebsocketprotobuf.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2019-11-26"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://hviker.github.io/post/vuewebsocketprotobuf/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/vuewebsocketprotobuf/"> </span>
+              </a>
+              <span id="/vuewebsocketprotobuf/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">VUE+Websocket+Protobuf</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-项目场景">1、项目场景</h3>
+<p>监控某工程状态变化，将后台推送信息解析并实时展示，推送数据量较大。</p>
+<h3 id="2-使用技术">2、使用技术</h3>
+<p>vue+websocket+protobuf</p>
+<h3 id="3-技术介绍">3、技术介绍</h3>
+<p><strong>Websocket</strong></p>
+<blockquote>
+<p>通信协议,基于tcp。与http协议不同，http是短连接，浏览器给服务端发送请求时开始，服务端接收处理响应后关闭，而且http协议只能由浏览器端发起，服务端无法直接推送。而ws是一个长连接，在vue的单个页面中，从页面创建(或者调用ws初始化方法)时开始，在当前页面关闭时结束。如果想要在整个项目中通用一个ws,可以将ws的触发放在app.vue上。ws可以实现浏览器端和服务端的双向通信，消息可以是文本也可以是二进制流数据(blob)，不存在跨域问题。使用ws就可以实现后台主动向前端推送数据，保证数据的实时渲染。</p>
+</blockquote>
+<p><strong>protobuf</strong></p>
+<blockquote>
+<p>protobuf是一种与语言无关、平台无关、可扩展的序列化数据结构，可以用于数据通信、数据存储。序列化是指将数据结构或者对象转换成能够被存储和传输的格式，同时保证序列化的结果在另一种环境中能够被重建回原来的数据或者对象。相比于XML、JSON，protobuf更加高效，适用于数据量较大的场景。</p>
+</blockquote>
+<h3 id="4-前端websocket实现">4、前端websocket实现</h3>
+<p>这里提供两种ws实现方式：原生ws、借助stompJS实现ws，两者差距在于后台ws的使用。如果后台使用的是Spring底层及的Websocket API,就使用原生的ws,如果后台启用了SockJS通信，就使用借助stompJS实现ws。需要注意的是，原生的ws在由浏览器端向后台发送数据时，后台支持接收的数据类型有String,ArrayBuffer、Blob、ArrayBufferView，但是借助stompJS的实现方式只支持发送String。<br>
+<strong>原生ws实现</strong></p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;&quot;,
+  components: {},
+  props: [],
+  data() {
+    return {
+      path: &quot;ws://127.0.0.1:8085/binaryHandler&quot;, // socket连接地址
+      socket: &quot;&quot;, // socket对象
+    };
+  },
+  watch: {},
+  computed: {},
+  methods: {
+    init() {
+      // 判断浏览器是否支持socket
+      if (typeof WebSocket === &quot;undefined&quot;) {
+        this.$message({
+          message: &quot;您的浏览器不支持socket&quot;,
+          type: &quot;warn&quot;
+        });
+      } else {
+        // 实例化socket
+        this.socket = new WebSocket(this.path);
+        // 监听socket连接
+        this.socket.onopen = this.open;
+        // 监听socket错误信息
+        this.socket.onerror = this.error;
+        // 监听socket推送消息
+        this.socket.onmessage = this.getMessage;
+      }
+    },
+    open() {
+      console.log(&quot;socket连接成功&quot;);
+    },
+    error() {
+      console.log(&quot;连接错误&quot;);
+    },
+    getMessage(msg) {
+        console.log(msg)
+    },
+    send() {
+      this.socket.send(&quot;数据发送&quot;);
+    },
+    close() {
+      console.log(&quot;socket已关闭&quot;);
+    }
+  },
+  created() {},
+  mounted() {
+      this.init();
+  },
+  destroyed() {
+    this.socket.close = this.close;
+  }
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+&lt;/style&gt;
+</code></pre>
+<p><strong>基于stompJS实现</strong></p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import SockJS from &quot;sockjs-client&quot;;
+import Stomp from &quot;stompjs&quot;;
+import heartBeat from &quot;@/proto/HeartBeat_pb&quot;;
+export default {
+  name: &quot;SocketLink&quot;,
+  components: {},
+  props: [],
+  data() {
+    return {
+      socketDir: &quot;http://127.0.0.1:8085/gs-guide-websocket&quot;, // socket连接地址
+      stompClient: null, // STOMP子协议的客户端对象
+      sendUrl: &quot;/app/hello&quot;, // 发送数据通道
+      receiveUrl: &quot;/topic/greetings&quot; // 接收数据通道
+    };
+  },
+  watch: {},
+  computed: {},
+  methods: {
+    // socket创建连接
+    initWebSocket() {
+      // 建立连接对象
+      let socket = new SockJS(this.socketDir);
+      this.stompClient = Stomp.over(socket); // 获取STOMP子协议的客户端对象
+      this.connection();
+    },
+    connection() {
+      // 定义客户端的认证信息,按需求配置
+      let headers = {};
+      // 向服务器发起websocket连接
+      this.stompClient.connect(
+        headers,
+        () =&gt; {
+          this.stompClient.subscribe(
+            this.receiveUrl,
+            msg =&gt; {
+              // todo 对数据处理
+              let data = msg;
+            },
+            headers
+          );
+        },
+        err =&gt; {
+          // 连接发生错误时的处理函数
+          console.log(err);
+        }
+      );
+    },
+    // 断开连接
+    disconnect() {
+      if (this.stompClient) {
+        this.stompClient.disconnect();
+      }
+    },
+    // 发送数据
+    sendMessage() {
+      let msg = &quot;aaa&quot;;
+      // 这里只支持发送string类型
+      this.stompClient.send(this.sendUrl, {}, msg);
+    }
+  },
+  created() {},
+  mounted() {
+      this.initWebSocket();
+  }
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+&lt;/style&gt;
+</code></pre>
+<h3 id="5-前端protobuf数据处理">5、前端protobuf数据处理</h3>
+<p>这里提供两种protobuf数据处理方式，借助google-protobuf、借助protobufJS。借助于StompJS的ws的实现后台不能接收arraybuffer数据类型，这里仅配合后台原生ws的实现。<br>
+<strong>借助google-protobuf</strong><br>
+(1) 使用npm下载 google-protobuf。</p>
+<pre><code>npm install google-protobuf -S
+</code></pre>
+<p>(2) 由于是在vue中使用，建议将后台提供的proto转化成js。后台提供的proto文件类似于以下格式：</p>
+<pre><code>syntax = &quot;proto3&quot;;
+
+ option java_package = &quot;com.train.proto&quot;;
+ option java_outer_classname = &quot;HeartBeatClass&quot;;
+
+message HeartBeat {
+    int32 heart =1;
+    int32 time =2;
+    int32 ids =3;
+    int64 requestInfo =4;
+}
+</code></pre>
+<p>在命令行执行下面代码，转化成js文件</p>
+<pre><code>protoc.exe --js_out=import_style=commonjs,binary:. xxx.proto
+</code></pre>
+<p>(3) google-protobuf提供了序列化和反序列化的方法，可以实现对二进制数据的处理</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import heartBeat from &quot;@/proto/HeartBeat_pb&quot;;
+export default {
+  name: &quot;&quot;,
+  components: {},
+  props: [],
+  data() {
+    return {
+      path: &quot;ws://127.0.0.1:8085/binaryHandler&quot;, // socket连接地址
+      socket: &quot;&quot;,  // socket对象
+    };
+  },
+  watch: {},
+  computed: {},
+  methods: {
+    init() {
+      // 判断浏览器是否支持socket
+      if (typeof WebSocket === &quot;undefined&quot;) {
+        this.$message({
+          message: &quot;您的浏览器不支持socket&quot;,
+          type: &quot;warn&quot;
+        });
+      } else {
+        // 实例化socket
+        this.socket = new WebSocket(this.path);
+        // 监听socket连接
+        // 监听socket错误信息
+        this.socket.onerror = this.error;
+        // 监听socket推送消息
+        this.socket.onmessage = this.getMessage;
+      }
+    },
+    open() {
+      console.log(&quot;socket连接成功&quot;);
+    },
+    error() {
+      console.log(&quot;连接错误&quot;);
+    },
+    getMessage(msg) {
+      // websocket server 返回的是blob
+      let result = msg.data;
+      if (result instanceof Blob) {
+        // 对blob数据进行处理
+        let reader = new FileReader();
+        reader.readAsArrayBuffer(result);
+        reader.onload = ()=&gt;{
+          const buf = new Uint8Array(reader.result);
+          // 反序列化
+          let decodeMsg = heartBeat.HeartBeat.deserializeBinary(buf);
+          // 获取数据，使用getXXX();
+          let requestInfo = decodeMsg.getRequestinfo()
+        }
+      }
+    },
+    send() {
+      if(this.socket === &quot;&quot;) return;
+        // 创建heart对象
+         const heart = new heartBeat.HeartBeat();
+         // 赋值,使用setXXX
+         heart.setHeart(100);
+         heart.setTime(150);
+         heart.setIds(200);
+         heart.setRequestinfo(250);
+         // 序列化
+         const hearts = heart.serializeBinary();
+         this.socket.send(buf);
+    },
+    close() {
+      console.log(&quot;socket已关闭&quot;);
+    }
+  },
+  created() {},
+  mounted() {
+      this.init()
+  },
+  destroyed() {
+    this.socket.close = this.close;
+  }
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+&lt;/style&gt;
+</code></pre>
+<p>关于google-protobuf的详细介绍见官网:<a href="https://www.npmjs.com/package/google-protobuf">https://www.npmjs.com/package/google-protobuf</a><br>
+<strong>借助于protobufJS</strong><br>
+(1) 使用npm下载 protobufJS。</p>
+<pre><code>npm install protobufjs -S；
+</code></pre>
+<p>(2) 同样推荐将proto文件转化成js文件<br>
+在项目跟目录下执行，A：生成js文件存放位置 B:需要生成js的proto文件</p>
+<pre><code>npx pbjs -t json-module -w commonjs -o A B
+</code></pre>
+<p>例如：</p>
+<pre><code>npx pbjs -t json-module -w commonjs -o src/proto/HeartBeat.js src/proto/HeartBeat.proto
+</code></pre>
+<p>(3) protobufJS提供方法较多，lookup、encode、decode等</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import heartBeatOth from &quot;@/proto/HeartBeat&quot;
+export default {
+  name: &quot;&quot;,
+  components: {},
+  props: [],
+  data() {
+    return {
+      path: &quot;ws://127.0.0.1:8085/binaryHandler&quot;, // socket连接地址
+      socket: &quot;&quot;, // socket实例
+      heartOther: &quot;&quot;, // heartBeatOth对象
+    };
+  },
+  watch: {},
+  computed: {},
+  methods: {
+    init() {
+      // 判断浏览器是否支持socket
+      if (typeof WebSocket === &quot;undefined&quot;) {
+        this.$message({
+          message: &quot;您的浏览器不支持socket&quot;,
+          type: &quot;warn&quot;
+        });
+      } else {
+        // 实例化socket
+        this.socket = new WebSocket(this.path);
+        // 监听socket连接
+        this.socket.onopen = this.open;
+         // 获取消息类型
+        this.heartOther = heartBeatOth.lookup(&quot;HeartBeat&quot;);
+        // 监听socket错误信息
+        this.socket.onerror = this.error;
+        // 监听socket推送消息
+        this.socket.onmessage = this.getMessage;
+      }
+    },
+    open() {
+      console.log(&quot;socket连接成功&quot;);
+    },
+    error() {
+      console.log(&quot;连接错误&quot;);
+    },
+    getMessage(msg) {
+      // websocket server返回的是blob
+      let result = msg.data;
+      if (result instanceof Blob) {
+        // 对blob进行处理
+        let reader = new FileReader();
+        reader.readAsArrayBuffer(result);
+        reader.onload = ()=&gt;{
+          const buf = new Uint8Array(reader.result);
+          let decodeMsg = this.heartOther.decode(buf);
+          let { requestInfo } = decodeMsg;
+        }
+      }
+    },
+    send() {
+      if(this.socket === &quot;&quot;) return;
+      // 传递内容
+      let cont = {
+        heart: 100,
+        time: 150,
+        ids: 200,
+        requestInfo: 250
+      }
+      // 验证内容是否有效
+      let errMsg = this.heartOther.verify(cont);
+      if(errMsg) throw Error(errMsg);
+      // 创建消息实体
+      let message = this.heartOther.create(cont);
+      // 将消息实体编码成Uint8Array 
+      let buf = this.heartOther.encode(message).finish();
+      this.socket.send(buf);
+    },
+    close() {
+      console.log(&quot;socket已关闭&quot;);
+    }
+  },
+  created() {},
+  mounted() {
+      this.init();
+  },
+  destroyed() {
+    this.socket.close = this.close;
+  }
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+&lt;/style&gt;
+</code></pre>
+<p>关于google-protobuf的详细介绍见官网:<a href="https://www.npmjs.com/package/protobufjs">https://www.npmjs.com/package/protobufjs</a></p>
+<p><strong>补充</strong><br>
+(1) 使用axios对接收protobuf数据的处理。需要修改content-type, responseType</p>
+<pre><code>import Vue from 'vue'
+import axios from 'axios'
+
+const protoSer = axios.create({
+    timeout: 60000,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/x-protobuf;charset=UTF-8'
+    },
+    responseType: 'arraybuffer'
+  })
+
+Vue.prototype.$protoSer = protoSer
+export default protoSer
+</code></pre>
+<p>(2) 使用google-protobuf、protobufJS在数据反序列化、序列化、获取数据上的打印结果<br>
+google-protobuf反序列化<br>
+<img src="https://hviker.github.io/post-images/1588132323484.png" alt="" loading="lazy"><br>
+protobufJS反序列化<br>
+<img src="https://hviker.github.io/post-images/1588132329884.png" alt="" loading="lazy"><br>
+google-protobuf序列化<br>
+<img src="https://hviker.github.io/post-images/1588132335737.png" alt="" loading="lazy"><br>
+protobufJS序列化<br>
+<img src="https://hviker.github.io/post-images/1588132341431.png" alt="" loading="lazy"><br>
+google-protobuf获取数据<br>
+<img src="https://hviker.github.io/post-images/1588132347091.png" alt="" loading="lazy"><br>
+protobufJS获取数据<br>
+<img src="https://hviker.github.io/post-images/1588132352638.png" alt="" loading="lazy"></p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/springboot-xia-shi-xian-yuan-sheng-websocket.jpg');"></div>
+                 <a href="https://hviker.github.io/post/springboot-xia-shi-xian-yuan-sheng-websocket/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2019-11-26">2019-11-26</time>
+                  <h4 class="title white no-margin">SpringBoot下实现原生Websocket</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/idNHj5-gf.jpg');"></div>
+                 <a href="https://hviker.github.io/post/hello-gridea/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2018-12-12">2018-12-12</time>
+                  <h4 class="title white no-margin">Hello Gridea</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-16">2021-03-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">vue强制跳转</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">el-table表格合并</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">高级搜索实现</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-1 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-2 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-3 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-4 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-5 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-6 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-7 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-8 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-9 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-10 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">淼一</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- <div class="logo">
+          <a href="https://hviker.github.io"><img src="\media\images\custom-footerLogo.JPG" alt=""></a>
+        </div> -->
+        <p class="published border-effect">
+          ©2019 共 46 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

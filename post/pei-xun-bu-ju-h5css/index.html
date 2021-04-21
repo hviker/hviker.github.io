@@ -1,0 +1,693 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>培训-布局(H5、CSS) | 淼一</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、标签初始化
+(1) 很多标签自带margin、padding。在使用前设置为0。不建议设置*
+(2) a 下划线去除
+(3) li 去除左侧点
+(4) i 去除斜体
+(4) 添加清除浮动伪类 clearfix
+html,body,div..." />
+    <meta name="keywords" content="培训" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="\media\images\custom-headerLogo.JPG" alt=""></a>
+            </div>
+            <!-- <div class="avatar logo">
+              <a href="https://hviker.github.io" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+            </div> -->
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619007006740" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/pei-xun-bu-ju-h5css.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-10-15"><i class="fa fa-calendar"></i><span class="lately">6 个月前</span></time>
+              
+              <a href="https://hviker.github.io/post/pei-xun-bu-ju-h5css/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/pei-xun-bu-ju-h5css/"> </span>
+              </a>
+              <span id="/pei-xun-bu-ju-h5css/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-0 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">培训-布局(H5、CSS)</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-标签初始化">1、标签初始化</h3>
+<p>(1) 很多标签自带margin、padding。在使用前设置为0。不建议设置*</p>
+<p>(2) a 下划线去除</p>
+<p>(3) li 去除左侧点</p>
+<p>(4) i 去除斜体</p>
+<p>(4) 添加清除浮动伪类 clearfix</p>
+<pre><code>html,body,div,ul,li,h1,h2,h3,h4,h5,table,p,span,img,a,label,i {
+    margin:0;
+    padding:0;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+i {
+    font-style:normal
+}
+clearfix:after{
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: &quot; &quot;;
+     clear: both;
+     height: 0;
+}
+</code></pre>
+<h3 id="2-行-块元素">2、行、块元素</h3>
+<h5 id="行元素">行元素:</h5>
+<p>a，span, i, label, img, input...</p>
+<h5 id="块元素">块元素:</h5>
+<p>div、table、h1-h6、p、ul、li...</p>
+<h5 id="表现形式">表现形式:</h5>
+<p>(1) 行元素不独占一行，不能设置宽高</p>
+<p>(2) 块元素独占一行，能设置宽高</p>
+<p>(3) 行内块元素不独占一行，但是可以设置宽高</p>
+<h5 id="行-块转换display">行、块转换:display</h5>
+<p>变行:  display:inline;</p>
+<p>变块: display:block;</p>
+<p>变行内块: display:inline-block;</p>
+<h3 id="3-居中">3、居中</h3>
+<h4 id="行标签">行标签:</h4>
+<p>​	水平：text-align:center;</p>
+<p>​	垂直：line-height:  父元素高度；</p>
+<h4 id="块元素-2">块元素：</h4>
+<p>​	水平：margin: 0px auto;</p>
+<p>​       垂直：(1) 定位position。已知块的宽和高，使用绝对定位</p>
+<p>​		  (2) display:flex。   父元素添加display:flex; 子元素添加margin:auto。</p>
+<h3 id="4-定位">4、定位</h3>
+<h5 id="绝对定位positionabsolute">绝对定位：position:absolute。</h5>
+<p>绝对定位元素的未知相对于最近的已定位的父元素。如果元素没有已经定位的父元素，那么它的相对位置相对于<html></p>
+<p>常用案例：块元素居中</p>
+<pre><code>{
+    position:absolute;
+    width:300px;
+    height:300px;
+    left:50%;
+    top:50%;
+    margin-left:-150px;
+    margin-top: -150px;
+}
+</code></pre>
+<h5 id="相对定位positionrelative">相对定位：position:relative。</h5>
+<p>正常文档流。相对于正常位置。</p>
+<h5 id="固定定位positionfixed">固定定位：position:fixed。</h5>
+<p>相对于浏览器窗口。浏览器中存在滚动条且发生滚动时，它不会移动。</p>
+<p>常用案例：头部定位导航条、左下角留言板。</p>
+<h3 id="5-浮动">5、浮动</h3>
+<h5 id="意义脱离正常的文档流摆脱了块级元素和行内元素的限制">意义：脱离正常的文档流,摆脱了块级元素和行内元素的限制。</h5>
+<h5 id="使用float-leftright">使用：float -&gt;left;/right;</h5>
+<h5 id="影响高度塌陷">影响：高度塌陷</h5>
+<p>当有浮动的子元素存在高度时，如果父元素没有设置浮动，此时子元素不会撑起父元素，父元素的高度消失。如果不清楚浮动，往后的dom元素也会存在高度上的影响。在这种情况下需要清除浮动。</p>
+<h5 id="清除1-伪类推荐">清除：(1) 伪类(推荐)</h5>
+<pre><code>clearfix:after{
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: &quot; &quot;;
+     clear: both;
+     height: 0;
+}
+</code></pre>
+<p>(2) overflow:hidden;</p>
+<p>(3) 兼容IE6  zoom:1</p>
+<h3 id="6-浏览器页面前端自适应方案">6、浏览器页面前端自适应方案</h3>
+<h4 id="1-常见概念">(1) 常见概念：</h4>
+<p>px：像素，屏幕上显示数据的最基本的点。width:100px；</p>
+<p>屏幕分辨率: 1920*1080 -》宽度上1920个像素点，高度上1080个像素点。</p>
+<p>rem：相对于根元素font-size的长度单位。 font-size:0.9rem;</p>
+<p>em：相对于父元素font-size的长度单位。font-size:0.9em; 几乎不用。</p>
+<p>vw:视窗宽度，移动端。1wm = 视窗宽度的1%;</p>
+<p>vh：视窗高度，移动端。 1vh = 视窗高度的1%；</p>
+<h4 id="2-方案">(2) 方案</h4>
+<h5 id="纯css-百分比方案媒体查询方案rem常用">纯css - 百分比方案+媒体查询方案+rem(常用)</h5>
+<h5 id="大布局用百分比小调整用媒体查询字体控制用rem">大布局用百分比，小调整用媒体查询,字体控制用rem。</h5>
+<h5 id="对于较大的定位区域比如整个页面-左侧菜单区域-右侧内容区域">对于较大的定位区域，比如整个页面、左侧菜单区域、右侧内容区域。</h5>
+<p>calc()在声明css属性时执行一些计算，用于计算不确定值。一般用calc() 去解决像素溢出问题。</p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5C13298%5CDesktop%5Cpic%5C%E5%9F%B9%E8%AE%AD%5C1.png" alt="" loading="lazy"></figure>
+<p>html:</p>
+<pre><code>&lt;div class=&quot;container&quot;&gt;
+	&lt;div class=&quot;header&quot;&gt;头部&lt;/div&gt;
+	&lt;div class=&quot;mainbody clearfix&quot;&gt;
+		&lt;div class=&quot;sider&quot;&gt;左侧菜单区域&lt;/div&gt;
+		&lt;div class=&quot;content&quot;&gt;右侧内容区域&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>css:</p>
+<pre><code>.container {
+    width:100%;
+    height:100%
+}
+.header {
+    width:100%;
+    height：60px;
+}
+.mainbody {
+    width:100%;
+    height:calc(100% - 60px)
+}
+.clearfix:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: &quot; &quot;;
+    clear: both;
+    height: 0;
+}
+.sider {
+    float:left;
+    width:200px;
+    height:100%;
+}
+.content {
+    float:right;
+    width:calc(100% - 200px);
+    height:100%;
+}
+</code></pre>
+<h5 id="局部调整用媒体查询media">局部调整用媒体查询@media</h5>
+<pre><code>@media screen and (min-width:1600px) and (max-width:1920px){
+    
+}
+@media screen and (min-width:1367px) and (max-width:1599px){
+    
+}
+@media screen and (min-width:1091px) and (max-width:1366px){
+    
+}
+@media screen and (min-width:768px) and (max-width:1090px){
+    
+}
+</code></pre>
+<h5 id="字体控制用rem">字体控制用rem</h5>
+<p>当页面调整时只需根据当前显示区域大小修改html的font-size。</p>
+<h5 id="借助js-rem方案不推荐">借助js - rem方案(不推荐)</h5>
+<p>js 动态修改html文字大小，在页面缩放时重新调整rem的大小。</p>
+<p>对于页面的放大缩小实际是改变了可是区域的大小，也可以用@media去调整。</p>
+<p>动态获取浏览器缩放比例的方法</p>
+<pre><code>function detectZoom() {
+            var ratio = 0,
+                screen = window.screen,
+                ua = navigator.userAgent.toLowerCase();
+
+            if (window.devicePixelRatio !== undefined) {
+                ratio = window.devicePixelRatio;
+            }
+            else if (~ua.indexOf('msie')) {
+                if (screen.deviceXDPI &amp;&amp; screen.logicalXDPI) {
+                    ratio = screen.deviceXDPI / screen.logicalXDPI;
+                }
+            }
+            else if (window.outerWidth !== undefined &amp;&amp; window.innerWidth !== undefined) {
+                ratio = window.outerWidth / window.innerWidth;
+            }
+
+            if (ratio) {
+                ratio = Math.round(ratio * 100);
+            }
+            return ratio;
+        }
+</code></pre>
+<p>备注：设置宽度/高度百分比一定要保证父元素的宽度/高度有确定值(可以是百分比，可以是px等)。否则设置的百分比无效。</p>
+<h3 id="7-css优先级">7、css优先级</h3>
+<h5 id="1-css具有继承性">(1) css具有继承性</h5>
+<p>应用在标签上的css会影响其子标签，但是子标签的直接样式优先级高于父标签样式。</p>
+<h5 id="2-样式优先级内联样式-id-选择器-类选择器-属性选择器-伪类选择器-标签选择器-伪元素选择器">(2) 样式优先级：内联样式 &gt; ID 选择器 &gt; 类选择器 = 属性选择器 = 伪类选择器 &gt; 标签选择器 = 伪元素选择器</h5>
+<p>属性选择器</p>
+<pre><code>input[type = &quot;text&quot;]
+{
+    width:200px;
+    height:30px;
+}
+</code></pre>
+<p>伪类选择器</p>
+<pre><code>input:first-child{
+    width:200px;
+    height:30px;
+}
+</code></pre>
+<p>伪元素选择器  :before :after</p>
+<h5 id="3-css可覆盖同级别-同路径下样式后者覆盖前者-主要用于样式覆盖">(3) css可覆盖，同级别、同路径下样式，后者覆盖前者。 主要用于样式覆盖。</h5>
+<h5 id="4-css样式嵌套层级越深优先级越高">(4) css样式嵌套层级越深，优先级越高。</h5>
+<p>.A .B .C &gt; .A .C</p>
+<p>可用于换肤，菜单样式切换。</p>
+<h3 id="8-其他常用css">8、其他常用css</h3>
+<p>(1) 单行文本溢出添加省略号</p>
+<pre><code>{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+</code></pre>
+<p>(2) 多行文本溢出添加省略号</p>
+<p><strong>chrome实现方法：不兼容IE及其他浏览器</strong></p>
+<pre><code>{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+ }
+</code></pre>
+<p><strong>IE及其他浏览器实现方法：</strong></p>
+<p>使用插件clamps .js</p>
+<p>插件下载地址：https://github.com/josephschmitt/Clamp.js</p>
+<p>使用：</p>
+<pre><code>	// 引入
+	&lt;script src=&quot;js/Clamp.js-master/clamp.js&quot;&gt;&lt;/script&gt;
+	// 样式
+    &lt;style&gt;
+        .divarea {
+            width: 300px;
+            height: 84px;
+        }
+
+        p {
+            width: 100%;
+        }
+    &lt;/style&gt;
+    // html 
+    &lt;div class=&quot;divarea&quot;&gt;
+        &lt;p&gt;这两个选择元素的API,ualCrew小组耗时两年翻译，保持与D3 V3最后一版（3.5.17）一致.D3 V4最新版API请参考d3.v4-API翻译&lt;/p&gt;
+    &lt;/div&gt;
+    // js
+    &lt;script&gt;
+    $(document).ready(function () {
+        $clamp($(&quot;.divarea p&quot;)[0], {
+            clamp: '3'
+        })
+    })
+&lt;/script&gt;
+</code></pre>
+<p>(3) 三角形绘制</p>
+<pre><code>{
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+}
+</code></pre>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/echarts-bu-fen-yong-fa.jpg');"></div>
+                 <a href="https://hviker.github.io/post/echarts-bu-fen-yong-fa/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-10-22">2020-10-22</time>
+                  <h4 class="title white no-margin">echarts部分用法</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/echarts-shu-xing-she-zhi-wan-zheng-ban.jpg');"></div>
+                 <a href="https://hviker.github.io/post/echarts-shu-xing-she-zhi-wan-zheng-ban/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-09-22">2020-09-22</time>
+                  <h4 class="title white no-margin">echarts属性设置(完整版)</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-16">2021-03-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">vue强制跳转</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">el-table表格合并</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">高级搜索实现</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-1 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-2 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-3 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-4 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-5 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-6 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-7 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-8 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-9 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-10 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">淼一</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- <div class="logo">
+          <a href="https://hviker.github.io"><img src="\media\images\custom-footerLogo.JPG" alt=""></a>
+        </div> -->
+        <p class="published border-effect">
+          ©2019 共 46 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

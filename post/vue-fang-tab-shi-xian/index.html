@@ -1,0 +1,597 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vue仿tab实现 | 淼一</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、应用场景
+单页面存在多个tab，其中多个tab中都存在大量的数据请求。普通的tab在首页面展示时会对所有tab的数据进行请求，浪费资源，引起页面卡顿。使用该tab可以有效解决单页面数据请求与数据渲染问题，利用 在tab切换时只需要根据i..." />
+    <meta name="keywords" content="前端组件" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="\media\images\custom-headerLogo.JPG" alt=""></a>
+            </div>
+            <!-- <div class="avatar logo">
+              <a href="https://hviker.github.io" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+            </div> -->
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619007006740" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/vue-fang-tab-shi-xian.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-09-04"><i class="fa fa-calendar"></i><span class="lately">8 个月前</span></time>
+              
+              <a href="https://hviker.github.io/post/vue-fang-tab-shi-xian/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/vue-fang-tab-shi-xian/"> </span>
+              </a>
+              <span id="/vue-fang-tab-shi-xian/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-0 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">vue仿tab实现</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-应用场景">1、应用场景</h3>
+<p>单页面存在多个tab，其中多个tab中都存在大量的数据请求。普通的tab在首页面展示时会对所有tab的数据进行请求，浪费资源，引起页面卡顿。使用该tab可以有效解决单页面数据请求与数据渲染问题，利用<component> 在tab切换时只需要根据id动态修改currentTabComponent的值,也可以往组件中传值。</p>
+<h3 id="2-效果截图">2、效果截图</h3>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1605085185520.png" alt="" loading="lazy"></figure>
+<h3 id="3-代码实现">3、代码实现</h3>
+<pre><code>&lt;!-- 首页 --&gt;
+&lt;template&gt;
+  &lt;div class=&quot;mainContainer&quot;&gt;
+    &lt;div class=&quot;tabArea&quot;&gt;
+      &lt;div class=&quot;overFlowTabArea&quot;&gt;
+        &lt;el-button
+          v-for=&quot;item in tabType&quot;
+          :key=&quot;item.id&quot;
+          @click=&quot;handleTab(item.id)&quot;
+          :class=&quot;{ isActive: item.id == activeTab }&quot;
+          &gt;{{ item.name }}&lt;/el-button
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;mainTabInfo&quot;&gt;
+      &lt;component :is=&quot;currentTabComponent&quot; :tabArr=&quot;tabArr&quot;&gt;&lt;/component&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import AllDynamicRoute from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/AllDynamicRoute_index&quot;; // 全部菜单
+import FirstPrinciples from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/FirstPrinciples_index&quot;; // xxx
+import CALPHAD from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/CALPHAD_index&quot;; //xxx
+import Spread from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/Spread_index&quot;; // xxx
+import Multiphase from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/Multiphase_index&quot;; // xxx
+
+export default {
+  components: {
+    AllDynamicRoute,
+    FirstPrinciples,
+    CALPHAD,
+    Spread,
+    Precipitation,
+    Multiphase,
+    Limited,
+    Fluid,
+    Coupling,
+    Other,
+  },
+  data() {
+    return {
+      computeMenuData: [], // 云计算菜单数据
+      tabType: [
+        // 仿Tab 按钮资源
+      ],
+      activeTab: &quot;FirstPrinciples&quot;, // 激活状态下的tab
+      currentTabComponent: FirstPrinciples, // 激活状态下tab对应的数据信息
+      tabArr: [
+        // 当前tab显示数据
+      ],
+      allDynamicRouteArr: [
+        // 所有的三级菜单
+      ],
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    // 点击按钮切换菜单
+    handleTab(id) {
+      this.activeTab = id;
+      switch (id) {
+        case &quot;AllDynamicRoute&quot;:
+          this.currentTabComponent = AllDynamicRoute;
+          break;
+        case &quot;FirstPrinciples&quot;:
+          this.currentTabComponent = FirstPrinciples;
+          break;
+        case &quot;CALPHAD&quot;:
+          this.currentTabComponent = CALPHAD;
+          break;
+        case &quot;Multiphase&quot;:
+          this.currentTabComponent = Multiphase;
+          break;
+        case &quot;Spread&quot;:
+          this.currentTabComponent = Spread;
+          break;
+        case &quot;MyComputeTask&quot;:
+          this.$router.push(&quot;/steelResearchCompute/myComputeTask&quot;);
+          return;
+          break;
+      }
+      this.getTabArr(id);
+    },
+    // 获取当前tab的二级菜单
+    getTabArr(id) {
+      if (id == &quot;AllDynamicRoute&quot;) {
+        this.tabArr = JSON.parse(JSON.stringify(this.allDynamicRouteArr));
+      } else {
+        let arr = [];
+        this.computeMenuData.some((item) =&gt; {
+          if (item.category == id) {
+            let categoryList = item.categoryList; // tab对应的二级菜单
+            categoryList.forEach((item1) =&gt; {
+              // InstructionMode : 1 指令模式，2 图形模式
+              let routerPath =
+                item1.InstructionMode == &quot;2&quot;
+                  ? &quot;/steelResearchCompute/cloudCompute&quot;
+                  : &quot;/steelResearchCompute/instructionModeCompute&quot;;
+              arr.push({
+                id: item1.ID,
+                name: item1.ChineseName,
+                secondName: item1.ChineseName,
+                picLocal: process.env.VUE_APP_DOWNLOAD_IP + item1.SoftAlgorithmCoverIcon,
+                routerPath: routerPath,
+              });
+            });
+            return true;
+          }
+        });
+        this.tabArr = arr;
+      }
+    },
+    // 初始化
+    init() {
+      // 钢研云计算所有动态的二级菜单
+      let computeMenuData = this.$store.getters.computeMenuData;
+      this.computeMenuData = computeMenuData;
+      this.tabType = [{ id: &quot;AllDynamicRoute&quot;, name: &quot;全部&quot; }];
+      if (computeMenuData.length &gt; 0) {
+        computeMenuData.forEach((item) =&gt; {
+          this.tabType.push({ id: item.category, name: item.categoryText });
+          // 获取所有的三级菜单
+          item.categoryList.forEach((item1) =&gt; {
+            let routerPath =
+              item1.InstructionMode == &quot;2&quot;
+                ? &quot;/steelResearchCompute/cloudCompute&quot;
+                : &quot;/steelResearchCompute/instructionModeCompute&quot;;
+            this.allDynamicRouteArr.push({
+              id: item1.ID,
+              name: item1.ChineseName,
+              secondName: item1.ChineseName,
+              picLocal: process.env.VUE_APP_DOWNLOAD_IP + item1.SoftAlgorithmCoverIcon,
+              routerPath: routerPath,
+            });
+          });
+        });
+        // 添加我的计算任务tab
+        this.tabType.push({ id: &quot;MyComputeTask&quot;, name: &quot;我的计算任务&quot; })
+        this.handleTab(&quot;AllDynamicRoute&quot;);
+      }
+    },
+  },
+  created() {
+    this.init();
+  },
+  mounted() {},
+};
+&lt;/script&gt;
+&lt;style lang='scss'&gt;
+//  仿Tab 按钮样式
+.mainContainer {
+  padding: 0px;
+  .overFlowTabArea {
+    width: auto;
+    height: 100%;
+  }
+  .tabArea .overFlowTabArea &gt; .el-button--medium {
+    padding: 10px;
+    border-radius: 2px;
+    margin-left: 2px;
+  }
+}
+&lt;/style&gt;
+</code></pre>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/element-ui-zu-jian-zheng-li.jpg');"></div>
+                 <a href="https://hviker.github.io/post/element-ui-zu-jian-zheng-li/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-09-14">2020-09-14</time>
+                  <h4 class="title white no-margin">vue文件上传</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vue-er-ji-shu-zhi-neng-xuan-ze-yi-ji-jie-dian-xia-de-yi-xiang-huo-zhe-duo-xiang.jpg');"></div>
+                 <a href="https://hviker.github.io/post/vue-er-ji-shu-zhi-neng-xuan-ze-yi-ji-jie-dian-xia-de-yi-xiang-huo-zhe-duo-xiang/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-08-30">2020-08-30</time>
+                  <h4 class="title white no-margin">vue二级树(只能选择一级节点下的一项或者多项)</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-16">2021-03-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">vue强制跳转</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">el-table表格合并</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">高级搜索实现</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-1 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-2 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-3 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-4 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-5 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-6 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-7 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-8 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-9 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-10 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">淼一</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- <div class="logo">
+          <a href="https://hviker.github.io"><img src="\media\images\custom-footerLogo.JPG" alt=""></a>
+        </div> -->
+        <p class="published border-effect">
+          ©2019 共 46 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

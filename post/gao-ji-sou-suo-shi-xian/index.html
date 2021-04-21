@@ -1,0 +1,1285 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>高级搜索实现 | 淼一</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、实现效果
+页面初始化效果
+
+单选选中效果
+
+全部选择效果
+
+取消选中(点击各查询条件或者已选条件的叉号)
+
+2、代码实现
+主页面方法
+&lt;template&gt;
+  &lt;div class=&quot;pageContaine..." />
+    <meta name="keywords" content="前端组件,前端" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="\media\images\custom-headerLogo.JPG" alt=""></a>
+            </div>
+            <!-- <div class="avatar logo">
+              <a href="https://hviker.github.io" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+            </div> -->
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619007006740" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-02-02"><i class="fa fa-calendar"></i><span class="lately">3 个月前</span></time>
+              
+              <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/gao-ji-sou-suo-shi-xian/"> </span>
+              </a>
+              <span id="/gao-ji-sou-suo-shi-xian/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-0 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">高级搜索实现</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-实现效果">1、实现效果</h3>
+<p><strong>页面初始化效果</strong><br>
+<img src="https://hviker.github.io/post-images/1612232799064.png" alt="" loading="lazy"><br>
+<strong>单选选中效果</strong><br>
+<img src="https://hviker.github.io/post-images/1612232812555.png" alt="" loading="lazy"><br>
+<strong>全部选择效果</strong><br>
+<img src="https://hviker.github.io/post-images/1612232868587.png" alt="" loading="lazy"><br>
+<strong>取消选中(点击各查询条件或者已选条件的叉号)</strong><br>
+<img src="https://hviker.github.io/post-images/1612232907021.png" alt="" loading="lazy"></p>
+<h3 id="2-代码实现">2、代码实现</h3>
+<p><strong>主页面方法</strong></p>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;pageContainer&quot;&gt;
+    &lt;div class=&quot;superSearchArea&quot; v-show=&quot;!searchMoreFlag&quot;&gt;
+      &lt;div
+              class=&quot;clearfix&quot;
+              v-for=&quot;renderItem in renderEntity&quot;
+              :key=&quot;renderItem.entityType&quot;
+      &gt;
+        &lt;div :class=&quot;renderItem.isSelectTypeNameClass ? 'selectTitle selectTitleSpace fl': 'selectTitle fl'&quot;&gt;{{ renderItem.selectTypeName }}&lt;/div&gt;
+        &lt;div class=&quot;selectType&quot;&gt;
+          &lt;div
+                  :class=&quot;submitReadySelectObj[renderItem.entityType].length === renderItem.entityList.length ? 'selectAll fl selectAllActive': 'selectAll fl '&quot;
+                  @click=&quot;handleAllSelect(renderItem.entityType)&quot;
+          &gt;
+            {{ renderItem.allSelectName }}
+          &lt;/div&gt;
+          &lt;div
+                  v-for=&quot;item in renderItem.entityList&quot;
+                  :key=&quot;item.key&quot;
+                  @click=&quot;handleSelectType(item.type, item.key, item.value, item.id, renderItem.entityType)&quot;
+                  :class=&quot;item.isSelect ? 'selectItem selectActive' : 'selectItem'&quot;
+          &gt;
+            {{ item.value }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- 已选条件 --&gt;
+      &lt;div class=&quot;clearfix&quot;&gt;
+        &lt;div class=&quot;selectTitle fl&quot;&gt;已选条件&lt;/div&gt;
+        &lt;ul class=&quot;readySelectType fl clearfix&quot;&gt;
+          &lt;li
+            v-for=&quot;item in allReadySelectArr&quot;
+            :key=&quot;item.key&quot;
+          &gt;
+            &lt;span class=&quot;fl&quot;&gt;{{ item.text }}&lt;/span&gt;&lt;label
+              class=&quot;fr&quot;
+              @click=&quot;delReadySelectItem(item.key, item.list, item.id)&quot;
+            &gt;X&lt;/label&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;!-- 化学成分,力学性能,关键字搜素 --&gt;
+      &lt;select-component
+        :keyWords=&quot;keyWords&quot;
+        :materialArr=&quot;materialArr&quot;
+        :dynamicsArr=&quot;dynamicsArr&quot;
+        @changeKeyWords=&quot;changeKeyWords&quot;
+        ref=&quot;selectComponent&quot;
+      &gt;&lt;/select-component&gt;
+      &lt;!-- 搜素及清空条件 --&gt;
+      &lt;div class=&quot;searchBtnArea&quot;&gt;
+        &lt;div
+          class=&quot;clearInfo fr&quot;
+          @click=&quot;clearSelectInfo&quot;
+        &gt;
+          &lt;img
+            src=&quot;@/assets/mainPage/clearinfo.png&quot;
+            alt=&quot;clearinfo&quot;
+          /&gt; 清空条件
+        &lt;/div&gt;
+        &lt;div class=&quot;searchBtn&quot;&gt;
+          &lt;el-button
+            type=&quot;danger&quot;
+            @click=&quot;searchInfo&quot;
+          &gt;搜索&lt;/el-button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 底部表格 --&gt;
+    &lt;el-table
+      :data=&quot;tableData&quot;
+      style=&quot;width: 100%&quot;
+    &gt;
+      &lt;el-table-column label=&quot;牌号&quot;&gt;
+        &lt;template slot-scope=&quot;{row}&quot;&gt;
+          &lt;span
+            @click=&quot;handleGoInfo('gcss', row.steelNum)&quot;
+            class=&quot;handGoInfo&quot;
+          &gt; {{ row.steelNum }} &lt;/span&gt;
+        &lt;/template&gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column
+        prop=&quot;applyStandard&quot;
+        label=&quot;适用标准&quot;
+      &gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column
+        prop=&quot;system&quot;
+        label=&quot;体系&quot;
+      &gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column
+        prop=&quot;steelNum&quot;
+        label=&quot;牌号&quot;
+      &gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column
+        prop=&quot;dataSource&quot;
+        label=&quot;数据来源&quot;
+      &gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column
+        prop=&quot;materialType&quot;
+        label=&quot;材料类别&quot;
+      &gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column label=&quot;配送信息&quot;&gt;
+        &lt;el-table-column
+          prop=&quot;C&quot;
+          label=&quot;C&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;Si&quot;
+          label=&quot;Si&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;Mn&quot;
+          label=&quot;Mn&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;P&quot;
+          label=&quot;P&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;S&quot;
+          label=&quot;S&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+      &lt;/el-table-column&gt;
+      &lt;el-table-column label=&quot;力学性能&quot;&gt;
+        &lt;el-table-column
+          prop=&quot;YS&quot;
+          label=&quot;YS&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;Rm&quot;
+          label=&quot;Rm&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+        &lt;el-table-column
+          prop=&quot;Akv&quot;
+          label=&quot;Akv&quot;
+        &gt;
+        &lt;/el-table-column&gt;
+      &lt;/el-table-column&gt;
+    &lt;/el-table&gt;
+    &lt;!-- 分页插件 --&gt;
+    &lt;pagination
+      v-show=&quot;total &gt; 0&quot;
+      :total=&quot;total&quot;
+      :page.sync=&quot;listQuery.page&quot;
+      :limit.sync=&quot;listQuery.limit&quot;
+      @pagination=&quot;getList&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;value
+
+&lt;script&gt;
+import { SelectType } from &quot;@/mixins/shycss/selectType&quot;;
+export default {
+  name: &quot;Gcss&quot;,
+  components: {},
+  mixins: [SelectType],
+  props: {
+    searchMoreFlag: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      matchRelation: {
+        // list 与 type对应关系， 主要是用于type对应
+        steelTypeList: &quot;SteelTypeList&quot;,
+        shapeTypeList: &quot;ShapeTypeList&quot;,
+        productCategoryTypeList: &quot;ProductCategoryTypeList&quot;,
+        deliveryStateTypeList: &quot;DeliveryStateTypeList&quot;,
+        standardTypeList: &quot;StandardTypeList&quot;,
+      },
+      submitReadySelectObj: {
+        // 查询条件提交数组，放在对象中方便提交
+        steelTypeList: [], // 钢类
+        shapeTypeList: [], // 形状
+        productCategoryTypeList: [], // 产品类别
+        deliveryStateTypeList: [], // 交货状态
+        standardTypeList: [], // 标准体系
+      },
+      steelTypeList: [
+        // 钢类数组，type: 类别， id: 后台返回唯一键， value: 显示名称  key: 前端唯一键(这里使用v-for循环，且存在多个查询条件，为避免前端v-for在指定key时报错重复，这里组合前端唯一键，使用type_id的形式，如果确定id唯一可删除，isSelect: 选中状态)
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g01&quot;,
+          value: &quot;碳素结构钢&quot;,
+          key: &quot;SteelTypeList_g01&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g02&quot;,
+          value: &quot;低合金高强度钢&quot;,
+          key: &quot;SteelTypeList_g02&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g03&quot;,
+          value: &quot;合金结构钢&quot;,
+          key: &quot;SteelTypeList_g03&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g04&quot;,
+          value: &quot;不锈钢&quot;,
+          key: &quot;SteelTypeList_g04&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g05&quot;,
+          value: &quot;易切削钢&quot;,
+          key: &quot;SteelTypeList_g05&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g06&quot;,
+          value: &quot;弹簧钢&quot;,
+          key: &quot;SteelTypeList_g06&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g07&quot;,
+          value: &quot;耐热钢&quot;,
+          key: &quot;SteelTypeList_g07&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g08&quot;,
+          value: &quot;工模具钢&quot;,
+          key: &quot;SteelTypeList_g08&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g09&quot;,
+          value: &quot;轴承钢&quot;,
+          key: &quot;SteelTypeList_g09&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g10&quot;,
+          value: &quot;弹簧钢&quot;,
+          key: &quot;SteelTypeList_g10&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g11&quot;,
+          value: &quot;铸钢铸铁&quot;,
+          key: &quot;SteelTypeList_g11&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;SteelTypeList&quot;,
+          id: &quot;g12&quot;,
+          value: &quot;耐候钢&quot;,
+          key: &quot;SteelTypeList_g12&quot;,
+          isSelect: false,
+        },
+      ],
+      shapeTypeList: [
+        // 形状数组
+        {
+          type: &quot;ShapeTypeList&quot;,
+          id: &quot;xz01&quot;,
+          value: &quot;板&quot;,
+          key: &quot;ShapeTypeList_xz01&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ShapeTypeList&quot;,
+          id: &quot;xz02&quot;,
+          value: &quot;带&quot;,
+          key: &quot;ShapeTypeList_xz02&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ShapeTypeList&quot;,
+          id: &quot;xz03&quot;,
+          value: &quot;薄带&quot;,
+          key: &quot;ShapeTypeList_xz03&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ShapeTypeList&quot;,
+          id: &quot;xz04&quot;,
+          value: &quot;棒&quot;,
+          key: &quot;ShapeTypeList_xz04&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ShapeTypeList&quot;,
+          id: &quot;xz05&quot;,
+          value: &quot;线&quot;,
+          key: &quot;ShapeTypeList_xz05&quot;,
+          isSelect: false,
+        },
+      ],
+      productCategoryTypeList: [
+        // 产品类别
+        {
+          type: &quot;ProductCategoryTypeList&quot;,
+          id: &quot;cplb01&quot;,
+          value: &quot;热轧钢&quot;,
+          key: &quot;ProductCategoryTypeList_cplb01&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ProductCategoryTypeList&quot;,
+          id: &quot;cplb02&quot;,
+          value: &quot;冷轧钢&quot;,
+          key: &quot;ProductCategoryTypeList_cplb02&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ProductCategoryTypeList&quot;,
+          id: &quot;cplb03&quot;,
+          value: &quot;无缝管&quot;,
+          key: &quot;ProductCategoryTypeList_cplb03&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ProductCategoryTypeList&quot;,
+          id: &quot;cplb04&quot;,
+          value: &quot;焊管&quot;,
+          key: &quot;ProductCategoryTypeList_cplb04&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;ProductCategoryTypeList&quot;,
+          id: &quot;cplb05&quot;,
+          value: &quot;铸造管&quot;,
+          key: &quot;ProductCategoryTypeList_cplb05&quot;,
+          isSelect: false,
+        },
+      ],
+      deliveryStateTypeList: [
+        // 交货状态
+        {
+          type: &quot;DeliveryStateTypeList&quot;,
+          id: &quot;jhzt01&quot;,
+          value: &quot;热轧&quot;,
+          key: &quot;DeliveryStateTypeList_jhzt01&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;DeliveryStateTypeList&quot;,
+          id: &quot;jhzt02&quot;,
+          value: &quot;冷轧&quot;,
+          key: &quot;DeliveryStateTypeList_jhzt02&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;DeliveryStateTypeList&quot;,
+          id: &quot;jhzt03&quot;,
+          value: &quot;热加工&quot;,
+          key: &quot;DeliveryStateTypeList_jhzt03&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;DeliveryStateTypeList&quot;,
+          id: &quot;jhzt04&quot;,
+          value: &quot;冷加工&quot;,
+          key: &quot;DeliveryStateTypeList_jhzt04&quot;,
+          isSelect: false,
+        },
+      ],
+      standardTypeList: [
+        // 标准体系
+        {
+          type: &quot;StandardTypeList&quot;,
+          id: &quot;bztx01&quot;,
+          value: &quot;所有企业标准&quot;,
+          key: &quot;StandardTypeList_bztx01&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;StandardTypeList&quot;,
+          id: &quot;bztx02&quot;,
+          value: &quot;中国(GB)&quot;,
+          key: &quot;StandardTypeList_bztx02&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;StandardTypeList&quot;,
+          id: &quot;bztx03&quot;,
+          value: &quot;日本(JIS)&quot;,
+          key: &quot;StandardTypeList_bztx03&quot;,
+          isSelect: false,
+        },
+        {
+          type: &quot;StandardTypeList&quot;,
+          id: &quot;bztx04&quot;,
+          value: &quot;美国(ASTM)&quot;,
+          key: &quot;StandardTypeList_bztx04&quot;,
+          isSelect: false,
+        },
+      ],
+      allReadySelectArr: [], // 所有选中数组，显示使用
+      tableData: [
+        {
+          steelNum: &quot;06Ni1DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni2DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni3DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni4DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni5DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni6DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni7DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+        {
+          steelNum: &quot;06Ni8DR&quot;,
+          applyStandard: &quot;GB 3531-2014&quot;,
+          system: &quot;中国GB&quot;,
+          dataSource: &quot;新材道公有云&quot;,
+          materialType: &quot;钢材&quot;,
+          C: &quot;≤0.08&quot;,
+          Si: &quot;0.15~0.35&quot;,
+          Mn: &quot;0.3~0.8&quot;,
+          P: &quot;≤0.008&quot;,
+          S: &quot;≤0.004&quot;,
+          YS: &quot;≥560&quot;,
+          Rm: &quot;680~820&quot;,
+          Akv: &quot;≥100&quot;,
+        },
+      ],
+      materialArr: [
+        // 化学性能
+        { key: &quot;C&quot;, value: &quot;C&quot; },
+        { key: &quot;Si&quot;, value: &quot;Si&quot; },
+        { key: &quot;Mr&quot;, value: &quot;Mr&quot; },
+        { key: &quot;P&quot;, value: &quot;P&quot; },
+        { key: &quot;S&quot;, value: &quot;S&quot; },
+      ],
+      dynamicsArr: [
+        // 力学性能
+        { key: &quot;qfqd&quot;, value: &quot;屈服强度YS(MPa)&quot; },
+        { key: &quot;cjg&quot;, value: &quot;冲击功Akv(J)&quot; },
+        { key: &quot;cjwd&quot;, value: &quot;冲击温度(℃)&quot; },
+        { key: &quot;klqd&quot;, value: &quot;抗拉强度TS(MPa)&quot; },
+        { key: &quot;ysl&quot;, value: &quot;延伸率A(%)&quot; },
+      ],
+    };
+  },
+  watch: {
+    // searchMoreFlag(newVal) {
+    //   console.log(&quot;flag&quot; + newVal);
+    // },
+  },
+  computed: {},
+  methods: {
+    // 清空搜素条件
+    clearSelectInfo() {
+      // submitReadySelectObj数据清空
+      this.submitReadySelectObj = {
+        // 查询条件提交数组
+        steelTypeList: [], // 钢类
+        shapeTypeList: [], // 形状
+        productCategoryTypeList: [], // 产品类别
+        deliveryStateTypeList: [], // 交货状态
+        standardTypeList: [], // 标准体系
+      };
+      // 将数据中的isSelect置为false
+      this.steelTypeList = [...this.resetIsSelect(this.steelTypeList)];
+      this.shapeTypeList = [...this.resetIsSelect(this.shapeTypeList)];
+      this.productCategoryTypeList = [
+        ...this.resetIsSelect(this.productCategoryTypeList),
+      ];
+      this.deliveryStateTypeList = [
+        ...this.resetIsSelect(this.deliveryStateTypeList),
+      ];
+      this.standardTypeList = [...this.resetIsSelect(this.standardTypeList)];
+      // allReadySelectArr清空
+      this.allReadySelectArr = [];
+      // selectComponent数据清空
+      this.$refs.selectComponent.clearSelectInfo();
+    },
+    // 搜索
+    searchInfo() {
+      // 获取selectComponent中的查询内容
+      let selectComponentInfo = this.$refs.selectComponent.getSelectInfo();
+      // todo 这里需要组合其他查询条件进行请求数据
+      this.searchData();
+    },
+    // 查询数据
+    searchData() {},
+  },
+  created() {},
+  mounted() {
+  // 修改数据格式，渲染实体
+    this.renderEntity = [
+      {
+        selectTypeName: &quot;钢类&quot;,
+        allSelectName: &quot;全部&quot;,
+        isSelectTypeNameClass: true,
+        entityType: &quot;steelTypeList&quot;,
+        entityList: this.steelTypeList,
+      },
+      {
+        selectTypeName: &quot;形状&quot;,
+        allSelectName: &quot;全部&quot;,
+        isSelectTypeNameClass: false,
+        entityType: &quot;shapeTypeList&quot;,
+        entityList: this.shapeTypeList,
+      },
+      {
+        selectTypeName: &quot;产品类别&quot;,
+        allSelectName: &quot;全部&quot;,
+        isSelectTypeNameClass: false,
+        entityType: &quot;productCategoryTypeList&quot;,
+        entityList: this.productCategoryTypeList,
+      },
+      {
+        selectTypeName: &quot;交货状态&quot;,
+        allSelectName: &quot;全部&quot;,
+        isSelectTypeNameClass: false,
+        entityType: &quot;deliveryStateTypeList&quot;,
+        entityList: this.deliveryStateTypeList,
+      },
+      {
+        selectTypeName: &quot;标准体系&quot;,
+        allSelectName: &quot;所有国际及行业标准&quot;,
+        isSelectTypeNameClass: false,
+        entityType: &quot;standardTypeList&quot;,
+        entityList: this.standardTypeList,
+      },
+    ];
+  },
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+&lt;/style&gt;
+</code></pre>
+<p><strong>复用方法</strong></p>
+<pre><code>import SelectComponent from '@/views/shycss/component/selectComponent_index';
+import Pagination from &quot;@/components/Pagination/Pagination_index&quot;;
+export const SelectType = {
+    components: { SelectComponent, Pagination },
+    props: {
+        searchMoreFlag: {
+            type: Boolean,
+        },
+        keyWords: {
+            type: String
+        }
+    },
+    data() {
+        return {
+            allReadySelectArr: [], // 所有选中数组，显示使用
+            renderEntity: [], // 渲染实体
+            total: 8, // 数据总条数
+            listQuery: {
+                page: 1, // 当前页
+                limit: 20, // 每页条数
+            }
+        }
+    },
+    methods: {
+        // 分页查询方法
+        getList(obj) {
+            this.listQuery.page = obj.page;
+            this.listQuery.limit = obj.limit;
+            this.searchData();
+        },
+        // 修改关键字
+        changeKeyWords(val) {
+            this.$emit(&quot;changeKeyWords&quot;, val)
+        },
+        // 将数组中的isSelect置为false
+        resetIsSelect(arr) {
+            arr.forEach(item =&gt; {
+                item.isSelect = false;
+            })
+            return arr;
+        },
+        // 查询条件
+        handleSelectType(type, key, text, id, list) {
+            this[list].some((item) =&gt; {
+                if (item.key == key) {
+                    this.changeSelectItemState(item.isSelect, key, type, id, list, text);
+                    item.isSelect = !item.isSelect;
+                    return true;
+                }
+            });
+        },
+        // 根据查询条件当前选中状态动态新增/删除显示选中数组和提交显示数组中的数据
+        // 如果原来是选中状态，则点击后为非选中状态，需要在所有选中数组中删除
+        // 如果原来是非选中状态，则点击后为选中状态，需要在所有选中数组中添加
+        changeSelectItemState(isSelect, key, type, id, list, text) {
+            if (isSelect) {
+                // 删除已选数组中的数组
+                this.delFromAllReadyArr(key);
+                // 删除提交数组中的数据
+                this.delFromSubmitReadySelectArr(list, id);
+            } else {
+                // 新增已选显示数组中的数据
+                this.addToAllReadyArr(key, text, list, id);
+                // 新增提交数组中的数据
+                this.addToSubmitReadySelectArr(type, id, text, list);
+            }
+        },
+        // 添加到显示选中数组
+        addToAllReadyArr(key, text, list, id) {
+            this.allReadySelectArr.push({ key: key, text: text, list: list, id: id });
+        },
+        // 添加到提交选中数组中
+        addToSubmitReadySelectArr(type, id, text, list) {
+            let obj = { key: id, value: text, type: type };
+            this.submitReadySelectObj[list].push(obj);
+        },
+        // 从显示选中数组中删除
+        delFromAllReadyArr(key) {
+            let flag = false;
+            let index = 0;
+            this.allReadySelectArr.some((item) =&gt; {
+                if (item.key == key) {
+                    flag = true;
+                    return true;
+                }
+                index++;
+            });
+            flag &amp;&amp; this.allReadySelectArr.splice(index, 1);
+        },
+        // 删除提交数组中的数据
+        delFromSubmitReadySelectArr(list, id) {
+            let flag = false,
+                index = 0;
+            this.submitReadySelectObj[list].some((item) =&gt; {
+                if (item.key == id) {
+                    flag = true;
+                    return true;
+                }
+                index++;
+            });
+            flag &amp;&amp; this.submitReadySelectObj[list].splice(index, 1);
+        },
+        // 删除所选选项
+        delReadySelectItem(key, list, id) {
+            // 删除显示选中数组中的对应数据
+            this.delFromAllReadyArr(key);
+            // 删除提交选中数组中的对应数据
+            this.delFromSubmitReadySelectArr(list, id);
+            // 取消查询条件的选中样式
+            this.cancelIsSelect(this[list], key);
+            // 查询数据
+            this.searchData();
+        },
+        // 取消查询条件选中状态
+        cancelIsSelect(arr, key) {
+            arr.some((item) =&gt; {
+                if (item.key == key) {
+                    item.isSelect = false;
+                    return true;
+                }
+            });
+        },
+        // 点击全部按钮
+        handleAllSelect(list) {
+            // 判断提交选中数组中的个数是否等于list数组的个数
+            // 如果是则删除显示数组中所有该类型数据，提交数组置空,然后将所有该类型数据select置为false
+            // 如果否则说明存在所有或部分数据未被选中，这时候删除显示数组中所有该类型数据，并新增数据；提交选中数组中将该类型所有数据填充，然后将所有该类型数据select置为true
+            if (!this.submitReadySelectObj[list] || !this.matchRelation[list]) return;
+            // 循环删除显示数组中所有该类型数据
+            this.delSpecTypeFromAllReadySelelctArr(list);
+            if (this.submitReadySelectObj[list].length === this[list].length) {
+                // 提交数组置空
+                this.submitReadySelectObj[list] = [];
+                this[list].forEach((item) =&gt; {
+                    // 将所有选项改为非选中状态
+                    item.isSelect = false;
+                });
+            } else {
+                // 提交数组置空
+                this.submitReadySelectObj[list] = [];
+                this[list].forEach((item) =&gt; {
+                    // push到显示选中数组的对象
+                    let obj1 = {
+                        key: item.key,
+                        text: item.value,
+                        list: list,
+                        id: item.id,
+                    };
+                    // push到提交选中数组的对象
+                    let obj2 = {
+                        key: item.id,
+                        value: item.value,
+                        type: this.matchRelation[list],
+                    };
+                    this.allReadySelectArr.push(obj1);
+                    this.submitReadySelectObj[list].push(obj2);
+                    // 将所有选项改为选中状态
+                    item.isSelect = true;
+                });
+            }
+            this.searchData();
+        },
+        // 循环删除显示数组中所有该类型数据
+        delSpecTypeFromAllReadySelelctArr(list) {
+            for (let i = this.allReadySelectArr.length - 1; i &gt;= 0; i--) {
+                if (this.allReadySelectArr[i].list == list) {
+                    this.allReadySelectArr.splice(i, 1);
+                }
+            }
+        },
+        // 跳转详情
+        handleGoInfo(type, steelName) {
+            switch(type) {
+                case &quot;gcss&quot;:
+                    this.$router.push({ path: '/shycss/gcssMainInfo', query: { name: steelName } })
+                    break;
+                case &quot;yshjsu&quot;:
+                    this.$router.push({ path: '/shycss/yshjssMainInfo', query: { name: steelName } })
+                    break;
+                case &quot;hcss&quot;:
+                    this.$router.push({ path: '/shycss/hcssMainInfo', query: { name: steelName } })
+                    break;
+            }
+        }
+    }
+}
+</code></pre>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/qian-duan.jpg');"></div>
+                 <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-02-02">2021-02-02</time>
+                  <h4 class="title white no-margin">el-table表格合并</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/gridea.jpg');"></div>
+                 <a href="https://hviker.github.io/post/fang-dou-jian-ting-liu-lan-qi-chuang-kou-bian-hua/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-01-07">2021-01-07</time>
+                  <h4 class="title white no-margin">防抖-监听浏览器窗口变化</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-16">2021-03-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">vue强制跳转</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">el-table表格合并</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-02-02">2021-02-02</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">高级搜索实现</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-0 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-1 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-2 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-3 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-4 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-5 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-6 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-7 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-8 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-9 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-10 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">淼一</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- <div class="logo">
+          <a href="https://hviker.github.io"><img src="\media\images\custom-footerLogo.JPG" alt=""></a>
+        </div> -->
+        <p class="published border-effect">
+          ©2019 共 46 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

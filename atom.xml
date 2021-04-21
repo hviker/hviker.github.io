@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
-    <title>Gridea</title>
-    <updated>2021-04-21T05:39:18.792Z</updated>
+    <title>淼一</title>
+    <updated>2021-04-21T12:10:59.467Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>心游于艺，道不远人。</subtitle>
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2021, 淼一</rights>
     <entry>
         <title type="html"><![CDATA[vue强制跳转]]></title>
         <id>https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/</id>
         <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
         </link>
         <updated>2021-03-16T03:54:07.000Z</updated>
-        <content type="html"><![CDATA[<p>url相同、参数不同。强制跳转刷新<br>
-跳转方法</p>
-<pre><code> wlb(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '1' }
-      })
-    },
-    wkc(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '0'}
-      })
-    },
-</code></pre>
-<p>当在path为'/zxxx/index'页面，点击wlb()、wkc() 方法时是不走vue生命周期函数的。需要监听$route变化。</p>
-<pre><code>'$route'(to, from) {
-      let { index } = to.query;
-      this.activeName = index === '1' ? 'second' : 'first'
-      this.handleClick({index: index})
-    }
-</code></pre>
-]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://hviker.github.io/post/hello-gridea/</id>
-        <link href="https://hviker.github.io/post/hello-gridea/">
+        <title type="html"><![CDATA[el-table表格合并]]></title>
+        <id>https://hviker.github.io/post/el-table-biao-ge-he-bing/</id>
+        <link href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
-]]></content>
+        <updated>2021-02-02T02:49:49.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[高级搜索实现]]></title>
+        <id>https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/</id>
+        <link href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">
+        </link>
+        <updated>2021-02-02T02:23:28.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[防抖-监听浏览器窗口变化]]></title>
+        <id>https://hviker.github.io/post/fang-dou-jian-ting-liu-lan-qi-chuang-kou-bian-hua/</id>
+        <link href="https://hviker.github.io/post/fang-dou-jian-ting-liu-lan-qi-chuang-kou-bian-hua/">
+        </link>
+        <updated>2021-01-07T03:08:06.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用vuex监听Layout的滚动，实现子组件指定页面的懒加载]]></title>
+        <id>https://hviker.github.io/post/shi-yong-vuex-jian-ting-layout-de-gun-dong-shi-xian-zi-zu-jian-zhi-ding-ye-mian-de-lan-jia-zai/</id>
+        <link href="https://hviker.github.io/post/shi-yong-vuex-jian-ting-layout-de-gun-dong-shi-xian-zi-zu-jian-zhi-ding-ye-mian-de-lan-jia-zai/">
+        </link>
+        <updated>2020-12-19T03:37:08.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[解决vue-element-admin三级菜单显示]]></title>
+        <id>https://hviker.github.io/post/jie-jue-vue-element-admin-san-ji-cai-dan-xian-shi/</id>
+        <link href="https://hviker.github.io/post/jie-jue-vue-element-admin-san-ji-cai-dan-xian-shi/">
+        </link>
+        <updated>2020-12-15T09:38:47.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[检测移动端软键盘回车进行查询]]></title>
+        <id>https://hviker.github.io/post/jian-ce-yi-dong-duan-ruan-jian-pan-hui-che-jin-xing-cha-xun/</id>
+        <link href="https://hviker.github.io/post/jian-ce-yi-dong-duan-ruan-jian-pan-hui-che-jin-xing-cha-xun/">
+        </link>
+        <updated>2020-12-10T10:38:45.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[检测屏幕宽度]]></title>
+        <id>https://hviker.github.io/post/jian-ce-ping-mu-kuan-du/</id>
+        <link href="https://hviker.github.io/post/jian-ce-ping-mu-kuan-du/">
+        </link>
+        <updated>2020-12-10T01:07:33.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JS封装组件模板(借助JQuery)]]></title>
+        <id>https://hviker.github.io/post/js-feng-zhuang-zu-jian-mo-ban-jie-zhu-jquery/</id>
+        <link href="https://hviker.github.io/post/js-feng-zhuang-zu-jian-mo-ban-jie-zhu-jquery/">
+        </link>
+        <updated>2020-12-04T09:11:42.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue视频播放-vue-video-player]]></title>
+        <id>https://hviker.github.io/post/vue-shi-pin-bo-fang-vue-video-player/</id>
+        <link href="https://hviker.github.io/post/vue-shi-pin-bo-fang-vue-video-player/">
+        </link>
+        <updated>2020-11-01T12:21:07.000Z</updated>
     </entry>
 </feed>
