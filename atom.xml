@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>Gridea</title>
-    <updated>2021-04-21T04:54:52.709Z</updated>
+    <updated>2021-04-21T04:57:37.671Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,36 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[vue强制跳转]]></title>
+        <id>https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/</id>
+        <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
+        </link>
+        <updated>2021-03-16T03:54:07.000Z</updated>
+        <content type="html"><![CDATA[<p>url相同、参数不同。强制跳转刷新<br>
+跳转方法</p>
+<pre><code> wlb(){
+      this.$router.push({
+        path: '/zxxx/index',
+        query: { index: '1' }
+      })
+    },
+    wkc(){
+      this.$router.push({
+        path: '/zxxx/index',
+        query: { index: '0'}
+      })
+    },
+</code></pre>
+<p>当在path为'/zxxx/index'页面，点击wlb()、wkc() 方法时是不走vue生命周期函数的。需要监听$route变化。</p>
+<pre><code>'$route'(to, from) {
+      let { index } = to.query;
+      this.activeName = index === '1' ? 'second' : 'first'
+      this.handleClick({index: index})
+    }
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://hviker.github.io/post/hello-gridea/</id>
