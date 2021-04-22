@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>vue强制跳转 | hviker</title>
+<title>elementUI2.0 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -14,19 +14,11 @@
 <script src="https://hviker.github.io/media/js/view-image.min.js"></script>
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
-    <meta name="referrer" content="never">
-    <meta name="description" content="url相同、参数不同。强制跳转刷新
-跳转方法
- wlb(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '1' }
-    ..." />
-    <meta name="keywords" content="" />
-    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
-    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
+    <!-- start: #wrapper -->
+    <div class="wrapper">
+      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -93,125 +85,45 @@
         </div>
       </div>
 
-      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
-
-        <div class="center content">
-          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
-            <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-03-16"><i class="fa fa-calendar"></i><span class="lately">1 个月前</span></time>
-              
-            </div>
-            <div class="info">
-              <div class="tags ">
-                
-              </div>
-              <h1 class="title ularge white bold">vue强制跳转</h1>
-            </div>
-          </div>
-        </div>  
-
+      <main id="home" class="main fullcover no-sidebar content">
+        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
         <div class="epcl-page-wrapper">
-          <div class="left-content grid-70 np-mobile">
-            <article class="main-article post">
-              <section class="post-content">
-                <div class="text">
-                  <p>url相同、参数不同。强制跳转刷新<br>
-跳转方法</p>
-<pre><code> wlb(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '1' }
-      })
-    },
-    wkc(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '0'}
-      })
-    },
-</code></pre>
-<p>当在path为'/zxxx/index'页面，点击wlb()、wkc() 方法时是不走vue生命周期函数的。需要监听$route变化。</p>
-<pre><code>'$route'(to, from) {
-      let { index } = to.query;
-      this.activeName = index === '1' ? 'second' : 'first'
-      this.handleClick({index: index})
-    }
-</code></pre>
-
-                </div>
-                <div class="clear"></div>
-              </section>
-            </article>
-            <div class="clear"></div>
-
-            <section class="related section">
-              
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/pei-xun-es-yu-fa.png');"></div>
-                 <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-04-21">2021-04-21</time>
-                  <h4 class="title white no-margin">培训-ES语法</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
-              
-              <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/sPs52aHLl.jpg');"></div>
-                 <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-03-14">2021-03-14</time>
-                  <h4 class="title white no-margin">如何封装全局组件并且被Vue.use(plugin) 使用</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
-
-                <div class="clear"></div>
-            </section>
-
-              <div class="clear"></div>
-              
-            
-              <div id="comments" class="bg-white hosted ">
+          <div class="left-content grid-70 np-mobile widget_epcl_related_articles">
                 
-                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+            <!-- start: .articles -->
+            <div class="main-article post">
+  <h2 class="year"># elementUI2.0</h2>
+    
+      <article class="item default grid-33 tablet-grid-50 np-mobile">
+        <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="thumb hover-effect">
+          <span class="fullimage cover" style="display: block;background-image: url('/media/images/gridea.jpg');"></span>
+        </a>
+        <div class="info gradient-effect">
+          <time datetime="2021-03-14">2021-03-14</time>
+          <h4 class="title usmall">
+            <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">如何封装全局组件并且被Vue.use(plugin) 使用</a>
+          </h4>
+        </div>
+      </article>
 
-<div id="gitalk-container"></div>
-<div class="clear"></div>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '944c823bd05c648104dd',
-    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
-    repo: 'gitalk',
-    owner: 'hviker',
-    admin: ['hviker'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-</script>
-
+    
+    <div class="clear"></div>
+</div>
+            <!-- end: .articles -->
+            
+                        <div class="epcl-pagination section">
+              <div class="nav">
                 
                 
               </div>
-            
-
             </div>
+            
           </div>
+          </div>
+        </div>
       </main>
 
-          <footer id="footer" class="grid-container">
+        <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -443,9 +355,6 @@
     <div class="clear"></div>
 
         
-
-      
-    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
 
     </div>
     <!-- end: #wrapper -->

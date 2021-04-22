@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>vue强制跳转 | hviker</title>
+<title>arguments使用 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,13 +15,20 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="url相同、参数不同。强制跳转刷新
-跳转方法
- wlb(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '1' }
-    ..." />
+    <meta name="description" content="以类数组对象的形式存储函数实参。
+1、作用:
+
+
+获取实参。
+
+
+arguments.callee()方法返回当前方法，可以用于递归。
+
+
+let organizeArr = [
+  {
+    id: '01',
+    name: 'x..." />
     <meta name="keywords" content="" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
@@ -98,14 +105,14 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-03-16"><i class="fa fa-calendar"></i><span class="lately">1 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-03-01"><i class="fa fa-calendar"></i><span class="lately">2 个月前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
               </div>
-              <h1 class="title ularge white bold">vue强制跳转</h1>
+              <h1 class="title ularge white bold">arguments使用</h1>
             </div>
           </div>
         </div>  
@@ -115,27 +122,74 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>url相同、参数不同。强制跳转刷新<br>
-跳转方法</p>
-<pre><code> wlb(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '1' }
-      })
-    },
-    wkc(){
-      this.$router.push({
-        path: '/zxxx/index',
-        query: { index: '0'}
-      })
-    },
-</code></pre>
-<p>当在path为'/zxxx/index'页面，点击wlb()、wkc() 方法时是不走vue生命周期函数的。需要监听$route变化。</p>
-<pre><code>'$route'(to, from) {
-      let { index } = to.query;
-      this.activeName = index === '1' ? 'second' : 'first'
-      this.handleClick({index: index})
+                  <p>以类数组对象的形式存储函数实参。</p>
+<p><strong>1、作用:</strong></p>
+<ol>
+<li>
+<p>获取实参。</p>
+</li>
+<li>
+<p>arguments.callee()方法返回当前方法，可以用于递归。</p>
+</li>
+</ol>
+<pre><code class="language-javascript">let organizeArr = [
+  {
+    id: '01',
+    name: 'xiaoming',
+    children: [
+      {
+        id: '0101',
+        name: 'xiaoming1',
+        children: [
+          {
+            id: '010101',
+            name: 'xiaoming2',
+            children: []
+          }
+        ]
+      },
+      {
+        id: '0102',
+        name: 'xiaoming3',
+        children: [
+          {
+            id: '010201',
+            name: 'xiaoming4',
+            children: []
+          }
+        ]
+      }
+    ]
+  }
+]
+
+function printName(arr) {
+  console.log(arguements);
+  arr.forEach(item =&gt; {
+    console.log(item.name);
+    if(item.children &amp;&amp; Array.isArray(item.children)) {
+      // 这里递归
+      arguments.callee(item.children)
     }
+  });
+}
+
+printName(organizeArr);
+</code></pre>
+<p><strong>2、转变成数组方法:toArray()</strong></p>
+<pre><code class="language-javascript">/**
+ * 取自vue2.0源码 将一个类数组对象转化成数组
+ * Convert an Array-like object to a real Array.
+ */
+function toArray (list, start) {
+  start = start || 0;
+  var i = list.length - start;
+  var ret = new Array(i);
+  while (i--) {
+    ret[i] = list[i + start];
+  }
+  return ret
+}
 </code></pre>
 
                 </div>
@@ -147,11 +201,11 @@
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/pei-xun-es-yu-fa.png');"></div>
-                 <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/sPs52aHLl.jpg');"></div>
+                 <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2021-04-21">2021-04-21</time>
-                  <h4 class="title white no-margin">培训-ES语法</h4>
+                  <time datetime="2021-03-14">2021-03-14</time>
+                  <h4 class="title white no-margin">如何封装全局组件并且被Vue.use(plugin) 使用</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -161,11 +215,11 @@
               
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/sPs52aHLl.jpg');"></div>
-                 <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/qian-duan.jpg');"></div>
+                 <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2021-03-14">2021-03-14</time>
-                  <h4 class="title white no-margin">如何封装全局组件并且被Vue.use(plugin) 使用</h4>
+                  <time datetime="2021-02-02">2021-02-02</time>
+                  <h4 class="title white no-margin">el-table表格合并</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
