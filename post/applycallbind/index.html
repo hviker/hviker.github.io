@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>echarts | hviker</title>
+<title>apply、call、bind | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -14,11 +14,18 @@
 <script src="https://hviker.github.io/media/js/view-image.min.js"></script>
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、作用
+
+都是为了改变某个函数运行时的上下文(context)，也就是改变函数内部的this指向,继承其他对象的属性。
+三个方法是每个函数都有的__proto__，而且是非继承而来的方法。
+
+通俗来讲，A、B为构造函数对象，A有C方法，B..." />
+    <meta name="keywords" content="源码学习" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
-    <!-- start: #wrapper -->
-    <div class="wrapper">
-      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -85,84 +92,160 @@
         </div>
       </div>
 
-      <main id="home" class="main fullcover no-sidebar content">
-        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
-        <div class="epcl-page-wrapper">
-          <div class="left-content grid-70 np-mobile widget_epcl_related_articles">
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-04-01"><i class="fa fa-calendar"></i><span class="lately">22 天前</span></time>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
                 
-            <!-- start: .articles -->
-            <div class="main-article post">
-  <h2 class="year"># echarts</h2>
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://hviker.github.io/post/echarts-bu-fen-yong-fa/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://hviker.github.io/post-images/echarts-bu-fen-yong-fa.jpg');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2020-10-22">2020-10-22</time>
-          <h4 class="title usmall">
-            <a href="https://hviker.github.io/post/echarts-bu-fen-yong-fa/">echarts部分用法</a>
-          </h4>
-        </div>
-      </article>
+                      <a href="https://hviker.github.io/tag/sPs52aHLl/" class="ctag ctag-0 ctag-sPs52aHLl" aria-label="">源码学习</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">apply、call、bind</h1>
+            </div>
+          </div>
+        </div>  
 
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://hviker.github.io/post/echarts-shu-xing-she-zhi-wan-zheng-ban/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://hviker.github.io/post-images/echarts-shu-xing-she-zhi-wan-zheng-ban.jpg');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2020-09-22">2020-09-22</time>
-          <h4 class="title usmall">
-            <a href="https://hviker.github.io/post/echarts-shu-xing-she-zhi-wan-zheng-ban/">echarts属性设置(完整版)</a>
-          </h4>
-        </div>
-      </article>
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-作用">1、作用</h3>
+<ol>
+<li>都是为了改变某个函数运行时的上下文(context)，也就是改变函数内部的this指向,继承其他对象的属性。</li>
+<li>三个方法是每个函数都有的<code>__proto__</code>，而且是非继承而来的方法。</li>
+</ol>
+<p>通俗来讲，A、B为构造函数对象，A有C方法，B没有C方法。</p>
+<p>如果你想让B去调用C方法，就使用A.C.apply(B) or A.C.call(B) or A.C.bind(B);</p>
+<h3 id="2-使用方式">2、使用方式</h3>
+<p>​	apply(obj, [])： apply方法后面跟两个参数，第一个参数是要指向的obj对象，第二个参数是数组。</p>
+<p>​	call(obj, property)：call方法后面跟多个参数，第一个参数是要指向的obj对象，从第二个参数起就是单个要传递的属性。</p>
+<p>​	bind(obj, [])(): 相比于apply来说，使用上加个().</p>
+<p>以Person为例，使用Person.apply(this, [name, age])。</p>
+<pre><code class="language-javascript">// 定义Person类
+function Person (name, age) {
+  this.name = name;
+  this.age = age;
+  this.getPersonInfo = function() {
+  	console.log(`姓名：${this.name} 年龄：${this.age}`)
+  }
+}
 
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://hviker.github.io/post/echarts-er-wei-shu-zu-hui-zhi-kong-dian-zhe-xian/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://hviker.github.io/post-images/echarts-er-wei-shu-zu-hui-zhi-kong-dian-zhe-xian.jpg');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2020-09-20">2020-09-20</time>
-          <h4 class="title usmall">
-            <a href="https://hviker.github.io/post/echarts-er-wei-shu-zu-hui-zhi-kong-dian-zhe-xian/">echarts二维数组绘制空点折线</a>
-          </h4>
-        </div>
-      </article>
+// 定义学生类
+function Student (name, age, grade) {
+  Person.apply(this, [name, age]); // 这里使用apply,其中第一个参数是this,指向student
+  this.grade = grade;
+}
 
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://hviker.github.io/post/echarts-di-er-ci-hui-zhi-xian-shi-kong-bai-de-jie-jue-fang-an/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://hviker.github.io/post-images/echarts-di-er-ci-hui-zhi-xian-shi-kong-bai-de-jie-jue-fang-an.jpg');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2020-09-19">2020-09-19</time>
-          <h4 class="title usmall">
-            <a href="https://hviker.github.io/post/echarts-di-er-ci-hui-zhi-xian-shi-kong-bai-de-jie-jue-fang-an/">echarts第二次绘制显示空白的解决方案</a>
-          </h4>
-        </div>
-      </article>
+let student = new Student('xiaming', 18, '1');
+console.log(student);
+student.getPersonInfo();
+</code></pre>
+<p>打印结果：</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1619166180704.png" alt="" loading="lazy"></figure>
+<p>从打印结果上看，student多了name，age以及getPersonInfo(),其来源就是继承于Person。</p>
+<p><strong>call 比 apply 的性能要好，平常可以多用 call, call 传入参数的格式正是内部所需要的格式。</strong></p>
+<h3 id="3-关于apply的思考">3、关于apply的思考</h3>
+<p>我们在调用apply()的时候，第二个参数是个数组，它可以将数组（ [ param1, param2, param3] ）默认转化成属性参数的形式（param1, param2, param3）,利用这一特点可以在需要属性传值的地方使用apply()传入对应数组，简化代码。</p>
+<p>例如我们要取数组的最大值，但是Math.max()不支持传入数组，这时候可以使用Math.max(null, arr)。这里第一个参数传入null，是因为没有对象去调用这回方法，我们只需要调用到Math的max()返回结果就行了。</p>
+<h3 id="4-使用场景">4、使用场景</h3>
+<ol>
+<li>
+<p>继承。如上例person.</p>
+</li>
+<li>
+<p>获取数组最大值或者最小值。 最大值：Math.max.apply(null, arr); 最小值： Math.min.apply(null, arr)</p>
+</li>
+<li>
+<p>合并数组，但是不会去重。</p>
+</li>
+</ol>
+<pre><code class="language-javascript">let arr1 = [1, 2, 3], arr2 = [3, 5, 6];
+Array.prototype.push.apply(arr1, arr2);
+console.log(arr1); // 打印 [1, 2, 3, 3, 5, 6]
+console.log(arr2); // 打印 [1, 2, 3]
+</code></pre>
 
-    
-    <div class="clear"></div>
-</div>
-            <!-- end: .articles -->
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/LDwpAxA3l.jpg');"></div>
+                 <a href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-04-14">2021-04-14</time>
+                  <h4 class="title white no-margin">培训-Git提交流程</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/sPs52aHLl.jpg');"></div>
+                 <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-03-18">2021-03-18</time>
+                  <h4 class="title white no-margin">如何封装全局组件并且被Vue.use(plugin) 使用</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
             
-                        <div class="epcl-pagination section">
-              <div class="nav">
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'f68ae8f71a2215243ce9',
+    clientSecret: '4425adb0890c433816522b291391cf173556ee5f',
+    repo: 'hviker.github.io',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
                 
                 
               </div>
-            </div>
             
+
+            </div>
           </div>
-          </div>
-        </div>
       </main>
 
-        <footer id="footer" class="grid-container">
+          <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -398,6 +481,9 @@
     <div class="clear"></div>
 
         
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
 
     </div>
     <!-- end: #wrapper -->
