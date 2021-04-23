@@ -1,0 +1,482 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>培训-Git提交流程 | hviker</title>
+<meta name="description" content="心游于艺，道不远人。" />
+<link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
+<link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
+
+<script src="https://hviker.github.io/media/js/jquery.min.js"></script>
+<script src="https://hviker.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hviker.github.io/media/js/aos.js"></script>
+<script src="https://hviker.github.io/media/js/pace.min.js"></script>
+<script src="https://hviker.github.io/media/js/view-image.min.js"></script>
+<script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://hviker.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="一、目的：
+​	1、增加项目负责人或组长对代码审核操作，对不规范代码及时打回指正。不规范代码指不符合该项目组原定编码规范、可复用功能代码多次编写、垃圾代码垃圾注释等，避免新人多次编写不规范代码。
+​	2、统一编码规范，便于后期代码交接维护。..." />
+    <meta name="keywords" content="培训" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hviker.github.io"><img src="/media/images/custom-headerLogo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://hviker.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                       
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1619144779196" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-04-14"><i class="fa fa-calendar"></i><span class="lately">9 天前</span></time>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-0 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">培训-Git提交流程</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="一-目的">一、目的：</h2>
+<p>​	1、增加项目负责人或组长对代码审核操作，对不规范代码及时打回指正。不规范代码指不符合该项目组原定编码规范、可复用功能代码多次编写、垃圾代码垃圾注释等，避免新人多次编写不规范代码。</p>
+<p>​	2、统一编码规范，便于后期代码交接维护。</p>
+<h2 id="二-具体提交流程">二、具体提交流程</h2>
+<h3 id="1-项目基本设置">1、项目基本设置</h3>
+<p>​	1.1 后期项目负责人在上传项目时，需要设置三个分支。master：主分支(默认存在)，release： 开发分支，test： 测试分支。其中三个分支在允许合并到以及允许推送到上都选择maintainers权限，只能由项目负责人完成三个分支上的操作权限，不允许其他成员通过merge或者push的方式推送项目代码。</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1619144614746.png" alt="" loading="lazy"></figure>
+<p>​	人员设置：</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1619144625611.png" alt="" loading="lazy"></figure>
+<h3 id="2-个人推送代码方式">2、个人推送代码方式</h3>
+<p>​	2.1 拉取代码后执行git branch（获取本地所有分支）命令后，显示只有master。对于已经存在的远程分支，需要使用git chekcout 【分支名称】来拉取到本地。这里以拉取已存在的release分支为例：</p>
+<figure data-type="image" tabindex="3"><img src="https://hviker.github.io/post-images/1619144631212.png" alt="" loading="lazy"></figure>
+<p>​	2.2 执行git checkout -b chore-update-【姓名首字母缩写】创建并切换到属于自己的本地分支,该分支内容与<strong>本次切换过来的</strong>release分支内容相同。这里也可以由项目负责人提前建好每个人分支名称，这时候就可以跳过接下来的2.3、2.4操作，在个人分支开发完成后直接add、commit、push即可。</p>
+<figure data-type="image" tabindex="4"><img src="https://hviker.github.io/post-images/1619144636503.png" alt="" loading="lazy"></figure>
+<p>​		<strong>Ps:此时只是在本地添加了分支，远程环境上并不存在该分支。</strong></p>
+<figure data-type="image" tabindex="5"><img src="https://hviker.github.io/post-images/1619144642218.png" alt="" loading="lazy"></figure>
+<p>​	2.3 后期本人需要在该分支上修改，完成add、commit操作。</p>
+<figure data-type="image" tabindex="6"><img src="https://hviker.github.io/post-images/1619144647177.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://hviker.github.io/post-images/1619144652646.png" alt="" loading="lazy"></figure>
+<p>​	2.4 执行完commit后需要创建<strong>同名的远程分支</strong>，并做关联。执行命令 git push --set-upstream origin 【同名的远程分支名】，这里以chore-update-lly为例。</p>
+<figure data-type="image" tabindex="8"><img src="https://hviker.github.io/post-images/1619144658742.png" alt="" loading="lazy"></figure>
+<p>​	此时再去查看远程分支就多了一项不受保护的远程分支： chore-update-lly</p>
+<figure data-type="image" tabindex="9"><img src="https://hviker.github.io/post-images/1619144663776.png" alt="" loading="lazy"></figure>
+<p>​	**ps:这里如果没有配置SSH会提示没有匹配，所以在使用git时大家一定要关联好自己的SSH。**没有SSH时会报以下错误：</p>
+<figure data-type="image" tabindex="10"><img src="https://hviker.github.io/post-images/1619144669470.png" alt="" loading="lazy"></figure>
+<p>​	2.5 确定提交到个人分支后，登录117git，选中项目后发起合并请求，确定修改分支和目标分支，并填写审核人员，发起合并申请。并通知审核人员及时审核。</p>
+<figure data-type="image" tabindex="11"><img src="https://hviker.github.io/post-images/1619144674794.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://hviker.github.io/post-images/1619144679919.png" alt="" loading="lazy"></figure>
+<p>点击比较分支后继续按钮，进入下面页面</p>
+<figure data-type="image" tabindex="13"><img src="https://hviker.github.io/post-images/1619144686160.png" alt="" loading="lazy"></figure>
+<p>下面是负责人相关界面：</p>
+<figure data-type="image" tabindex="14"><img src="https://hviker.github.io/post-images/1619144691625.png" alt="" loading="lazy"></figure>
+<p>这里点击Merge when piole success右侧下拉时会出现两个按钮。第一个是配置自动化部署jenkins并且流水线完成后才合并(这里只是审核代码，不需要合并)。第二个直接点击合并。<strong>合并前请项目负责人或者组长做好审查代码工作！！！</strong></p>
+<figure data-type="image" tabindex="15"><img src="https://hviker.github.io/post-images/1619144699285.png" alt="" loading="lazy"></figure>
+<p>选择第二个后会显示已合并状态，虽然流水线还在等待但是不影响合并功能。</p>
+<figure data-type="image" tabindex="16"><img src="https://hviker.github.io/post-images/1619144707697.png" alt="" loading="lazy"></figure>
+<p>此时查看release记录会增加修改的提交记录,查看release分支后已经存在合并内容。</p>
+<figure data-type="image" tabindex="17"><img src="https://hviker.github.io/post-images/1619144713224.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://hviker.github.io/post-images/1619144718240.png" alt="" loading="lazy"></figure>
+<p>2.6 合并完成后远程release分支相对于本地的release分支以及本地的chore-update-lly是有区别的，提前于本地分支。为了避免后期合并冲突增多，需要更新本地release以及chore-update-lly分支。</p>
+<p>​	(1) 对于release分支，直接切换到分支执行 git pull --rebase即可。</p>
+<figure data-type="image" tabindex="19"><img src="https://hviker.github.io/post-images/1619144724443.png" alt="" loading="lazy"></figure>
+<p>​	(2) 对于chore-update-lly分支，需要切换到该分支，然后执行merge命令。经过上述命令可以知道release是最新的，切换到chore-update-lly分支后执行命令 git merge release，git push即可。</p>
+<figure data-type="image" tabindex="20"><img src="https://hviker.github.io/post-images/1619144729846.png" alt="" loading="lazy"></figure>
+<p><strong>上面执行git merge release后，会把release的更新内容更新到本地的chore-update-lly上，但是chore-update-lly是存在没有保护状态远程分支的，这里需要提交下及时更新该远程分支。确保chore-update-lly分支内容与当前release分支最新内容保持一致。</strong></p>
+<h3 id="3-常见问题">3、常见问题</h3>
+<p>​	3.1 在其他分支修改后如何调整到源分支？例如下图，需要在chore-update-lly上修改，但是却发生在release分支。</p>
+<figure data-type="image" tabindex="21"><img src="https://hviker.github.io/post-images/1619144736655.png" alt="" loading="lazy"></figure>
+<p>​	这时候请保持在未add状态，执行git stash将内容暂存，切换到chore-update-lly后再执行git stash pop命令，将暂存内容转移至chore-update-lly分支。</p>
+<figure data-type="image" tabindex="22"><img src="https://hviker.github.io/post-images/1619144743507.png" alt="" loading="lazy"></figure>
+<p>3.2 如果2.6 操作不及时，可能会出现很多冲突。冲突的地方请联系代码提交者合并冲突后再提交。如果冲突过多建议重新创建本地分支及远程分支，将修改内容重新放置新分支上再执行上述操作。<strong>远程分支删除一定要跟项目负责人沟通,确认没问题后由项目负责人删除远程分支.</strong></p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/pei-xun-es-yu-fa.png');"></div>
+                 <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-04-21">2021-04-21</time>
+                  <h4 class="title white no-margin">培训-ES语法</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/sPs52aHLl.jpg');"></div>
+                 <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-03-18">2021-03-18</time>
+                  <h4 class="title white no-margin">如何封装全局组件并且被Vue.use(plugin) 使用</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '944c823bd05c648104dd',
+    clientSecret: '479408160ae5c4ae8d72afb14e74779c4228ef5f',
+    repo: 'gitalk',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://hviker.github.io/post-images/pei-xun-es-yu-fa.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-04-21">2021-04-21</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/pei-xun-es-yu-fa/">培训-ES语法</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-04-14">2021-04-14</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/">培训-Git提交流程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-03-18">2021-03-18</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">如何封装全局组件并且被Vue.use(plugin) 使用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hviker.github.io/tag/LDwpAxA3l/" class="ctag ctag-0 ctag-LDwpAxA3l" aria-label="">培训</a>
+                    
+                      <a href="https://hviker.github.io/tag/sPs52aHLl/" class="ctag ctag-1 ctag-sPs52aHLl" aria-label="">源码学习</a>
+                    
+                      <a href="https://hviker.github.io/tag/Ugt1CeixF/" class="ctag ctag-2 ctag-Ugt1CeixF" aria-label="">elementUI2.0</a>
+                    
+                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-3 ctag-qian-duan" aria-label="">前端</a>
+                    
+                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-4 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                    
+                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-5 ctag-nHH9c42oQ" aria-label="">解决方法</a>
+                    
+                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-6 ctag-GXfbDeMZV" aria-label="">vue</a>
+                    
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-7 ctag-z2AsGhmT2" aria-label="">echarts</a>
+                    
+                      <a href="https://hviker.github.io/tag/DIQF7868Q/" class="ctag ctag-8 ctag-DIQF7868Q" aria-label="">服务器</a>
+                    
+                      <a href="https://hviker.github.io/tag/uWbJmEwft/" class="ctag ctag-9 ctag-uWbJmEwft" aria-label="">D3</a>
+                    
+                      <a href="https://hviker.github.io/tag/37uX5bo02/" class="ctag ctag-10 ctag-37uX5bo02" aria-label="">Git</a>
+                    
+                      <a href="https://hviker.github.io/tag/rqmNkvREA/" class="ctag ctag-11 ctag-rqmNkvREA" aria-label="">后端</a>
+                    
+                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-12 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hviker.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">hviker</a></h4>
+                    <p class="founder">心游于艺，道不远人。</p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hviker.github.io"><img src="/media/images/custom-footerLogo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 50 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

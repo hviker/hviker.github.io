@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-04-22T09:36:11.714Z</updated>
+    <updated>2021-04-23T02:26:24.929Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -18,18 +18,25 @@
         <updated>2021-04-21T12:44:49.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[vue强制跳转]]></title>
-        <id>https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/</id>
-        <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
+        <title type="html"><![CDATA[培训-Git提交流程]]></title>
+        <id>https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/</id>
+        <link href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/">
         </link>
-        <updated>2021-03-16T03:54:07.000Z</updated>
+        <updated>2021-04-14T11:47:32.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[如何封装全局组件并且被Vue.use(plugin) 使用]]></title>
         <id>https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/</id>
         <link href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">
         </link>
-        <updated>2021-03-14T08:20:09.000Z</updated>
+        <updated>2021-03-18T08:20:09.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue强制跳转]]></title>
+        <id>https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/</id>
+        <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
+        </link>
+        <updated>2021-03-16T03:54:07.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[arguments使用]]></title>
@@ -72,12 +79,5 @@
         <link href="https://hviker.github.io/post/jie-jue-vue-element-admin-san-ji-cai-dan-xian-shi/">
         </link>
         <updated>2020-12-15T09:38:47.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[检测移动端软键盘回车进行查询]]></title>
-        <id>https://hviker.github.io/post/jian-ce-yi-dong-duan-ruan-jian-pan-hui-che-jin-xing-cha-xun/</id>
-        <link href="https://hviker.github.io/post/jian-ce-yi-dong-duan-ruan-jian-pan-hui-che-jin-xing-cha-xun/">
-        </link>
-        <updated>2020-12-10T10:38:45.000Z</updated>
     </entry>
 </feed>
