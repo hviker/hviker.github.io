@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>typeof与instanceof的区别 | hviker</title>
+<title>判断js变量类型的几种方法 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,8 +15,8 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="当我们需要判断一个变量的类型时经常会用到typeof,但是当去判断一个引用数据类型对象时，它返回的永远是&quot;object&quot;。
-这时候我们需要用到instanceof来判断某个对象是不是另一个对象的实例，instanceof..." />
+    <meta name="description" content="typeof、instanceof、Object.prototype.toString.call()
+当我们需要判断一个变量的类型时经常会用到typeof,但是当去判断一个引用数据类型对象时，它返回的永远是&quot;object&quot..." />
     <meta name="keywords" content="JS" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
@@ -78,7 +78,7 @@
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1619411579739" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1619439158834" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -102,7 +102,7 @@
                       <a href="https://hviker.github.io/tag/OK2iMRMG6/" class="ctag ctag-0 ctag-OK2iMRMG6" aria-label="">JS</a>
                     
               </div>
-              <h1 class="title ularge white bold">typeof与instanceof的区别</h1>
+              <h1 class="title ularge white bold">判断js变量类型的几种方法</h1>
             </div>
           </div>
         </div>  
@@ -112,7 +112,8 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>当我们需要判断一个变量的类型时经常会用到typeof,但是当去判断一个引用数据类型对象时，它返回的永远是&quot;object&quot;。</p>
+                  <p><strong>typeof、instanceof、Object.prototype.toString.call()</strong><br>
+当我们需要判断一个变量的类型时经常会用到typeof,但是当去判断一个引用数据类型对象时，它返回的永远是&quot;object&quot;。</p>
 <p>这时候我们需要用到instanceof来判断某个对象是不是另一个对象的实例，instanceof运算符用来检测构造函数的prototype属性是否存在于参数object的原型链上。语法： object instanceof constructor</p>
 <p>例如我们去判断一个数组</p>
 <pre><code class="language-javascript">let arr = [];
@@ -145,6 +146,40 @@ let boy = new BoyPerson('xiaoming', 12);
 console.log(boy instanceof BoyPerson); // 打印 true
 console.log(boy instanceof Person); // 打印 true
 </code></pre>
+<p><strong>Object.prototype.toString.call(property)也可以判断变量是属于那种内置类型。</strong></p>
+<pre><code class="language-javascript">Object.prototype.toString.call(null); // &quot;[object Null]&quot;
+Object.prototype.toString.call(undefined); // &quot;[object Undefined]&quot;
+Object.prototype.toString.call(“abc”);// &quot;[object String]&quot;
+Object.prototype.toString.call(123);// &quot;[object Number]&quot;
+Object.prototype.toString.call(true);// &quot;[object Boolean]&quot;
+**函数类型**
+Function fn(){
+  console.log(“test”);
+}
+Object.prototype.toString.call(fn); // &quot;[object Function]&quot;
+**日期类型**
+var date = new Date();
+Object.prototype.toString.call(date); // &quot;[object Date]&quot;
+**数组类型**
+var arr = [1,2,3];
+Object.prototype.toString.call(arr); // &quot;[object Array]&quot;
+**正则表达式**
+var reg = /[hbc]at/gi;
+Object.prototype.toString.call(reg); // &quot;[object RegExp]&quot;
+**自定义类型**
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+var person = new Person(&quot;Rose&quot;, 18);
+Object.prototype.toString.call(arr); // &quot;[object Object]&quot;
+</code></pre>
+<p><strong>总结</strong>：</p>
+<ol>
+<li>如果仅判断基本数据类型，typeof相对简单。 使用上typeof property === 'number'</li>
+<li>如果要判断是对象、数组、日期、Function、RegExp，可以使用arr instanceof Array、Object.prototype.toString.call(obj) === '[object, Object]'来判断。</li>
+<li>如果判断某变量是某构造函数实例，使用instanceof.</li>
+</ol>
 
                 </div>
                 <div class="clear"></div>
