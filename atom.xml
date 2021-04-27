@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-04-26T12:14:29.739Z</updated>
+    <updated>2021-04-27T02:01:54.803Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -46,6 +46,13 @@
         <updated>2021-04-01T11:28:22.000Z</updated>
     </entry>
     <entry>
+        <title type="html"><![CDATA[工程化注册全局组件]]></title>
+        <id>https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/</id>
+        <link href="https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/">
+        </link>
+        <updated>2021-03-20T11:59:51.000Z</updated>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[如何封装全局组件并且被Vue.use(plugin) 使用]]></title>
         <id>https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/</id>
         <link href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">
@@ -72,12 +79,5 @@
         <link href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">
         </link>
         <updated>2021-02-02T02:49:49.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[高级搜索实现]]></title>
-        <id>https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/</id>
-        <link href="https://hviker.github.io/post/gao-ji-sou-suo-shi-xian/">
-        </link>
-        <updated>2021-02-02T02:23:28.000Z</updated>
     </entry>
 </feed>
