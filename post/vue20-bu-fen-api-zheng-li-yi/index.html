@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>JS封装组件模板(借助JQuery) | hviker</title>
+<title>Vue2.0部分API整理(一) | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,10 +15,11 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="(function (factory) {
-    if(typeof module === 'object' &amp;&amp; typeof module.exports === 'object') {
-        factory..." />
-    <meta name="keywords" content="前端组件" />
+    <meta name="description" content="1、provide, inject
+​	用于父组件向子组件、孙子组件传递数据。
+​	provide, inject是成对出现的，provide在父组件使用，用于传递变量 ；inject在子、孙子组件使用，用于接收变量。
+​	相对于props..." />
+    <meta name="keywords" content="Vue2.0" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -92,18 +93,18 @@
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/js-feng-zhuang-zu-jian-mo-ban-jie-zhu-jquery.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-12-04"><i class="fa fa-calendar"></i><span class="lately">5 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-04-28"><i class="fa fa-calendar"></i><span class="lately">17 小时前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-0 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                      <a href="https://hviker.github.io/tag/L-6nzPhRV/" class="ctag ctag-0 ctag-L-6nzPhRV" aria-label="">Vue2.0</a>
                     
               </div>
-              <h1 class="title ularge white bold">JS封装组件模板(借助JQuery)</h1>
+              <h1 class="title ularge white bold">Vue2.0部分API整理(一)</h1>
             </div>
           </div>
         </div>  
@@ -113,40 +114,253 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <pre><code>(function (factory) {
-    if(typeof module === 'object' &amp;&amp; typeof module.exports === 'object') {
-        factory(require('jquery'), window, document);
-    } else {
-        factory(jQuery, window, document);
+                  <h2 id="1-provide-inject">1、provide, inject</h2>
+<p>​	<strong>用于父组件向子组件、孙子组件传递数据。</strong></p>
+<p>​	provide, inject是成对出现的，provide在父组件使用，用于传递变量 ；inject在子、孙子组件使用，用于接收变量。</p>
+<p>​	相对于props，主要用于跨组件传递。</p>
+<p>​	传递的数据为<strong>非响应式数据</strong>。父组件中主动触发修改变量的操作，不会影响子组件展示。</p>
+<h3 id="11-使用">1.1、使用</h3>
+<p>​	 父组件：</p>
+<pre><code class="language-javascript">export default {
+  components: {
+    Othertext
+  },
+  provide() {
+    return {
+      currentPermission: this.currentPermission
     }
-})(function ($, window, document) {
-    var OrganizePart = function(ele, opts) {
-        this.$ele = $(ele);
-        this.opts = opts;
-        this.defaultConfig = {}
-    };
-    OrganizePart.prototype = {
-        init: function() {
-            var _this = this;
-            _this.$options = $.extend({}, _this.defaultConfig, _this.opts);
-
-        }
-    };
-
-    $.fn.OrganizePart = function(opts) {
-        return new OrganizePart(this, opts).init();
+  },
+  data() {
+    return {
+      currentPermission: 'editor',
     }
-})
-
+  }
+}
 </code></pre>
-<p><strong>使用</strong></p>
-<pre><code>$(function() {
-        $(&quot;#pageContainer&quot;).OrganizePart({
-            // &quot;data&quot;: dataSource,
-        })
+<p>​	子组件：</p>
+<pre><code class="language-javascript">export default {
+  inject: {
+      currentPermission: {
+          default: () =&gt; ({})
+      }
+  },
+}
+</code></pre>
+<h3 id="12-注意">1.2、注意</h3>
+<p>​	1) <code>provide</code> 的值需要是一个对象或者是返回对象的函数，与data属性类型。</p>
+<p>​	2) <code>inject</code>的值需要是个数组，或者对象，与props属性类似。</p>
+<p>​	3)  传递的值为非响应式数据，由于父组件的主动行为引起属性发生变化时，子组件并不会响应。</p>
+<p>​	4） 一般vue项目的根页面为vue.app,同时也是所有页面的父页面。我们会根据项目要求存储些公共变量或者方法，如果需要在其他页面调用，可以将app.vue的当前实例传进去。</p>
+<pre><code class="language-javascript">// app.vue
+provide() {
+  return {
+    app: this
+  }
+}
+
+...
+
+// 其他页面
+inject: {
+  app: {
+    default: () =&gt; ({})
+  },
+},
+</code></pre>
+<p><strong>但是我们不建议这样使用。对于公共变量完全可以放到vuex中，公共方法可以进行提取调用。</strong></p>
+<h2 id="2-watch两个属性-immediate-deep">2、watch两个属性  immediate 、deep</h2>
+<h3 id="21-使用">2.1、使用</h3>
+<pre><code class="language-javascript">watch: {
+    info1: {
+      handler(newVal, oldVal) {
+        // todo
+      },
+      deep: true
+    }，
+    
+    info2: {
+      handler(newVal, oldVal) {
+        // todo
+      },
+      immediate: true
+    }
+  },
+</code></pre>
+<h3 id="22-区别">2.2 区别</h3>
+<p><code>deep</code>: 深度监听。在vue2.x的版本中，响应式使用Object.defineProperty(),在组件实例创建时，只是对对象的存在属性做了响应式。但是在实际开发过程中我们可能会存在增加属性的情况。对于这种情况，我们可以使用$set() 或者 深拷贝的方式来解决。对于对象的监听，尤其是上述增加属性的情况，deep可以做到深层次的监听，即当属性发生变化时也会watch到当前对象发生了变化。</p>
+<p><code>immediate</code>: 主要是用于页面加载时需不需要触发watch函数。如果是true则触发，否则之后在属性或对象发生变化时才会触发。</p>
+<h2 id="2-slot">2、slot</h2>
+<p>​	插槽。当父组件调用子组件时，允许将子组件内容、逻辑以插槽的形式写在父组件中。插槽有默认插槽，即v-slot:default，也有具名插槽，下面demo主要是具名插槽使用。</p>
+<h3 id="31-使用">3.1 使用</h3>
+<p>​	slot.vue</p>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;container-wrapper&quot;&gt;
+      slots.vue
+      &lt;br/&gt;
+      &lt;Testslot&gt;
+        // v-slot只能用在&lt;template&gt;;
+        // v-slot: 可以使用 # 来简化， 接收对应子组件插槽传递的数据value直接在对应v-slot后加={value},value可以使用解构赋值
+        // v-slot:name 其中name为具名插槽的name，即代码插入位置
+          &lt;template #header=&quot;{ user: { name } }&quot;&gt;
+            &lt;h1&gt;header&lt;/h1&gt;
+            &lt;h2&gt;{{ username }}&lt;/h2&gt;
+            &lt;h3&gt;{{ name }}&lt;/h3&gt;
+          &lt;/template&gt;
+          &lt;template v-slot:default&gt;
+            &lt;p&gt;middle&lt;/p&gt;
+          &lt;/template&gt;
+          &lt;template #footer&gt;
+            &lt;h2&gt;footer&lt;/h2&gt;
+          &lt;/template&gt;
+      &lt;/Testslot&gt;
+      &lt;Vfor :arr=&quot;permission&quot;&gt;
+        // v-slot 接收的参数可以key
+        &lt;template #vfor=&quot;arritem&quot;&gt;
+          &lt;span v-if=&quot;arritem.item != 1&quot;&gt;{{ arritem }}&lt;/span&gt;
+        &lt;/template&gt;
+      &lt;/Vfor&gt; 
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Testslot from './_testslot';
+import Vfor from './vfor';
+export default {
+  name: &quot;&quot;,
+  components: { Testslot, Vfor },
+  data() {
+    return {
+        username: 'xiaoming',
+        permission: ['1', '2', '3']
+    };
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+  //方法集合
+  methods: {},
+};
+&lt;/script&gt;
+</code></pre>
+<p>​	Testslot.vue</p>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;container-wrapper2&quot;&gt;
+    &lt;header&gt;
+      // 需要将子组件的值传递给父组件是，使用v-bind:prpperty = &quot;data&quot;
+      // 具名插槽需要使用name，默认name=&quot;default&quot;
+      &lt;slot name=&quot;header&quot; v-bind:user=&quot;user&quot;&gt;&lt;/slot&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+      &lt;slot&gt;&lt;/slot&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;&quot;,
+  props: [],
+  components: {},
+  data() {
+    return {
+      user: {
+        name: '1'
+      }
+    };
+  },
+  computed: {},
+  watch: {},
+  created() {
+
+  },
+  mounted() {},
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+  //方法集合
+  methods: {},
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+//@import url(); 引入公共css类
+&lt;/style&gt;
+</code></pre>
+<p>​		Vfor.vue</p>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;container-wrapper&quot;&gt;
+      &lt;ul&gt;
+          &lt;li v-for=&quot;(item, index) in arr&quot; :key=&quot;index&quot;&gt;
+            // 这里将item传递给父组件，这里v-bind:item可以写成:item, :后面的[item]可以修改，传递给父组件的时候，需要父组件自定义key.[item] 获取到数据
+            // 后备显示内容为item
+              &lt;slot name=&quot;vfor&quot; v-bind:item=&quot;item&quot;&gt;{{ item }}&lt;/slot&gt;
+          &lt;/li&gt;
+      &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;&quot;,
+  props: {
+      arr: {
+          type: Array
+      }
+  },
+  components: {},
+  data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+  //方法集合
+  methods: {},
+};
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+//@import url(); 引入公共css类
+&lt;/style&gt;
+</code></pre>
+<h2 id="3-delimiters">3、delimiters</h2>
+<p><strong>改变纯文本插入分隔符。</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1619600168785.png" alt="" loading="lazy"></figure>
+<p>现在我们的插值形式就变成了${},代替了{{ }},在页面中就可以使用 ${xxxxx} 绑定对应的值。</p>
+<h2 id="4-inheritattrs">4、inheritAttrs</h2>
+<p><strong>如果你不希望组件的根元素继承特性，你可以在组件的选项中设置 inheritAttrs: false</strong></p>
+<p>当inheritAttrs: false ，使用组件时组件自定义的属性不会覆盖组件中属性名称的值，同时组件中未定义的属性也不会添加到组件中</p>
+<p>当inheritAttrs:true，使用组件时组件自定义的属性会覆盖组件中属性名称的值，同时组件中未定义的属性会添加到组件中</p>
+<p>但是在组件中插入style、class时，不管inheritAttrs是true还是false，都会叠加到一起。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>r</mi><mi>r</mi><mi>t</mi><mi mathvariant="normal">使</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">：</mi><mi mathvariant="normal">给</mi><mi mathvariant="normal">组</mi><mi mathvariant="normal">件</mi><mi mathvariant="normal">添</mi><mi mathvariant="normal">加</mi><mi>v</mi><mo>−</mo><mi>b</mi><mi>i</mi><mi>n</mi><mi>d</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">arrt 使用：给组件添加v-bind=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">给</span><span class="mord cjk_fallback">组</span><span class="mord cjk_fallback">件</span><span class="mord cjk_fallback">添</span><span class="mord cjk_fallback">加</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span></span></span>arrts。 当设置为true或者false时功能与上述一致。</p>
+<pre><code class="language-javascript">&lt;div id =&quot;wxApp&quot; class =&quot;appclass&quot;&gt; 
+        &lt;blog-post title=&quot;标题&quot; demo-one=&quot;未定义属性1&quot; demo-tow=&quot;未定义属性2&quot; class=&quot;cointer2&quot; style=&quot;color:red&quot;&gt;&lt;/blog-post&gt;
+ &lt;/div&gt;
+ 
+ Vue.component(&quot;blog-post&quot;,{
+            props:{
+                title:String,
+            },
+            inheritAttrs:false,
+            template:`&lt;div demo-one=&quot;hello&quot; class=&quot;cointer&quot; style=&quot;width:500px&quot; &gt;
+                &lt;h1&gt;title:{{title}}&lt;/h1&gt;
+            &lt;/div&gt;
+            `
     })
-
 </code></pre>
+<p>当inheritAttrs为false时，</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1619600132284.png" alt="" loading="lazy"></figure>
+<p>当inheritAttrs为true时<br>
+<img src="https://hviker.github.io/post-images/1619600140394.png" alt="" loading="lazy"></p>
+<p>参考：https://blog.csdn.net/weixin_49868928/article/details/111935639</p>
 
                 </div>
                 <div class="clear"></div>
@@ -156,26 +370,13 @@
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/jian-ce-ping-mu-kuan-du.jpg');"></div>
-                 <a href="https://hviker.github.io/post/jian-ce-ping-mu-kuan-du/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2020-12-10">2020-12-10</time>
-                  <h4 class="title white no-margin">检测屏幕宽度</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vue-shi-pin-bo-fang-vue-video-player.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vue-shi-pin-bo-fang-vue-video-player/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/GXfbDeMZV.jpg');"></div>
+                 <a href="https://hviker.github.io/post/vue-yuan-ma-xue-xi-vuedirective/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-11-01">2020-11-01</time>
-                  <h4 class="title white no-margin">vue视频播放-vue-video-player</h4>
+                  <time datetime="2021-04-27">2021-04-27</time>
+                  <h4 class="title white no-margin">Vue.directive</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-04-27T02:01:54.803Z</updated>
+    <updated>2021-04-29T01:31:21.265Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[Vue2.0部分API整理(一)]]></title>
+        <id>https://hviker.github.io/post/vue20-bu-fen-api-zheng-li-yi/</id>
+        <link href="https://hviker.github.io/post/vue20-bu-fen-api-zheng-li-yi/">
+        </link>
+        <updated>2021-04-28T08:54:57.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Vue.directive]]></title>
+        <id>https://hviker.github.io/post/vue-yuan-ma-xue-xi-vuedirective/</id>
+        <link href="https://hviker.github.io/post/vue-yuan-ma-xue-xi-vuedirective/">
+        </link>
+        <updated>2021-04-27T08:24:52.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CSS设置滚动条样式(兼容IE)]]></title>
         <id>https://hviker.github.io/post/css-she-zhi-gun-dong-tiao-yang-shi-jian-rong-ie/</id>
@@ -46,7 +60,7 @@
         <updated>2021-04-01T11:28:22.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[工程化注册全局组件]]></title>
+        <title type="html"><![CDATA[工程化注册Vue全局组件]]></title>
         <id>https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/</id>
         <link href="https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/">
         </link>
@@ -65,19 +79,5 @@
         <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
         </link>
         <updated>2021-03-16T03:54:07.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[arguments使用]]></title>
-        <id>https://hviker.github.io/post/arguments-shi-yong/</id>
-        <link href="https://hviker.github.io/post/arguments-shi-yong/">
-        </link>
-        <updated>2021-03-01T06:43:53.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[el-table表格合并]]></title>
-        <id>https://hviker.github.io/post/el-table-biao-ge-he-bing/</id>
-        <link href="https://hviker.github.io/post/el-table-biao-ge-he-bing/">
-        </link>
-        <updated>2021-02-02T02:49:49.000Z</updated>
     </entry>
 </feed>
