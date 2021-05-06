@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-04-29T01:31:21.265Z</updated>
+    <updated>2021-05-06T09:12:36.323Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[loader：管理资源]]></title>
+        <id>https://hviker.github.io/post/webpack-loaderguan-li-zi-yuan/</id>
+        <link href="https://hviker.github.io/post/webpack-loaderguan-li-zi-yuan/">
+        </link>
+        <updated>2021-05-06T09:09:29.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Vue2.0部分API整理(一)]]></title>
         <id>https://hviker.github.io/post/vue20-bu-fen-api-zheng-li-yi/</id>
@@ -72,12 +79,5 @@
         <link href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">
         </link>
         <updated>2021-03-18T08:20:09.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue强制跳转]]></title>
-        <id>https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/</id>
-        <link href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/">
-        </link>
-        <updated>2021-03-16T03:54:07.000Z</updated>
     </entry>
 </feed>

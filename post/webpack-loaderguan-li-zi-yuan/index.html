@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法 | hviker</title>
+<title>loader：管理资源 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,12 +15,12 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="vue的钩子函数beforeDestroy()、destroy() 只是在页面切换的时候触发，并不能监听F5或者网页关闭时的事件。
-js种beforeunload事件可以在当前页面刷新或者关闭时调用。
-使用：
-methods:{
-    /..." />
-    <meta name="keywords" content="解决方法,前端" />
+    <meta name="description" content="1 链式loader执行顺序
+一组链式的loader讲按照相反的顺序执行，从右到左。
+链式的最后一个loader将转换过后的结果传递给前一个loader，以此类推。链中的第一个loader，返回webpack期望的js。
+2 管理资源
+对于..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -94,20 +94,18 @@ methods:{
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2019-12-31"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-06"><i class="fa fa-calendar"></i><span class="lately">3 分钟前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-0 ctag-nHH9c42oQ" aria-label="">解决方法</a>
-                    
-                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法</h1>
+              <h1 class="title ularge white bold">loader：管理资源</h1>
             </div>
           </div>
         </div>  
@@ -117,30 +115,143 @@ methods:{
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>vue的钩子函数beforeDestroy()、destroy() 只是在页面切换的时候触发，并不能监听F5或者网页关闭时的事件。<br>
-js种beforeunload事件可以在当前页面刷新或者关闭时调用。<br>
-使用：</p>
-<pre><code>methods:{
-    // beforeunload对用的方法
-    beforeunloadFn(e) {
-      if(this.socket) {
-        this.socket.close();
-        clearInterval(this.heartBeatInterval);
-        this.heartBeatInterval = null;
+                  <h3 id="1-链式loader执行顺序">1 链式loader执行顺序</h3>
+<p>一组链式的loader讲按照相反的顺序执行，从右到左。</p>
+<p>链式的最后一个loader将转换过后的结果传递给前一个loader，以此类推。链中的第一个loader，返回webpack期望的js。</p>
+<h3 id="2-管理资源">2 管理资源</h3>
+<p>对于webapack来说，默认只能打包js文件，或者说是js模块。</p>
+<p>Webpack中的loader可以引入、打包非js文件/模块。</p>
+<p>当webpack对项目代码进行打包时，遇到非js文件，会去webpack的配置文件中查找module节点，查询有没有配置去处理对应的节点。</p>
+<p>允许将文件从不同的语言(如ts)转换为js,或者将内联图片转换为data URL,允许直接在js模块中import css文件。</p>
+<h4 id="21-加载css">2.1 加载css</h4>
+<p>需要安装 <a href="https://v4.webpack.docschina.org/loaders/style-loader">style-loader</a> 和 <a href="https://v4.webpack.docschina.org/loaders/css-loader">css-loader</a></p>
+<pre><code class="language-js">npm install --save-dev style-loader css-loader
+</code></pre>
+<p>webpack根据正则表达式，来查找所有以.css结尾的文件，都将被提供style-loader，css-loader。</p>
+<p><strong>这样可以使你在js文件中使用import './style.css'。</strong></p>
+<p><strong>在编译该模块时，引入的style.css将会被<code>&lt;style&gt;</code>给包裹，并添加到html的<code>&lt;head&gt;</code>中。</strong></p>
+<pre><code class="language-js"> module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [&quot;style-loader&quot;, &quot;css-loader&quot;],
       }
-    }
-},
-
-mounted() {
-    // 初始化socket
-    this.init();
-    // 给beforeunload添加事件，并监听beforeunload
-    window.addEventListener('beforeunload', e =&gt; this.beforeunloadFn(e))
-},
-beforeDestroy () {
-    // 当页面切换时关闭监听
-    window.removeEventListener('beforeunload', e =&gt; this.beforeunloadFn(e))
+    ]
+ }
+</code></pre>
+<p><strong>Q1: 为什么先引入style-loader,后引入css-loader ?</strong></p>
+<p>1、css-loader的作用： 帮助解析css文件中的css代码，除了正常的css代码外，还解析css中的@import、url(..)这种方法来实现require的功能，但是样式内容并没有添加到<code>&lt;style&gt;</code>中。</p>
+<p>2、style-loader的作用：帮助我们将css-loader解析后的内容包裹在<code>&lt;style&gt;</code>中，并添加到html的<code>&lt;head&gt;</code>中。</p>
+<p>3、loader执行顺序，从右往左。webpack肯定是现将所有css模块解析完成后再添加到style标签中，所有css-loader在后，style-loader在前。</p>
+<h4 id="22-加载images图像">2.2 加载images图像</h4>
+<p>对于图片，不管是css中的background-image，还是<code>img</code>中的src，使用file-loader | url-loader进行处理。</p>
+<p>**file-loader解决了路径引入问题。**拿图片来说，webpack打包后这些图片的打包路径可能和编码中引入路径不一样，比如开发坏境中引入./images目录下的图片，但是打包却打包到./imgs文件夹下，设置更多文件夹嵌套，导致引用出现问题。file-loader会修改打包后图片的存储路径，首先会将图片移动到output所在文件夹，并且随机生成一个hash值座位图片的名字。并将打包后的图片名称返回import | require函数。</p>
+<pre><code class="language-js">{
+  test: /\.(png|svg|jpe?g|gif)$/i,
+    use: [
+      {
+        loader: &quot;file-loader&quot;,
+        options: {
+          name: &quot;[name]_[hash:7].[ext]&quot;,
+          outputPath: 'images/'
+        }
+      }
+    ]
+}
+</code></pre>
+<p><code>file-loader</code>的常用配置项(options)</p>
+<p>name: 设置打包生成文件的名称。其中，<code>[name]</code>: 源文件名； <code>[hash]</code>: 随机生成的hash值,<code>:6</code> 表示生成的hash值截取前6位； <code>[ext]</code>: 源文件后缀； <strong>一定要用<code>&quot;&quot;</code>包裹。</strong></p>
+<p><code>outputPath</code>: 打包文件目录，相对路径，相对于output的设置。我们最终导出的文件路径为<code>output.path + file-loader.outputPath + file-loader.name</code>。例如上面images,会在dist文件夹下创建images文件夹并存储文件。</p>
+<p><code>publicPath</code>:指定最终引用的文件路径(打包生成的index.html文件里面引用资源的前缀)。最终引用文件路径：<code>output.outputPath + file-loader.outputPath + file-loader.name</code> 。例如访问文件路径为http://localhost:8080/dist/images,其中output.publicPath默认为/dist, 这里可以设置为<code>images/</code>。</p>
+<p>url-loader:https://www.npmjs.com/package/url-loader</p>
+<p>url-loader: 内置file-loader。使用url-loader时，可以不用安装file-loader。</p>
+<p>当图片较多时会发起很多http请求，会降低页面的性能，这个问题可以使用url-loader进行解决。url-loader会将引入的图片编码，生成dataURL并将其打包到文件中。最终不需要请求直接访问这个dataURL就能访问图片。如果图片过大编码过程将会降低性能，建议将较小的图标设置为baseURL。</p>
+<p>url-loader提供了limit参数，如果文件小于limit限制，则返回DataURL（根据encoding设置，默认base64，也可以设置utf-8等），如果大于则会调用file-loader。</p>
+<p><strong>进一步压缩、优化图片：</strong></p>
+<p>图片压缩： image-webpack-loader</p>
+<pre><code class="language-js">{
+  loader: &quot;image-webpack-loader&quot;,
+  options: {
+  	bypassOnDebug: true,
   }
+}
+</code></pre>
+<p>loader中使用<code>image-webpack-loader</code>时经常报错：Cannot find module 'imagemin-gifsicle'</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1620292261813.png" alt="" loading="lazy"></figure>
+<p>这是因为npm下载包时下载不全导致的。</p>
+<p>解决方法：</p>
+<ol>
+<li>
+<p>不要使用npm，使用cnpm i image-webpack-loader@6.0.0 -D;  这里一定要加版本号，如果不加版本号很容易下载不下来。</p>
+</li>
+<li>
+<p>使用cnpm下载低版本的包。</p>
+</li>
+</ol>
+<p>比较url-loader、file-loader:https://segmentfault.com/a/1190000018987483?utm_source=tag-newest</p>
+<p><strong>最终对图片的优化loader为：</strong></p>
+<p>这里先对图片使用<code>image-webpack-loader</code>进行压缩为二次图片，二次图片再使用<code>url-loader</code>。</p>
+<p>当二次图片大小大于8k直接使用压缩后的文件，小于8k是进行base64编码。</p>
+<pre><code class="language-js">module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        use: [
+          {
+            loader: &quot;url-loader&quot;,
+            options: {
+              limit: 8192, // 8k
+              name: '[name]_[hash:7].[ext]',
+            }
+          },
+          {
+            loader: &quot;image-webpack-loader&quot;,
+            options: {
+              bypassOnDebug: true,
+            }
+          }
+        ],
+      },
+    ],
+  }
+</code></pre>
+<p>这里能够看到原图片压缩了70%</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1620292269806.png" alt="" loading="lazy"></figure>
+<h4 id="23-加载font字体">2.3 加载font字体</h4>
+<p>使用file-loader 或者 url-loader可以接收、加载字体文件。<br>
+<strong>对指定文件添加loader</strong></p>
+<pre><code class="language-js">module: {
+    rules: [
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'url-loader'
+        ]
+      }
+    ],
+  }
+</code></pre>
+<p>​	存放字体文件并使用<code>@font-face</code>声明混合。url(...)指令会给webpack处理。</p>
+<figure data-type="image" tabindex="3"><img src="https://hviker.github.io/post-images/1620292277356.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://hviker.github.io/post-images/1620292281555.png" alt="" loading="lazy"></figure>
+<h4 id="24-加载csvtsvxml数据">2.4 加载csv|tsv|xml数据</h4>
+<p>对于数据，json属于内置的，也就是说使用import导入.json文件时默认正常运行。但是如果导入CSV、TSV、XML时需要下载<a href="https://github.com/theplatapi/csv-loader">csv-loader</a> 和 <a href="https://github.com/gisikw/xml-loader">xml-loader</a>。</p>
+<pre><code class="language-js">module: {
+    rules: [
+      {
+        test: /\.(csv|tsv)$/,
+        use: [
+          'csv-loader'
+        ]
+      },
+      {
+        test: /\.xml$/,
+        use: [
+          'xml-loader'
+        ]
+      }
+    ]
+}   
 </code></pre>
 
                 </div>
@@ -151,26 +262,13 @@ beforeDestroy () {
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang.jpg');"></div>
-                 <a href="https://hviker.github.io/post/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2020-01-13">2020-01-13</time>
-                  <h4 class="title white no-margin">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/sass.jpg');"></div>
-                 <a href="https://hviker.github.io/post/sass/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/L-6nzPhRV.jpg');"></div>
+                 <a href="https://hviker.github.io/post/vue20-bu-fen-api-zheng-li-yi/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-12-29">2019-12-29</time>
-                  <h4 class="title white no-margin">Sass</h4>
+                  <time datetime="2021-04-28">2021-04-28</time>
+                  <h4 class="title white no-margin">Vue2.0部分API整理(一)</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
