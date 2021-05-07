@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>vue仿tab实现 | hviker</title>
+<title>模块热替换 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,9 +15,12 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="1、应用场景
-单页面存在多个tab，其中多个tab中都存在大量的数据请求。普通的tab在首页面展示时会对所有tab的数据进行请求，浪费资源，引起页面卡顿。使用该tab可以有效解决单页面数据请求与数据渲染问题，利用 在tab切换时只需要根据i..." />
-    <meta name="keywords" content="前端组件" />
+    <meta name="description" content="webpack的模块热替换功能，简称HMR，允许在运行时更新各模块而无需对网页进行刷新。
+webpack-dev-server中提供了模块热替换功能，只需要将hot属性设置为true即可使用。
+只用于开发环境。
+demo：
+webpack...." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -91,18 +94,18 @@
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/vue-fang-tab-shi-xian.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-09-04"><i class="fa fa-calendar"></i><span class="lately">8 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-07"><i class="fa fa-calendar"></i><span class="lately">36 分钟前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/WeNhJHfo1/" class="ctag ctag-0 ctag-WeNhJHfo1" aria-label="">前端组件</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">vue仿tab实现</h1>
+              <h1 class="title ularge white bold">模块热替换</h1>
             </div>
           </div>
         </div>  
@@ -112,177 +115,166 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <h3 id="1-应用场景">1、应用场景</h3>
-<p>单页面存在多个tab，其中多个tab中都存在大量的数据请求。普通的tab在首页面展示时会对所有tab的数据进行请求，浪费资源，引起页面卡顿。使用该tab可以有效解决单页面数据请求与数据渲染问题，利用<component> 在tab切换时只需要根据id动态修改currentTabComponent的值,也可以往组件中传值。</p>
-<h3 id="2-效果截图">2、效果截图</h3>
-<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1605085185520.png" alt="" loading="lazy"></figure>
-<h3 id="3-代码实现">3、代码实现</h3>
-<pre><code>&lt;!-- 首页 --&gt;
-&lt;template&gt;
-  &lt;div class=&quot;mainContainer&quot;&gt;
-    &lt;div class=&quot;tabArea&quot;&gt;
-      &lt;div class=&quot;overFlowTabArea&quot;&gt;
-        &lt;el-button
-          v-for=&quot;item in tabType&quot;
-          :key=&quot;item.id&quot;
-          @click=&quot;handleTab(item.id)&quot;
-          :class=&quot;{ isActive: item.id == activeTab }&quot;
-          &gt;{{ item.name }}&lt;/el-button
-        &gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mainTabInfo&quot;&gt;
-      &lt;component :is=&quot;currentTabComponent&quot; :tabArr=&quot;tabArr&quot;&gt;&lt;/component&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
+                  <p>webpack的模块热替换功能，简称HMR，允许在运行时更新各模块而无需对网页进行刷新。</p>
+<p>webpack-dev-server中提供了模块热替换功能，只需要将<code>hot</code>属性设置为true即可使用。</p>
+<p><strong>只用于开发环境。</strong></p>
+<p><strong>demo：</strong></p>
+<p>webpack.config.js</p>
+<pre><code class="language-js">const path = require(&quot;path&quot;);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
-&lt;script&gt;
-import AllDynamicRoute from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/AllDynamicRoute_index&quot;; // 全部菜单
-import FirstPrinciples from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/FirstPrinciples_index&quot;; // xxx
-import CALPHAD from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/CALPHAD_index&quot;; //xxx
-import Spread from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/Spread_index&quot;; // xxx
-import Multiphase from &quot;@/views/steelResearchCompute/cloudCompute/dynamicRoute/Multiphase_index&quot;; // xxx
-
-export default {
-  components: {
-    AllDynamicRoute,
-    FirstPrinciples,
-    CALPHAD,
-    Spread,
-    Precipitation,
-    Multiphase,
-    Limited,
-    Fluid,
-    Coupling,
-    Other,
+module.exports = {
+  mode: 'development',
+  entry: {
+    app: &quot;./src/index.js&quot;,
   },
-  data() {
-    return {
-      computeMenuData: [], // 云计算菜单数据
-      tabType: [
-        // 仿Tab 按钮资源
-      ],
-      activeTab: &quot;FirstPrinciples&quot;, // 激活状态下的tab
-      currentTabComponent: FirstPrinciples, // 激活状态下tab对应的数据信息
-      tabArr: [
-        // 当前tab显示数据
-      ],
-      allDynamicRouteArr: [
-        // 所有的三级菜单
-      ],
-    };
+  devtool: 'eval-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    port: 9000,
+    compress: true,
+    // hot: true
   },
-  computed: {},
-  watch: {},
-  methods: {
-    // 点击按钮切换菜单
-    handleTab(id) {
-      this.activeTab = id;
-      switch (id) {
-        case &quot;AllDynamicRoute&quot;:
-          this.currentTabComponent = AllDynamicRoute;
-          break;
-        case &quot;FirstPrinciples&quot;:
-          this.currentTabComponent = FirstPrinciples;
-          break;
-        case &quot;CALPHAD&quot;:
-          this.currentTabComponent = CALPHAD;
-          break;
-        case &quot;Multiphase&quot;:
-          this.currentTabComponent = Multiphase;
-          break;
-        case &quot;Spread&quot;:
-          this.currentTabComponent = Spread;
-          break;
-        case &quot;MyComputeTask&quot;:
-          this.$router.push(&quot;/steelResearchCompute/myComputeTask&quot;);
-          return;
-          break;
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: '管理输出'
+    }),
+    new WebpackManifestPlugin()
+  ],
+  output: {
+    filename: &quot;[name].bundle.js&quot;,
+    path: path.resolve(__dirname, &quot;dist&quot;),
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [&quot;style-loader&quot;, &quot;css-loader&quot;],
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        use: [
+          {
+            loader: &quot;url-loader&quot;,
+            options: {
+              limit: 35840,
+              name: '[name]_[hash:7].[ext]',
+              outputPath: '/images/',
+              publicPath: 'images/'
+            }
+          },
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'url-loader'
+        ]
       }
-      this.getTabArr(id);
-    },
-    // 获取当前tab的二级菜单
-    getTabArr(id) {
-      if (id == &quot;AllDynamicRoute&quot;) {
-        this.tabArr = JSON.parse(JSON.stringify(this.allDynamicRouteArr));
-      } else {
-        let arr = [];
-        this.computeMenuData.some((item) =&gt; {
-          if (item.category == id) {
-            let categoryList = item.categoryList; // tab对应的二级菜单
-            categoryList.forEach((item1) =&gt; {
-              // InstructionMode : 1 指令模式，2 图形模式
-              let routerPath =
-                item1.InstructionMode == &quot;2&quot;
-                  ? &quot;/steelResearchCompute/cloudCompute&quot;
-                  : &quot;/steelResearchCompute/instructionModeCompute&quot;;
-              arr.push({
-                id: item1.ID,
-                name: item1.ChineseName,
-                secondName: item1.ChineseName,
-                picLocal: process.env.VUE_APP_DOWNLOAD_IP + item1.SoftAlgorithmCoverIcon,
-                routerPath: routerPath,
-              });
-            });
-            return true;
-          }
-        });
-        this.tabArr = arr;
-      }
-    },
-    // 初始化
-    init() {
-      // 钢研云计算所有动态的二级菜单
-      let computeMenuData = this.$store.getters.computeMenuData;
-      this.computeMenuData = computeMenuData;
-      this.tabType = [{ id: &quot;AllDynamicRoute&quot;, name: &quot;全部&quot; }];
-      if (computeMenuData.length &gt; 0) {
-        computeMenuData.forEach((item) =&gt; {
-          this.tabType.push({ id: item.category, name: item.categoryText });
-          // 获取所有的三级菜单
-          item.categoryList.forEach((item1) =&gt; {
-            let routerPath =
-              item1.InstructionMode == &quot;2&quot;
-                ? &quot;/steelResearchCompute/cloudCompute&quot;
-                : &quot;/steelResearchCompute/instructionModeCompute&quot;;
-            this.allDynamicRouteArr.push({
-              id: item1.ID,
-              name: item1.ChineseName,
-              secondName: item1.ChineseName,
-              picLocal: process.env.VUE_APP_DOWNLOAD_IP + item1.SoftAlgorithmCoverIcon,
-              routerPath: routerPath,
-            });
-          });
-        });
-        // 添加我的计算任务tab
-        this.tabType.push({ id: &quot;MyComputeTask&quot;, name: &quot;我的计算任务&quot; })
-        this.handleTab(&quot;AllDynamicRoute&quot;);
-      }
-    },
+    ],
   },
-  created() {
-    this.init();
-  },
-  mounted() {},
 };
-&lt;/script&gt;
-&lt;style lang='scss'&gt;
-//  仿Tab 按钮样式
-.mainContainer {
-  padding: 0px;
-  .overFlowTabArea {
-    width: auto;
-    height: 100%;
-  }
-  .tabArea .overFlowTabArea &gt; .el-button--medium {
-    padding: 10px;
-    border-radius: 2px;
-    margin-left: 2px;
+</code></pre>
+<p>index.js</p>
+<pre><code class="language-js">import _ from 'loadsh';
+import './style.css'
+import Icon from './image/icon.png';
+import printMe from './print'
+
+function component() {
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
+  
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.classList.add('hello');
+
+    btn.innerHTML = 'printMe';
+    btn.onclick = printMe;
+    element.appendChild(btn)
+
+    return element;
+}
+  
+document.body.appendChild(component());
+</code></pre>
+<p>print.js</p>
+<pre><code class="language-js">export default function printMe() {
+    let appendDiv = document.createElement('div');
+    appendDiv.classList.add('divStyle')
+    document.body.appendChild(appendDiv)
+}
+</code></pre>
+<p>style.css</p>
+<pre><code class="language-css">@font-face {
+    font-family: 'GraublauWeb';
+    src: url('./font/GraublauWeb.woff.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+.hello {
+    font-size: 36px;
+    color: green;
+    font-family: 'GraublauWeb'; 
+    background: url('./image/icon.png');
+}
+
+.imageStyle {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+.divStyle {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background: yellow;
+}
+</code></pre>
+<p>package.json</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;webpack-demo&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;private&quot;: true,
+  &quot;scripts&quot;: {
+    &quot;watch&quot;: &quot;webpack --watch&quot;,
+    &quot;start&quot;: &quot;webpack-dev-server --open&quot;,
+    &quot;build&quot;: &quot;npx webpack --config webpack.config.js&quot;,
+    &quot;server&quot;: &quot;node server.js&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: {
+    &quot;file-loader&quot;: &quot;^6.2.0&quot;,
+    &quot;html-webpack-plugin&quot;: &quot;^4.5.2&quot;,
+    &quot;loadsh&quot;: &quot;0.0.4&quot;,
+    &quot;webpack&quot;: &quot;^4.20.2&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.1.2&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;clean-webpack-plugin&quot;: &quot;^4.0.0-alpha.0&quot;,
+    &quot;css-loader&quot;: &quot;^5.2.4&quot;,
+    &quot;express&quot;: &quot;^4.17.1&quot;,
+    &quot;image-webpack-loader&quot;: &quot;^6.0.0&quot;,
+    &quot;style-loader&quot;: &quot;^2.0.0&quot;,
+    &quot;url-loader&quot;: &quot;^4.1.1&quot;,
+    &quot;webpack-dev-middleware&quot;: &quot;^4.1.0&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^3.11.2&quot;,
+    &quot;webpack-manifest-plugin&quot;: &quot;^3.1.1&quot;,
+    &quot;webpack-nano&quot;: &quot;^1.1.1&quot;
   }
 }
-&lt;/style&gt;
 </code></pre>
+<p>当我们执行npm run start时，会打开localhost:9000的网址，并且每点击一次按钮会出现一个div</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1620376811920.png" alt="" loading="lazy"></figure>
+<p>但是当我们去修改.divStyle的background属性时，就会引起浏览器的刷新，导致这些通过点击生成的div就会消失。</p>
+<p>但是如果开始webpack-dev-server的hot属性，就可以保证在修改css时不会引起浏览器的刷新，这样动态生成的div就不会消失。</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1620376817632.png" alt="" loading="lazy"></figure>
 
                 </div>
                 <div class="clear"></div>
@@ -292,26 +284,13 @@ export default {
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/element-ui-zu-jian-zheng-li.jpg');"></div>
-                 <a href="https://hviker.github.io/post/element-ui-zu-jian-zheng-li/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2020-09-14">2020-09-14</time>
-                  <h4 class="title white no-margin">vue文件上传</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vue-er-ji-shu-zhi-neng-xuan-ze-yi-ji-jie-dian-xia-de-yi-xiang-huo-zhe-duo-xiang.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vue-er-ji-shu-zhi-neng-xuan-ze-yi-ji-jie-dian-xia-de-yi-xiang-huo-zhe-duo-xiang/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/kai-fa-huan-jing/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-08-30">2020-08-30</time>
-                  <h4 class="title white no-margin">vue二级树(只能选择一级节点下的一项或者多项)</h4>
+                  <time datetime="2021-05-07">2021-05-07</time>
+                  <h4 class="title white no-margin">开发环境</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
