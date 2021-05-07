@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-05-06T09:14:22.697Z</updated>
+    <updated>2021-05-07T07:47:52.485Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[开发环境]]></title>
+        <id>https://hviker.github.io/post/kai-fa-huan-jing/</id>
+        <link href="https://hviker.github.io/post/kai-fa-huan-jing/">
+        </link>
+        <updated>2021-05-07T07:47:18.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[管理输出]]></title>
+        <id>https://hviker.github.io/post/guan-li-shu-chu/</id>
+        <link href="https://hviker.github.io/post/guan-li-shu-chu/">
+        </link>
+        <updated>2021-05-07T01:32:09.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[loader：管理资源]]></title>
         <id>https://hviker.github.io/post/webpack-loaderguan-li-zi-yuan/</id>
@@ -65,19 +79,5 @@
         <link href="https://hviker.github.io/post/applycallbind/">
         </link>
         <updated>2021-04-01T11:28:22.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[工程化注册Vue全局组件]]></title>
-        <id>https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/</id>
-        <link href="https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/">
-        </link>
-        <updated>2021-03-20T11:59:51.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[如何封装全局组件并且被Vue.use(plugin) 使用]]></title>
-        <id>https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/</id>
-        <link href="https://hviker.github.io/post/ru-he-feng-zhuang-quan-ju-zu-jian-bing-qie-bei-vueuseplugin-shi-yong/">
-        </link>
-        <updated>2021-03-18T08:20:09.000Z</updated>
     </entry>
 </feed>

@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | hviker</title>
+<title>管理输出 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,15 +15,9 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="👏  欢迎使用 Gridea ！
-✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...
-
-Github
-Gridea 主页
-示例网站
-特性👇
-📝  你可以使用最酷的 Markdo..." />
-    <meta name="keywords" content="Gridea" />
+    <meta name="description" content="1、html-webpack-plugin
+当我们根据功能或者模块将代码分成多个js，这时候利用webpack会输出多个bundle。index.html需要手动引入多个bundle会变得困难。这时候可以通过设置HtmlWebpackPlu..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -99,16 +93,16 @@ Gridea 主页
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2018-12-12"><i class="fa fa-calendar"></i><span class="lately">2 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-07"><i class="fa fa-calendar"></i><span class="lately">6 小时前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/idNHj5-gf/" class="ctag ctag-0 ctag-idNHj5-gf" aria-label="">Gridea</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">Hello Gridea</h1>
+              <h1 class="title ularge white bold">管理输出</h1>
             </div>
           </div>
         </div>  
@@ -118,27 +112,100 @@ Gridea 主页
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                  <h3 id="1-html-webpack-plugin">1、html-webpack-plugin</h3>
+<p>当我们根据功能或者模块将代码分成多个js，这时候利用webpack会输出多个bundle。index.html需要手动引入多个bundle会变得困难。这时候可以通过设置<code>HtmlWebpackPlugin</code>来实现多个bundle的自动化引入。</p>
+<pre><code class="language-js">npm install --save-dev html-webpack-plugin
+</code></pre>
+<pre><code class="language-js">const path = require(&quot;path&quot;);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+  mode: 'production',
+  entry: {
+    app: &quot;./src/index.js&quot;,
+    print: &quot;./src/print.js&quot;
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: '管理输出'
+    })
+  ],
+  output: {
+    filename: &quot;[name].bundle.js&quot;,
+    path: path.resolve(__dirname, &quot;dist&quot;),
+  },
+}
+</code></pre>
+<p>1、下载html-webpack-plugin，并引入</p>
+<p>2、在entry中定义多个入口，同时output的filename设置为`[name].bundle.js``,这样可以使打包生成的bundle名称分别为app.bundle.js、print.bundle.js。否则执行打包命令会报错出现多个重名的bundle。</p>
+<p>3、plugins中使用html-webpack-plugin，这里上面声明的HtmlWebpackPlugin是一个构造函数，需要通过new HtmlWebpackPlugin({...})使用。html-webpack-plugin可以动态生成index.html并且动态引入entry中定义的文件。</p>
+<p><strong>Q1：使用html-webpack-plugin报错 Cannot read property 'tap' of undefined。</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1620351156891.png" alt="" loading="lazy"></figure>
+<p>查看自己webpack版本是否与html-webpack-plugin版本一致。自己项目中webpack用的4+,则html-webpack-plugin也用4+。</p>
+<h3 id="2-clean-webpack-plugin">2、clean-webpack-plugin</h3>
+<p><strong>clean-webpack-plugin负责清理/dist文件夹</strong>。</p>
+<p>经过webpack打包后，生成文件会被输出到output定义的path中。有些打包文件在项目开发过程中已经不需要了，但是webpack本身不具有自动清理/dist的功能。这时候需要<code>clean-webpack-plugin</code>。</p>
+<pre><code class="language-js">const path = require(&quot;path&quot;);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    app: &quot;./src/index.js&quot;,
+    print: &quot;./src/print.js&quot;,
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: '管理输出'
+    })
+  ],
+  output: {
+    filename: &quot;[name].bundle.js&quot;,
+    path: path.resolve(__dirname, &quot;dist&quot;),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [&quot;style-loader&quot;, &quot;css-loader&quot;],
+      }
+    ],
+  },
+};
+
+</code></pre>
+<h3 id="3-manifest">3、manifest</h3>
+<p>描述模块与所生成的bundle自建的映射关系。可以使用webpack-manifest-plugin将mainfest数据提取为到json文件中。</p>
+<pre><code class="language-js">npm install webpack-nano webpack-manifest-plugin --save-dev
+</code></pre>
+<pre><code class="language-js">const path = require(&quot;path&quot;);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    app: &quot;./src/index.js&quot;,
+    print: &quot;./src/print.js&quot;,
+    // test: &quot;./src/test.js&quot;
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: '管理输出'
+    }),
+    new WebpackManifestPlugin()
+  ],
+  output: {
+    filename: &quot;[name].bundle.js&quot;,
+    path: path.resolve(__dirname, &quot;dist&quot;),
+  },
+}
+</code></pre>
+<p>所生成的mainfest.json文件</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1620351146325.png" alt="" loading="lazy"></figure>
 
                 </div>
                 <div class="clear"></div>
@@ -149,11 +216,11 @@ Gridea 主页
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vuewebsocketprotobuf.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vuewebsocketprotobuf/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/kai-fa-huan-jing/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-11-26">2019-11-26</time>
-                  <h4 class="title white no-margin">VUE+Websocket+Protobuf</h4>
+                  <time datetime="2021-05-07">2021-05-07</time>
+                  <h4 class="title white no-margin">开发环境</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -161,6 +228,19 @@ Gridea 主页
                 <div class="overlay"></div>
               </article>
               
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/webpack-loaderguan-li-zi-yuan/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-05-06">2021-05-06</time>
+                  <h4 class="title white no-margin">loader：管理资源</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
               
 
                 <div class="clear"></div>
