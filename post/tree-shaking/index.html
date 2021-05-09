@@ -1,9 +1,8 @@
-<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>我的阅读 | hviker</title>
+<title>tree shaking | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -16,13 +15,13 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.8.0/dist/Bmdb.min.css">
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.8.0/dist/Bmdb.min.js'></script>
+    <meta name="description" content="1、原理
+​	tree shaking是基于es module的静态分析，在编译期间就确定了模块(module)使用情况，并且配合解构赋值能够确定module中哪些方法用到了，哪些没有用到。然后对用到的和没用到的进行标记，在压缩阶段删除没有..." />
+    <meta name="keywords" content="webpack" />
+    <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
-    <!-- start: #wrapper -->
-    <div class="wrapper">
-      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -89,14 +88,168 @@
         </div>
       </div>
 
-      <main id="friends" class="main fullcover no-sidebar content">
-        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-05-08"><i class="fa fa-calendar"></i><span class="lately">1 天前</span></time>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">tree shaking</h1>
+            </div>
+          </div>
+        </div>  
+
         <div class="epcl-page-wrapper">
-          <div class="section-content" style="margin-top:3em;"></div>
-        </div>
-        </div>
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="1-原理">1、原理</h3>
+<p>​	<code>tree shaking</code>是基于es module的静态分析，在编译期间就确定了模块(module)使用情况，并且配合解构赋值能够确定module中哪些方法用到了，哪些没有用到。然后对用到的和没用到的进行标记，在压缩阶段删除没有用到的部分。</p>
+<h3 id="2-作用">2、作用</h3>
+<p>删除项目中没有用到的代码，有针对性的优化代码来达到最小的bundle size。</p>
+<h3 id="3-基本使用">3、基本使用</h3>
+<p><strong>开发环境下</strong></p>
+<p>webpack.config.js设置mode、optimization.usedExports、devtool属性。</p>
+<pre><code class="language-js">module.exports = {
+  mode: 'development',
+  optimization: {
+    usedExports: true
+  },
+  devtool: 'inline-source-map',
+  entry: {
+    app: &quot;./src/index.js&quot;,
+  },
+  ...
+}
+</code></pre>
+<p>这里设置<code>devtool</code>为<code>inline-source-map</code>主要是为了以源代码的方式查看export使用情况。对于未使用的export，<code>optimization.usedExports</code>会添加<code>unused harmony export square</code>的注释</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1620463437499.png" alt="" loading="lazy"></figure>
+<p><strong>正式环境</strong></p>
+<p>webpack.config.js设置mode、optimization.usedExports、devtool属性。</p>
+<pre><code class="language-js">module.exports = {
+  mode: 'production',
+  optimization: {
+    usedExports: true
+  },
+  devtool: '(none)',
+}
+</code></pre>
+<p>mode设置为production后会开启压缩模式，查找压缩后代码中也只是引入了使用的代码。</p>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1620463450036.png" alt="" loading="lazy"></figure>
+<h3 id="4-使用tree-shaking的注意事项">4、使用tree shaking的注意事项</h3>
+<ul>
+<li>
+<p><strong>使用es module的模块规范，使用解构赋值。</strong></p>
+<p>tree shaking是机遇es module的静态分析，所以代码必须使用esm规范。我们在业务代码中一般都会基于esm规范，但是对于第三方的插件不一定，部分第三方插件基于commonJS规范。</p>
+</li>
+<li>
+<p><strong>开启optimization.usedExports属性。</strong></p>
+<pre><code class="language-js">optimization: {
+    usedExports: true
+  },
+</code></pre>
+<p>该属性主要是用于产生标记，标记哪些export使用到了，哪些export没有被使用到。</p>
+</li>
+<li>
+<p><strong>使用压缩插件。</strong></p>
+<p>webpack4+ 直接将mode设置为production即可开启压缩。</p>
+</li>
+<li>
+<p><strong>tree shaking只能做到export级别。</strong></p>
+<p>如果模块导出一个对象，我们在使用时可能只使用到了对象中的几个属性或者方法，这时候是不能被tree shaking作用的。</p>
+<p>为了更好地配合tree shaking，我们在编码过程中尽量不要export出对象使用，这样能够保证tree shaking打包成最小的bundle。</p>
+</li>
+<li>
+<p>不需要tree shaking的模块，可以在package.json中添加<code>sideEffects</code>进行配置。</p>
+<p>如果所有的模块都不包含副作用，可以直接将该属性设置为false，来告诉webpack可以安全删除未用到的export。</p>
+<p>如果有些模块有副作用，我们不想让webpack去删除这些export，可以在<code>sideEffects</code>中提供一个数组</p>
+<pre><code class="language-js">{
+  &quot;name&quot;: &quot;your-project&quot;,
+  &quot;sideEffects&quot;: [
+    &quot;./src/some-side-effectful-file.js&quot;,
+    &quot;*.css&quot;
+  ]
+}
+</code></pre>
+<blockquote>
+<p><em>注意，所有导入文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似</em> <code>css-loader</code> *并 import 一个 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="5-使用lodash-es-代替-lodash">5、使用lodash-es 代替 lodash</h3>
+<p>我们在项目中可能会使用到lodash的一些功能，进而引入了整个lodash,而lodash是基于commonJS的第三方包，即使使用解构赋值也不会触发tree shaking，导致打包的bundle体积会大很多。</p>
+<p>这里推荐使用lodash-es，lodash-es所提供的api与lodash相同，是基于ESM规范的。这里使用解构赋值的方式仅引入使用到的接口，很大程度上减小构建的bundle体积。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-05-07">2021-05-07</time>
+                  <h4 class="title white no-margin">模块热替换</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'f68ae8f71a2215243ce9',
+    clientSecret: '4425adb0890c433816522b291391cf173556ee5f',
+    repo: 'hviker.github.io',
+    owner: 'hviker',
+    admin: ['hviker'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
       </main>
-        <footer id="footer" class="grid-container">
+
+          <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -363,15 +516,9 @@
 
         
 
-    <script>
-    new Bmdb({
-      type: 'books',
-      selector: '.section-content',
-      secret: '',
-      noMoreText: '没有更多数据了',
-      limit: 30
-    })
-    </script>
+      
+    <script src="https://hviker.github.io/media/js/functions-post.js"></script>
+
     </div>
     <!-- end: #wrapper -->
   </body>

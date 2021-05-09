@@ -16,10 +16,10 @@
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
     <meta name="description" content="1 链式loader执行顺序
-一组链式的loader讲按照相反的顺序执行，从右到左。
+一组链式的loader按照相反的顺序执行，从右到左。
 链式的最后一个loader将转换过后的结果传递给前一个loader，以此类推。链中的第一个loader，返回webpack期望的js。
 2 管理资源
-对于..." />
+对于w..." />
     <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
@@ -81,7 +81,7 @@
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1620378923333" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1620563069195" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -96,7 +96,7 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-05-06"><i class="fa fa-calendar"></i><span class="lately">1 天前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-06"><i class="fa fa-calendar"></i><span class="lately">3 天前</span></time>
               
             </div>
             <div class="info">
@@ -116,7 +116,7 @@
               <section class="post-content">
                 <div class="text">
                   <h3 id="1-链式loader执行顺序">1 链式loader执行顺序</h3>
-<p>一组链式的loader讲按照相反的顺序执行，从右到左。</p>
+<p>一组链式的loader按照相反的顺序执行，从右到左。</p>
 <p>链式的最后一个loader将转换过后的结果传递给前一个loader，以此类推。链中的第一个loader，返回webpack期望的js。</p>
 <h3 id="2-管理资源">2 管理资源</h3>
 <p>对于webapack来说，默认只能打包js文件，或者说是js模块。</p>
@@ -142,10 +142,10 @@
 <p><strong>Q1: 为什么先引入style-loader,后引入css-loader ?</strong></p>
 <p>1、css-loader的作用： 帮助解析css文件中的css代码，除了正常的css代码外，还解析css中的@import、url(..)这种方法来实现require的功能，但是样式内容并没有添加到<code>&lt;style&gt;</code>中。</p>
 <p>2、style-loader的作用：帮助我们将css-loader解析后的内容包裹在<code>&lt;style&gt;</code>中，并添加到html的<code>&lt;head&gt;</code>中。</p>
-<p>3、loader执行顺序，从右往左。webpack肯定是现将所有css模块解析完成后再添加到style标签中，所有css-loader在后，style-loader在前。</p>
+<p>3、loader执行顺序，从右往左。webpack肯定是先将所有css模块解析完成后再添加到style标签中，所以css-loader在后，style-loader在前。</p>
 <h4 id="22-加载images图像">2.2 加载images图像</h4>
 <p>对于图片，不管是css中的background-image，还是<code>img</code>中的src，使用file-loader | url-loader进行处理。</p>
-<p>**file-loader解决了路径引入问题。**拿图片来说，webpack打包后这些图片的打包路径可能和编码中引入路径不一样，比如开发坏境中引入./images目录下的图片，但是打包却打包到./imgs文件夹下，设置更多文件夹嵌套，导致引用出现问题。file-loader会修改打包后图片的存储路径，首先会将图片移动到output所在文件夹，并且随机生成一个hash值座位图片的名字。并将打包后的图片名称返回import | require函数。</p>
+<p>file-loader解决了路径引入问题。拿图片来说，webpack打包后这些图片的打包路径可能和编码中引入路径不一样，比如开发坏境中引入./images目录下的图片，但是打包却打包到./imgs文件夹下，甚至设置很多文件夹嵌套，导致引用出现问题。file-loader会修改打包后图片的存储路径，首先会将图片移动到output所在文件夹，并且随机生成一个hash值作为图片的名字。并将打包后的图片名称返回import | require函数。</p>
 <pre><code class="language-js">{
   test: /\.(png|svg|jpe?g|gif)$/i,
     use: [
@@ -159,8 +159,8 @@
     ]
 }
 </code></pre>
-<p><code>file-loader</code>的常用配置项(options)</p>
-<p>name: 设置打包生成文件的名称。其中，<code>[name]</code>: 源文件名； <code>[hash]</code>: 随机生成的hash值,<code>:6</code> 表示生成的hash值截取前6位； <code>[ext]</code>: 源文件后缀； <strong>一定要用<code>&quot;&quot;</code>包裹。</strong></p>
+<p>file-loader的常用配置项(options)</p>
+<p><code>name</code>: 设置打包生成文件的名称。其中，<code>[name]</code>: 源文件名； <code>[hash]</code>: 随机生成的hash值,<code>:7</code> 表示生成的hash值截取前7位； <code>[ext]</code>: 源文件后缀； <strong>一定要用<code>&quot;&quot;</code>包裹。</strong></p>
 <p><code>outputPath</code>: 打包文件目录，相对路径，相对于output的设置。我们最终导出的文件路径为<code>output.path + file-loader.outputPath + file-loader.name</code>。例如上面images,会在dist文件夹下创建images文件夹并存储文件。</p>
 <p><code>publicPath</code>:指定最终引用的文件路径(打包生成的index.html文件里面引用资源的前缀)。最终引用文件路径：<code>output.outputPath + file-loader.outputPath + file-loader.name</code> 。例如访问文件路径为http://localhost:8080/dist/images,其中output.publicPath默认为/dist, 这里可以设置为<code>images/</code>。</p>
 <p>url-loader:https://www.npmjs.com/package/url-loader</p>
@@ -336,6 +336,21 @@
                   
                   
                   <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hviker.github.io/post/tree-shaking/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-05-08">2021-05-08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hviker.github.io/post/tree-shaking/">tree shaking</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
                     <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
@@ -350,7 +365,7 @@
                   
                   
                   
-                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
                     <a href="https://hviker.github.io/post/kai-fa-huan-jing/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
@@ -364,19 +379,6 @@
                   </article>
                   
                   
-                  
-                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/guan-li-shu-chu/" class="thumb hover-effect">
-                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
-                    </a>
-                    <div class="info gradient-effect">
-                      <time datetime="2021-05-07">2021-05-07</time>
-                      <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/guan-li-shu-chu/">管理输出</a>
-                      </h4>
-                    </div>
-                    <div class="clear"></div>
-                  </article>
                   
                   
                   
@@ -578,7 +580,7 @@
           <a href="https://hviker.github.io"><img src="/media/images/custom-footerLogo.png" alt=""></a>
         </div>
         <p class="published border-effect">
-          ©2019 共 60 篇文章
+          ©2019 共 61 篇文章
           <br/>
           Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
         </p>

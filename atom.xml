@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-05-07T09:15:26.456Z</updated>
+    <updated>2021-05-09T12:24:32.279Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[tree shaking]]></title>
+        <id>https://hviker.github.io/post/tree-shaking/</id>
+        <link href="https://hviker.github.io/post/tree-shaking/">
+        </link>
+        <updated>2021-05-08T08:43:35.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[模块热替换]]></title>
         <id>https://hviker.github.io/post/mo-kuai-re-ti-huan/</id>
@@ -72,12 +79,5 @@
         <link href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/">
         </link>
         <updated>2021-04-14T11:47:32.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[判断js变量类型的几种方法]]></title>
-        <id>https://hviker.github.io/post/typeof-yu-instanceof-de-qu-bie/</id>
-        <link href="https://hviker.github.io/post/typeof-yu-instanceof-de-qu-bie/">
-        </link>
-        <updated>2021-04-04T03:26:19.000Z</updated>
     </entry>
 </feed>
