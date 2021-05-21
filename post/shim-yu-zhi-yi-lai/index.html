@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IE下多个tab页(嵌套iframe)打开导致内存一直上涨 | hviker</title>
+<title>shim 预置依赖 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,11 +15,12 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="(1) 使用iframe时 ，确保公用一个iframe
-(2) ie下添加代码
-let mainframe = document.getElementById(&quot;mainFrame&quot;);
-this.src = &quot..." />
-    <meta name="keywords" content="解决方法,前端" />
+    <meta name="description" content="1、使用场景
+​	1.1 将一些第三方库作为全局依赖，例如jquery中的$, lodash中的_
+​	1.2 使用polyfill扩展浏览器能力，来支持更多的语法。
+2、预置全局依赖
+例如我们要引入lodash-es，我们需要使用到web..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -93,20 +94,18 @@ this.src = &quot..." />
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-01-13"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-11"><i class="fa fa-calendar"></i><span class="lately">10 天前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-0 ctag-nHH9c42oQ" aria-label="">解决方法</a>
-                    
-                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h1>
+              <h1 class="title ularge white bold">shim 预置依赖</h1>
             </div>
           </div>
         </div>  
@@ -116,13 +115,85 @@ this.src = &quot..." />
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>(1) 使用iframe时 ，确保公用一个iframe<br>
-(2) ie下添加代码</p>
-<p>let mainframe = document.getElementById(&quot;mainFrame&quot;);<br>
-this.src = &quot;about:blank&quot;; //src地址清空<br>
-mainframe.contentWindow.document.write(''); // 清空iframe内容<br>
-mainframe.contentWindow.close();<br>
-CollectGarbage();</p>
+                  <h3 id="1-使用场景">1、使用场景</h3>
+<p>​	1.1 将一些第三方库作为全局依赖，例如jquery中的$, lodash中的_</p>
+<p>​	1.2 使用polyfill扩展浏览器能力，来支持更多的语法。</p>
+<h3 id="2-预置全局依赖">2、预置全局依赖</h3>
+<p>例如我们要引入lodash-es，我们需要使用到webpack的ProvidePlugin()。在webpack.config,js中设置：</p>
+<pre><code class="language-js">const webpack = require('webpack');
+
+module.exports = {
+	plugins: [
+    new webpack.ProvidePlugin({
+            _:'lodash-es',
+            join: ['lodash-es', 'join']
+      }),
+  ]
+}
+</code></pre>
+<p>这里我们可以将整个lodash-es定义为<code>-</code>, 将其join()定义为<code>join</code>。这样在代码编译过程中，遇到- 或者 join就回去使用lodash-es。</p>
+<blockquote>
+<p>不建议使用全局依赖。使用全局依赖后，bundle中会整个引入第三方库，无法优化bundle打包方式。而且前端的模块化开发要求模块之间彼此隔离，不依赖于全局变量。</p>
+</blockquote>
+<h3 id="3-全局export">3、全局export</h3>
+<p>​	将某些不支持模块化规范的模块所声明的全局变量导出。使用exports-loader。</p>
+<pre><code class="language-js">npm install exports-loader --save-dev
+</code></pre>
+<p>webpack中配置</p>
+<pre><code class="language-js">module.exports = {
+  module: {
+    rules: [
+      {
+        test: path.resolve(__dirname, 'src/globals.js'),
+        use: &quot;exports-loader?file,parse=helpers.parse&quot;
+      },
+    ],
+  },
+}
+</code></pre>
+<p>这里使用exports-loader指定/src/globals.js，将file导出为file，helpers.parse导出为parse。</p>
+<p>globals.js</p>
+<pre><code class="language-js">var file = 'blah.txt'
+var helpers = {
+    test: () =&gt; { console.log('test') },
+    parse: () =&gt; { console.log('parse') }
+}
+</code></pre>
+<p>index.js</p>
+<pre><code class="language-js">import { file, parse } from './globals.js'
+function components() {
+    var dom = document.createElement('p');
+    dom.innerHTML = _.join(['123', 'webpack'], ' ');
+    var bar = document.createElement('br');
+    dom.appendChild(bar);
+    console.log(file);
+    parse();
+    return dom;
+}
+
+document.body.appendChild(components());
+</code></pre>
+<p>上面demo可以看到,globals.js是不符合模块化规范的，只是定义了几个全局变量，正常情况下无法在index.js中使用import()。</p>
+<p>通过exports-loader将globals.js导出并声明，这样就可以实现在全局内引用。</p>
+<h3 id="4-babel-polyfill">4、babel-polyfill</h3>
+<p>babel默认只转换新的js语法，但是不转换新的API，比如Map、Set、Promise，以及一些定义在全局对象上的方法，比如Array.from。如果想让这个方法运行，必须使用babel-polyfill,为当前环境提供一个垫片。</p>
+<p>polyfill指的是&quot;用于实现浏览器不支持原生功能的代码&quot;。比如对于不支持fetch函数的浏览器，需要在网页引入对应fetch的polyfill。然后这个polyfill就给window对象添加了一个fetch函数。</p>
+<pre><code class="language-js">npm install babel-polyfill --save
+</code></pre>
+<p>这里使用 --save而不是--save-dev，因为我们需要babel-polyfill在源代码之前运行，需要它成为一个dependencies,而不是一个devDependencies。</p>
+<p>然后在index.js最上面引入</p>
+<pre><code class="language-js"> import 'babel-polyfill'
+</code></pre>
+<p>对于fetch</p>
+<pre><code class="language-js">npm install --save whatwg-fetch
+
+
+import 'babel-polyfill';
+import 'whatwg-fetch';
+</code></pre>
+<blockquote>
+<p>shim/polyfill必须运行于所有其他代码之前，而且需要同步加载。下载第三方包是需要--save 而不是 --save-dev</p>
+</blockquote>
 
                 </div>
                 <div class="clear"></div>
@@ -132,26 +203,13 @@ CollectGarbage();</p>
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/chun-css-hui-zhi-ge-chong-san-jiao-xing.jpg');"></div>
-                 <a href="https://hviker.github.io/post/chun-css-hui-zhi-ge-chong-san-jiao-xing/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2020-03-19">2020-03-19</time>
-                  <h4 class="title white no-margin">纯CSS绘制各种三角形</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-12-31">2019-12-31</time>
-                  <h4 class="title white no-margin">vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法</h4>
+                  <time datetime="2021-05-11">2021-05-11</time>
+                  <h4 class="title white no-margin">webpack-bundle-analyzer使用</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">

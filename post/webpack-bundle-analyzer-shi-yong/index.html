@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IE下多个tab页(嵌套iframe)打开导致内存一直上涨 | hviker</title>
+<title>webpack-bundle-analyzer使用 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,11 +15,11 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="(1) 使用iframe时 ，确保公用一个iframe
-(2) ie下添加代码
-let mainframe = document.getElementById(&quot;mainFrame&quot;);
-this.src = &quot..." />
-    <meta name="keywords" content="解决方法,前端" />
+    <meta name="description" content="1、作用
+webpack的可视化资源分析工具。查看项目中各模块文件大小、定位模块包含内容，也能看到使用gzip压缩后的模块大小，进而对模块进行优化。
+2、安装及配置
+npm install --save-dev webpack-bundle..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -93,20 +93,18 @@ this.src = &quot..." />
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-01-13"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-11"><i class="fa fa-calendar"></i><span class="lately">10 天前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-0 ctag-nHH9c42oQ" aria-label="">解决方法</a>
-                    
-                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h1>
+              <h1 class="title ularge white bold">webpack-bundle-analyzer使用</h1>
             </div>
           </div>
         </div>  
@@ -116,13 +114,35 @@ this.src = &quot..." />
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>(1) 使用iframe时 ，确保公用一个iframe<br>
-(2) ie下添加代码</p>
-<p>let mainframe = document.getElementById(&quot;mainFrame&quot;);<br>
-this.src = &quot;about:blank&quot;; //src地址清空<br>
-mainframe.contentWindow.document.write(''); // 清空iframe内容<br>
-mainframe.contentWindow.close();<br>
-CollectGarbage();</p>
+                  <h3 id="1-作用">1、作用</h3>
+<p>webpack的可视化资源分析工具。查看项目中各模块文件大小、定位模块包含内容，也能看到使用gzip压缩后的模块大小，进而对模块进行优化。</p>
+<h3 id="2-安装及配置">2、安装及配置</h3>
+<pre><code class="language-js">npm install --save-dev webpack-bundle-analyzer
+</code></pre>
+<pre><code class="language-js">const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      analyzerHost: '127.0.0.1',
+      analyzerPort: '8888',
+      logLevel: 'info'
+    }),
+  ]
+}
+</code></pre>
+<p>package.json中设置</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;webpack-dev-server --open --config webpack.dev.js&quot;,
+    &quot;prod&quot;: &quot;webpack --config webpack.prod.js&quot;,
+    &quot;watch&quot;: &quot;webpack --watch&quot;,
+    &quot;start&quot;: &quot;webpack-dev-server --open&quot;,
+    &quot;build&quot;: &quot;webpack --config webpack.config.js&quot;,
+    &quot;server&quot;: &quot;node server.js&quot;,
+    &quot;analysis&quot;: &quot;NODE_ENV=production npm_config_report=true npm run prod&quot;
+  },
+</code></pre>
+<p>细节查看：https://www.npmjs.com/package/webpack-bundle-analyzer</p>
 
                 </div>
                 <div class="clear"></div>
@@ -133,11 +153,11 @@ CollectGarbage();</p>
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/chun-css-hui-zhi-ge-chong-san-jiao-xing.jpg');"></div>
-                 <a href="https://hviker.github.io/post/chun-css-hui-zhi-ge-chong-san-jiao-xing/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-03-19">2020-03-19</time>
-                  <h4 class="title white no-margin">纯CSS绘制各种三角形</h4>
+                  <time datetime="2021-05-11">2021-05-11</time>
+                  <h4 class="title white no-margin">shim 预置依赖</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -147,11 +167,11 @@ CollectGarbage();</p>
               
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/dai-ma-fen-chi/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-12-31">2019-12-31</time>
-                  <h4 class="title white no-margin">vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法</h4>
+                  <time datetime="2021-05-10">2021-05-10</time>
+                  <h4 class="title white no-margin">代码分离</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">

@@ -81,7 +81,7 @@
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1620564416391" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1621583011832" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -96,7 +96,7 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-05-06"><i class="fa fa-calendar"></i><span class="lately">3 天前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-06"><i class="fa fa-calendar"></i><span class="lately">15 天前</span></time>
               
             </div>
             <div class="info">
@@ -152,7 +152,7 @@
       {
         loader: &quot;file-loader&quot;,
         options: {
-          name: &quot;[name]_[hash:7].[ext]&quot;,
+          name: &quot;[name]_[contenthash:7].[ext]&quot;,
           outputPath: 'images/'
         }
       }
@@ -160,7 +160,7 @@
 }
 </code></pre>
 <p>file-loader的常用配置项(options)</p>
-<p><code>name</code>: 设置打包生成文件的名称。其中，<code>[name]</code>: 源文件名； <code>[hash]</code>: 随机生成的hash值,<code>:7</code> 表示生成的hash值截取前7位； <code>[ext]</code>: 源文件后缀； <strong>一定要用<code>&quot;&quot;</code>包裹。</strong></p>
+<p><code>name</code>: 设置打包生成文件的名称。其中，<code>[name]</code>: 源文件名； <code>[contenthash]</code>: 随机生成的hash值,<code>:7</code> 表示生成的hash值截取前7位； <code>[ext]</code>: 源文件后缀； <strong>一定要用<code>&quot;&quot;</code>包裹。</strong></p>
 <p><code>outputPath</code>: 打包文件目录，相对路径，相对于output的设置。我们最终导出的文件路径为<code>output.path + file-loader.outputPath + file-loader.name</code>。例如上面images,会在dist文件夹下创建images文件夹并存储文件。</p>
 <p><code>publicPath</code>:指定最终引用的文件路径(打包生成的index.html文件里面引用资源的前缀)。最终引用文件路径：<code>output.outputPath + file-loader.outputPath + file-loader.name</code> 。例如访问文件路径为http://localhost:8080/dist/images,其中output.publicPath默认为/dist, 这里可以设置为<code>images/</code>。</p>
 <p>url-loader:https://www.npmjs.com/package/url-loader</p>
@@ -336,13 +336,13 @@
                   
                   
                   <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/tree-shaking/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-08">2021-05-08</time>
+                      <time datetime="2021-05-11">2021-05-11</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/tree-shaking/">tree shaking</a>
+                        <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/">shim 预置依赖</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
@@ -351,13 +351,13 @@
                   
                   
                   <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-07">2021-05-07</time>
+                      <time datetime="2021-05-11">2021-05-11</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/">模块热替换</a>
+                        <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/">webpack-bundle-analyzer使用</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
@@ -366,17 +366,25 @@
                   
                   
                   <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/kai-fa-huan-jing/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/dai-ma-fen-chi/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-07">2021-05-07</time>
+                      <time datetime="2021-05-10">2021-05-10</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/kai-fa-huan-jing/">开发环境</a>
+                        <a href="https://hviker.github.io/post/dai-ma-fen-chi/">代码分离</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
                   </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   
                   
                   
@@ -580,7 +588,7 @@
           <a href="https://hviker.github.io"><img src="/media/images/custom-footerLogo.png" alt=""></a>
         </div>
         <p class="published border-effect">
-          ©2019 共 61 篇文章
+          ©2019 共 65 篇文章
           <br/>
           Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
         </p>

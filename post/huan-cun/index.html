@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IE下多个tab页(嵌套iframe)打开导致内存一直上涨 | hviker</title>
+<title>缓存  | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,11 +15,10 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="(1) 使用iframe时 ，确保公用一个iframe
-(2) ie下添加代码
-let mainframe = document.getElementById(&quot;mainFrame&quot;);
-this.src = &quot..." />
-    <meta name="keywords" content="解决方法,前端" />
+    <meta name="description" content="浏览器可以使用缓存技术来降低网页流量，从而使网站加载速度更快。
+但是我们在部署新版本时如果不更改资源名称，浏览器很可能认为资源没有被更新从而使用缓存版本。
+我们可以通过配置，确保webpack编译生成的文件能被浏览器缓存，而文件内容发生变化..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -93,20 +92,18 @@ this.src = &quot..." />
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-01-13"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-10"><i class="fa fa-calendar"></i><span class="lately">11 天前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-0 ctag-nHH9c42oQ" aria-label="">解决方法</a>
-                    
-                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h1>
+              <h1 class="title ularge white bold">缓存 </h1>
             </div>
           </div>
         </div>  
@@ -116,13 +113,56 @@ this.src = &quot..." />
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>(1) 使用iframe时 ，确保公用一个iframe<br>
-(2) ie下添加代码</p>
-<p>let mainframe = document.getElementById(&quot;mainFrame&quot;);<br>
-this.src = &quot;about:blank&quot;; //src地址清空<br>
-mainframe.contentWindow.document.write(''); // 清空iframe内容<br>
-mainframe.contentWindow.close();<br>
-CollectGarbage();</p>
+                  <p>浏览器可以使用缓存技术来降低网页流量，从而使网站加载速度更快。</p>
+<p>但是我们在部署新版本时如果不更改资源名称，浏览器很可能认为资源没有被更新从而使用缓存版本。</p>
+<p>我们可以通过配置，确保webpack编译生成的文件能被浏览器缓存，而文件内容发生变化后可以请求到新的文件。</p>
+<h3 id="1-可替换模板字符串substitution">1、可替换模板字符串（substitution）</h3>
+<p>利用<code>[contenthash]</code>可以<strong>根据资源内容</strong>创建出唯一的hash。当资源发生变化时，文件名称就会发生变化。</p>
+<pre><code class="language-js">module.exports = {
+	output: {
+    filename: &quot;[name].[contenthash].js&quot;,
+  },
+}
+</code></pre>
+<h3 id="2-提取引导模板runtime">2、提取引导模板(runtime)</h3>
+<p>使用optimization.runtimeChunk将runtime代码拆分出一个独立的chunk，将其设置为<code>single</code>来为所有的chunk创建一个runtime bundle。</p>
+<p>用于webpack优化。</p>
+<pre><code class="language-js">optimization: {
+    runtimeChunk: &quot;single&quot;,
+}
+</code></pre>
+<h3 id="3-提取第三方库">3、提取第三方库</h3>
+<p>一些第三方库很少修改，可以将第三方库提取到<code>vendor</code> chunk中。</p>
+<p>这样可以利用浏览器的偿还村机制，命中缓存来消除请求，并减少向server获取资源。</p>
+<p>通过设置splitChunks.cacheGroups进行设置。</p>
+<pre><code class="language-js">optimization: {
+  splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+}
+</code></pre>
+<h3 id="4-模块标识符">4、模块标识符</h3>
+<p>上面的代码中我们已经将chunk分为了app.[hash].js、runtime.[hash].js、vendor.[hash].js。其中vendor chunk主要是第三方库，我们希望能够利用浏览器缓存机制缓存起来提升页面的加载速度。但是目前每次打包后vendor.[hash].js的名称都会发生变化。</p>
+<ul>
+<li>app: 当自身内容修改后会发生变化</li>
+<li>runtime（manifest） ：当新增bundle时发生变化，比如在entry中新增入口，或者使用动态引入等。只要bundle出现修改就会发生变化。</li>
+<li>vendor: 随自身<code>module.id</code>的变化而变化。webpack打包时module.id使用自增长数字，当有新增|删除module模块时，module.id就会发生变化。</li>
+<li>我们在这里不希望module.id发生变化，使用webpack提供的 <a href="https://v4.webpack.docschina.org/plugins/hashed-module-ids-plugin"><code>HashedModuleIdsPlugin</code></a>，用于生产环境构建。</li>
+</ul>
+<pre><code class="language-js">const webpack = require(&quot;webpack&quot;);
+module.exports = {
+  plugins: [
+    new webpack.HashedModuleIdsPlugin()
+  ]
+}
+</code></pre>
+<p>这里是对module.id进行固定。如果对chunk.id固定需要自定义插件，参考：https://zhuanlan.zhihu.com/p/34110535</p>
 
                 </div>
                 <div class="clear"></div>
@@ -133,11 +173,11 @@ CollectGarbage();</p>
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/chun-css-hui-zhi-ge-chong-san-jiao-xing.jpg');"></div>
-                 <a href="https://hviker.github.io/post/chun-css-hui-zhi-ge-chong-san-jiao-xing/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/dai-ma-fen-chi/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-03-19">2020-03-19</time>
-                  <h4 class="title white no-margin">纯CSS绘制各种三角形</h4>
+                  <time datetime="2021-05-10">2021-05-10</time>
+                  <h4 class="title white no-margin">代码分离</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -147,11 +187,11 @@ CollectGarbage();</p>
               
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/tree-shaking/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-12-31">2019-12-31</time>
-                  <h4 class="title white no-margin">vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法</h4>
+                  <time datetime="2021-05-08">2021-05-08</time>
+                  <h4 class="title white no-margin">tree shaking</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">

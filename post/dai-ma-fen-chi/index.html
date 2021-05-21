@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IE下多个tab页(嵌套iframe)打开导致内存一直上涨 | hviker</title>
+<title>代码分离 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,11 +15,11 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="(1) 使用iframe时 ，确保公用一个iframe
-(2) ie下添加代码
-let mainframe = document.getElementById(&quot;mainFrame&quot;);
-this.src = &quot..." />
-    <meta name="keywords" content="解决方法,前端" />
+    <meta name="description" content="1、splitChunks
+使用SplitChunksPlugin 插件可以将公共的依赖模块提取到已有的 entry chunk 中，或者提取到一个新生成的 chunk。
+optimization: {
+    splitChunks: {..." />
+    <meta name="keywords" content="webpack" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -93,20 +93,18 @@ this.src = &quot..." />
       <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
         <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://hviker.github.io/post-images/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang.jpg');">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-01-13"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-10"><i class="fa fa-calendar"></i><span class="lately">11 天前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/nHH9c42oQ/" class="ctag ctag-0 ctag-nHH9c42oQ" aria-label="">解决方法</a>
-                    
-                      <a href="https://hviker.github.io/tag/qian-duan/" class="ctag ctag-1 ctag-qian-duan" aria-label="">前端</a>
+                      <a href="https://hviker.github.io/tag/VFjcKMN5n/" class="ctag ctag-0 ctag-VFjcKMN5n" aria-label="">webpack</a>
                     
               </div>
-              <h1 class="title ularge white bold">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h1>
+              <h1 class="title ularge white bold">代码分离</h1>
             </div>
           </div>
         </div>  
@@ -116,13 +114,60 @@ this.src = &quot..." />
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>(1) 使用iframe时 ，确保公用一个iframe<br>
-(2) ie下添加代码</p>
-<p>let mainframe = document.getElementById(&quot;mainFrame&quot;);<br>
-this.src = &quot;about:blank&quot;; //src地址清空<br>
-mainframe.contentWindow.document.write(''); // 清空iframe内容<br>
-mainframe.contentWindow.close();<br>
-CollectGarbage();</p>
+                  <h3 id="1-splitchunks">1、splitChunks</h3>
+<p>使用<a href="https://v4.webpack.docschina.org/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> 插件可以将公共的依赖模块提取到已有的 entry chunk 中，或者提取到一个新生成的 chunk。</p>
+<pre><code class="language-js">optimization: {
+    splitChunks: {
+      chunks: &quot;all&quot;
+    }
+ }
+</code></pre>
+<h3 id="2-动态导入">2、动态导入</h3>
+<pre><code class="language-javascript">btn.onclick = e =&gt; import(/* webpackChunkName: &quot;print&quot; */ &quot;./print&quot;).then(module =&gt; {
+        var print = module.default;
+        print();
+ })
+</code></pre>
+<p>推荐使用import() 实现动态引入。</p>
+<p>使用动态引入时，不需要在entry设置bundle入口，在output中设置chunkFilename，它决定了非入口chunk名称。</p>
+<pre><code class="language-js">output: {
+	chunkFilename: '[name].lazybundle.js',
+}
+</code></pre>
+<p>我们在import中使用了注释，注释中提供了webpackChunkName,这样会拆分出来命名为print.lazybundle.js的bundle。import() 会返回一个promise，所以需要.then()进行后续操作。这里也可使使用async、await来实现同步效果。</p>
+<blockquote>
+<p>当调用import()方法引用模块时，必须指向模块的.default值，因为它才是promise被处理后返回的实际的module对象。</p>
+</blockquote>
+<h3 id="3-预取-预加载模块prefetch-preload">3、预取、预加载模块(prefetch、preload)</h3>
+<p><code>预取(prefetch)</code>：表示用户在接下来的浏览中可能会用到对应的资源，提示浏览器在空闲的时候获取对应资源。获取资源后不解析。</p>
+<p>会生成以下代码并追加到头部，告诉浏览器在闲置时间加载...bundle.js</p>
+<pre><code class="language-html">&lt;link rel=&quot;prefetch&quot; href=&quot;...bundle.js&quot; /&gt;
+</code></pre>
+<p><code>预加载(preload)</code>: 下载资源后解析文件。</p>
+<p>预取与预加载区别</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>prefetch</th>
+<th>preload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>与父chunk执行顺序</td>
+<td>父chunk加载完成后才进行加载</td>
+<td>在父chunk加载时进行加载</td>
+</tr>
+<tr>
+<td>在浏览器中执行时间</td>
+<td>浏览器闲置时加载</td>
+<td>在父chunk加载时立即执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-懒加载">4、懒加载</h3>
+<p>将后续执行的代码从源代码中分离出来，在需要触发时再引入执行。具体见上述动态引入的例子。</p>
 
                 </div>
                 <div class="clear"></div>
@@ -133,11 +178,11 @@ CollectGarbage();</p>
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/chun-css-hui-zhi-ge-chong-san-jiao-xing.jpg');"></div>
-                 <a href="https://hviker.github.io/post/chun-css-hui-zhi-ge-chong-san-jiao-xing/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-03-19">2020-03-19</time>
-                  <h4 class="title white no-margin">纯CSS绘制各种三角形</h4>
+                  <time datetime="2021-05-11">2021-05-11</time>
+                  <h4 class="title white no-margin">webpack-bundle-analyzer使用</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -147,11 +192,11 @@ CollectGarbage();</p>
               
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/post-images/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vuews-zai-shua-xin-ye-mian-shi-shi-yong-beforedestroy-wu-fa-hong-fa-de-jie-jue-fang-fa/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/huan-cun/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2019-12-31">2019-12-31</time>
-                  <h4 class="title white no-margin">vue+ws在刷新页面时使用beforeDestroy无法触发的解决方法</h4>
+                  <time datetime="2021-05-10">2021-05-10</time>
+                  <h4 class="title white no-margin">缓存 </h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">

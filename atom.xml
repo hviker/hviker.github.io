@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-05-09T12:48:22.442Z</updated>
+    <updated>2021-05-21T07:43:34.325Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,34 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[shim 预置依赖]]></title>
+        <id>https://hviker.github.io/post/shim-yu-zhi-yi-lai/</id>
+        <link href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/">
+        </link>
+        <updated>2021-05-11T07:14:34.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[webpack-bundle-analyzer使用]]></title>
+        <id>https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/</id>
+        <link href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/">
+        </link>
+        <updated>2021-05-11T01:33:16.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[代码分离]]></title>
+        <id>https://hviker.github.io/post/dai-ma-fen-chi/</id>
+        <link href="https://hviker.github.io/post/dai-ma-fen-chi/">
+        </link>
+        <updated>2021-05-10T05:48:06.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[缓存 ]]></title>
+        <id>https://hviker.github.io/post/huan-cun/</id>
+        <link href="https://hviker.github.io/post/huan-cun/">
+        </link>
+        <updated>2021-05-10T01:47:31.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[tree shaking]]></title>
         <id>https://hviker.github.io/post/tree-shaking/</id>
@@ -51,33 +79,5 @@
         <link href="https://hviker.github.io/post/vue20-bu-fen-api-zheng-li-yi/">
         </link>
         <updated>2021-04-28T08:54:57.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Vue.directive]]></title>
-        <id>https://hviker.github.io/post/vue-yuan-ma-xue-xi-vuedirective/</id>
-        <link href="https://hviker.github.io/post/vue-yuan-ma-xue-xi-vuedirective/">
-        </link>
-        <updated>2021-04-27T08:24:52.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CSS设置滚动条样式(兼容IE)]]></title>
-        <id>https://hviker.github.io/post/css-she-zhi-gun-dong-tiao-yang-shi-jian-rong-ie/</id>
-        <link href="https://hviker.github.io/post/css-she-zhi-gun-dong-tiao-yang-shi-jian-rong-ie/">
-        </link>
-        <updated>2021-04-26T03:19:27.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[培训-ES语法]]></title>
-        <id>https://hviker.github.io/post/pei-xun-es-yu-fa/</id>
-        <link href="https://hviker.github.io/post/pei-xun-es-yu-fa/">
-        </link>
-        <updated>2021-04-21T12:44:49.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[培训-Git提交流程]]></title>
-        <id>https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/</id>
-        <link href="https://hviker.github.io/post/pei-xun-git-ti-jiao-liu-cheng/">
-        </link>
-        <updated>2021-04-14T11:47:32.000Z</updated>
     </entry>
 </feed>

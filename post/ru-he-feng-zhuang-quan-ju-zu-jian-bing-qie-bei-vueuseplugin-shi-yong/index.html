@@ -87,7 +87,7 @@
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1620564416391" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1621583011832" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -254,7 +254,45 @@ Vue.use(Dbutton);
 <p><strong>项目使用</strong></p>
 <p>项目上所使用的组件分为两种，全局组件和局部组件。局部组件在对应页面import后使用即可，全局组件去掉/dbutton/src/index.js，修改/dbutton/src/install.js的引入，改为import Dbutton from './src/main'; 即可。</p>
 </li>
+<li>
+<p><strong>如何开发插件</strong><br>
+Vue.js 要求插件应该有一个公开方法 install。这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象。<br>
+在 install 方法里面，便可以做相关的处理：<br>
+添加全局方法或者属性<br>
+添加全局资源：指令/过滤器/过渡等，<br>
+通过全局 mixin 方法添加一些组件选项，<br>
+添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。<br>
+一个库，提供自己的 API，同时提供上面提到的一个或多个功能</p>
+</li>
 </ol>
+<pre><code>MyPlugin.install = function (Vue, options) {
+  // 1. 添加全局方法或属性
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
+
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+    bind (el, binding, vnode, oldVnode) {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 3. 注入组件
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    // 逻辑...
+  }
+}
+</code></pre>
 
                 </div>
                 <div class="clear"></div>
@@ -338,13 +376,13 @@ Vue.use(Dbutton);
                   
                   
                   <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/tree-shaking/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-08">2021-05-08</time>
+                      <time datetime="2021-05-11">2021-05-11</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/tree-shaking/">tree shaking</a>
+                        <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/">shim 预置依赖</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
@@ -353,13 +391,13 @@ Vue.use(Dbutton);
                   
                   
                   <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-07">2021-05-07</time>
+                      <time datetime="2021-05-11">2021-05-11</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/mo-kuai-re-ti-huan/">模块热替换</a>
+                        <a href="https://hviker.github.io/post/webpack-bundle-analyzer-shi-yong/">webpack-bundle-analyzer使用</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
@@ -368,17 +406,25 @@ Vue.use(Dbutton);
                   
                   
                   <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://hviker.github.io/post/kai-fa-huan-jing/" class="thumb hover-effect">
+                    <a href="https://hviker.github.io/post/dai-ma-fen-chi/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
                     <div class="info gradient-effect">
-                      <time datetime="2021-05-07">2021-05-07</time>
+                      <time datetime="2021-05-10">2021-05-10</time>
                       <h4 class="title usmall">
-                        <a href="https://hviker.github.io/post/kai-fa-huan-jing/">开发环境</a>
+                        <a href="https://hviker.github.io/post/dai-ma-fen-chi/">代码分离</a>
                       </h4>
                     </div>
                     <div class="clear"></div>
                   </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   
                   
                   
@@ -582,7 +628,7 @@ Vue.use(Dbutton);
           <a href="https://hviker.github.io"><img src="/media/images/custom-footerLogo.png" alt=""></a>
         </div>
         <p class="published border-effect">
-          ©2019 共 61 篇文章
+          ©2019 共 65 篇文章
           <br/>
           Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
         </p>
