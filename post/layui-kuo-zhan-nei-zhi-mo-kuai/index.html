@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>arguments使用 | hviker</title>
+<title>layui扩展内置模块 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,21 +15,11 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="以类数组对象的形式存储函数实参。
-1、作用:
-
-
-获取实参。
-
-
-arguments.callee()方法返回当前方法，可以用于递归。
-
-
-let organizeArr = [
-  {
-    id: '01',
-    name: 'x..." />
-    <meta name="keywords" content="JS" />
+    <meta name="description" content="将公共代码提取，并以layui模块规范要求进行编写，封装成layui扩展模块，方便页面调用。
+1、扩展模块定义
+// commonSearch.js
+layui.define(['jquery', 'form', 'laydate'], f..." />
+    <meta name="keywords" content="layui" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -105,16 +95,16 @@ let organizeArr = [
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-03-01"><i class="fa fa-calendar"></i><span class="lately">3 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-05-27"><i class="fa fa-calendar"></i><span class="lately">1 分钟前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/OK2iMRMG6/" class="ctag ctag-0 ctag-OK2iMRMG6" aria-label="">JS</a>
+                      <a href="https://hviker.github.io/tag/WtDIIxiyz/" class="ctag ctag-0 ctag-WtDIIxiyz" aria-label="">layui</a>
                     
               </div>
-              <h1 class="title ularge white bold">arguments使用</h1>
+              <h1 class="title ularge white bold">layui扩展内置模块</h1>
             </div>
           </div>
         </div>  
@@ -124,74 +114,46 @@ let organizeArr = [
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>以类数组对象的形式存储函数实参。</p>
-<p><strong>1、作用:</strong></p>
-<ol>
-<li>
-<p>获取实参。</p>
-</li>
-<li>
-<p>arguments.callee()方法返回当前方法，可以用于递归。</p>
-</li>
-</ol>
-<pre><code class="language-javascript">let organizeArr = [
-  {
-    id: '01',
-    name: 'xiaoming',
-    children: [
-      {
-        id: '0101',
-        name: 'xiaoming1',
-        children: [
-          {
-            id: '010101',
-            name: 'xiaoming2',
-            children: []
-          }
-        ]
-      },
-      {
-        id: '0102',
-        name: 'xiaoming3',
-        children: [
-          {
-            id: '010201',
-            name: 'xiaoming4',
-            children: []
-          }
-        ]
-      }
-    ]
-  }
-]
-
-function printName(arr) {
-  console.log(arguements);
-  arr.forEach(item =&gt; {
-    console.log(item.name);
-    if(item.children &amp;&amp; Array.isArray(item.children)) {
-      // 这里递归
-      arguments.callee(item.children)
-    }
-  });
-}
-
-printName(organizeArr);
+                  <p>将公共代码提取，并以layui模块规范要求进行编写，封装成layui扩展模块，方便页面调用。</p>
+<h3 id="1-扩展模块定义">1、扩展模块定义</h3>
+<pre><code class="language-js">// commonSearch.js
+layui.define(['jquery', 'form', 'laydate'], function (exports) {
+	var commonSearch = {
+		getPersonIdentity: function() {
+			// todo
+		},
+		getTljDictory: function() {
+			// todo
+		},
+		// todo
+	}
+  exports('commonSearch', commonSearch)
+})
 </code></pre>
-<p><strong>2、转变成数组方法:toArray()</strong></p>
-<pre><code class="language-javascript">/**
- * 取自vue2.0源码 将一个类数组对象转化成数组
- * Convert an Array-like object to a real Array.
- */
-function toArray (list, start) {
-  start = start || 0;
-  var i = list.length - start;
-  var ret = new Array(i);
-  while (i--) {
-    ret[i] = list[i + start];
-  }
-  return ret
-}
+<p>使用<code>layui.define()</code>定义模块，其中<code>jquery</code>,<code>form</code>, <code>laydate</code>都是已经存在于layui中的内置模块，可以在该扩展组件中使用。</p>
+<p>这里定义了commonSearch对象，然后通过exports抛出变量。</p>
+<h3 id="2-注册">2、注册</h3>
+<pre><code class="language-js">// layui.baseExtend.js
+layui.config({
+    base: '/static/'
+    , version: '20190927'
+}).extend({
+    commonSearch: &quot;assets/js/commonSearch&quot;
+})
+</code></pre>
+<p>使用<code>layui.config().extend({...})</code>进行多个内置模块的注册。</p>
+<p><code>base</code>: 定义公共目录前缀，commonSearch的真实路径为/static/assets/js/commonSearch.js。</p>
+<p><code>extend()</code>:以对象的形式声明抛出模块的使用名称以及模块文件对应路径。</p>
+<p>官网中也可以使用use方法加载合并模块后的入口文件。</p>
+<h3 id="3-使用">3、使用</h3>
+<p>在script引入layui.js后引入layui.baseExtend.js</p>
+<pre><code class="language-html">&lt;script src=&quot;/static/assets/lib/layui2.4.5/layui.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/static/assets/js/layui.baseExtend.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>模块化引入使用</p>
+<pre><code class="language-js">layui.use(['layer','table','commonSearch'], function(){
+	// todo
+})
 </code></pre>
 
                 </div>
@@ -202,26 +164,13 @@ function toArray (list, start) {
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/gridea.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-03-16">2021-03-16</time>
-                  <h4 class="title white no-margin">vue强制跳转</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/qian-duan.jpg');"></div>
-                 <a href="https://hviker.github.io/post/el-table-biao-ge-he-bing/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/VFjcKMN5n.jpg');"></div>
+                 <a href="https://hviker.github.io/post/shim-yu-zhi-yi-lai/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2021-02-02">2021-02-02</time>
-                  <h4 class="title white no-margin">el-table表格合并</h4>
+                  <time datetime="2021-05-11">2021-05-11</time>
+                  <h4 class="title white no-margin">shim 预置依赖</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
