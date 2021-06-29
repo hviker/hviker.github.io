@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>如何封装全局组件并且被Vue.use(plugin) 使用 | hviker</title>
+<title>解决vue2.x 跳转报错Redirected when going from &#34;/xxx&#34; to &#34;/XXXX&#34; via a navigation guard.的问题 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,18 +15,11 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="1、首先我们要先了解下Vue.use(plugin)的用法。
-
-
-参数：
-
-{Object | Function} plugin
-
-
-
-用法：
-安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数..." />
-    <meta name="keywords" content="源码学习,elementUI2.0" />
+    <meta name="description" content="高版本vue-router在跳转时会有报错。
+解决：在router.js中添加代码
+const originalPush = Router.prototype.push
+Router.prototype.push = function pu..." />
+    <meta name="keywords" content="" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -102,18 +95,14 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-03-18"><i class="fa fa-calendar"></i><span class="lately">3 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-06-29"><i class="fa fa-calendar"></i><span class="lately">2 分钟前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/sPs52aHLl/" class="ctag ctag-0 ctag-sPs52aHLl" aria-label="">源码学习</a>
-                    
-                      <a href="https://hviker.github.io/tag/Ugt1CeixF/" class="ctag ctag-1 ctag-Ugt1CeixF" aria-label="">elementUI2.0</a>
-                    
               </div>
-              <h1 class="title ularge white bold">如何封装全局组件并且被Vue.use(plugin) 使用</h1>
+              <h1 class="title ularge white bold">解决vue2.x 跳转报错Redirected when going from &#34;/xxx&#34; to &#34;/XXXX&#34; via a navigation guard.的问题</h1>
             </div>
           </div>
         </div>  
@@ -123,174 +112,12 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <h3 id="1-首先我们要先了解下vueuseplugin的用法">1、首先我们要先了解下Vue.use(plugin)的用法。</h3>
-<ul>
-<li>
-<p><strong>参数</strong>：</p>
-<ul>
-<li><code>{Object | Function} plugin</code></li>
-</ul>
-</li>
-<li>
-<p><strong>用法</strong>：</p>
-<p>安装 Vue.js 插件。如果插件是一个对象，必须提供 <code>install</code> 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。</p>
-<p>该方法需要在调用 <code>new Vue()</code> 之前被调用。</p>
-<p>当 install 方法被同一个插件多次调用，插件将只会被安装一次。</p>
-</li>
-</ul>
-<p>下面是vue2.0源码，使用vue.use(plugins)其实是将plugin放到vue构造器的_installedPlugins属性里，防止重复安装，并且以Vue.component的方式做全局组件。</p>
-<pre><code class="language-javascript">Vue.use = function (plugin) {
-    // 获取vue构造器当前已经use的组件，如果组件已经存在则返回当前vue对象，避免同一组件重复use
-    var installedPlugins = (this._installedPlugins || (this._installedPlugins = []));
-    if (installedPlugins.indexOf(plugin) &gt; -1) {
-      return this
-    }
-
-    // additional parameters
-    // 将类数组对象转化成数组，满足apply(对象， 数组)
-    var args = toArray(arguments, 1);
-    args.unshift(this);
-    if (typeof plugin.install === 'function') {
-      plugin.install.apply(plugin, args);
-    } else if (typeof plugin === 'function') {
-      plugin.apply(null, args);
-    }
-    // 填充到vue的_installedPlugins中
-    installedPlugins.push(plugin);
-    return this
-  };
-</code></pre>
-<p><strong>plugin必须是个对象或者方法，对象的话必须存在install(), 方法的话默认该方法就是install();</strong></p>
-<h3 id="2-如何封装自己的组件">2、如何封装自己的组件</h3>
-<p>​	 这里分自写组件库使用和自己项目上使用。</p>
-<ol>
-<li>
-<p><strong>自写组件库使用</strong></p>
-<ol>
-<li>
-<p>参考element-ui，具体分层和代码如下</p>
-<p><strong>1) 按照包格式编写组件。</strong><br>
-内容：<br>
-<img src="https://hviker.github.io/post-images/1619079723825.png" alt="" loading="lazy"><br>
-<strong>2）各文件内容</strong></p>
-<p>/dbutton/src/main.vue</p>
-<pre><code class="language-vue">&lt;template&gt;
-  &lt;button class=&quot;btn&quot;&gt;点击&lt;/button&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: &quot;Dbutton&quot;, // 这里名称建议为组件包名称，首字母大写
-  components: {},
-  data() {
-    return {};
-  },
-  computed: {},
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {},
-};
-&lt;/script&gt;
-&lt;style lang='scss' scoped&gt;
-//@import url(); 引入公共css类
-.btn {
-  padding: 12px 20px;
-  font-size: 16px;
-  background: blue;
-  border-radius: 5px;
-  color: #ffffff;
-  &amp;:hover {
-    background: red;
-  }
-}
-&lt;/style&gt;
-</code></pre>
-<p>/dbutton/src/index.js</p>
-<pre><code class="language-javascript">import Dbutton from './src/main';
-
-// 给单独的组件添加install事件，便于按需注册
-Dbutton.install = Vue =&gt;{
-  Vue.component(Dbutton.name, Dbutton);
-}
-
-export default Dbutton;
-</code></pre>
-<p>/dbutton/src/install.js</p>
-<pre><code class="language-javascript">import Dbutton from './dbutton/index.js';
-// 这里为组件数组，便于install方法循环
-const commonComponnet = [
-    Dbutton
-]
-
-// 注册全局install方法，这里的install会循环遍历component,给vue实例注册全局组件
-const install = function (Vue, options = {}) {
-    commonComponnet.forEach(component =&gt; {
-        Vue.component(component.name, component)
-    })
-}
-
-// 导出对象，对象属性为各组件，以及install方法
-export default {
-    install,
-    Dbutton
-}
-</code></pre>
-<p><strong>3) main.js使用</strong></p>
-<p>全局引入。这里使用use不仅会调用全局的install(),也会调用各组件的install(),但是没有影响。vue.use()已经给我们做了处理，相同组件只允许注册一次。</p>
-<pre><code class="language-javascript">import HavikerUI from './components/install';
-Vue.use(HavikerUI);
-</code></pre>
-<p>局部引入。这样的话就只会调用Dbutton的install().</p>
-<pre><code class="language-javascript">import HavikerUI from './components/install';
-
-const { install, Dbutton } = HavikerUI;
-Vue.use(Dbutton);
-</code></pre>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>项目使用</strong></p>
-<p>项目上所使用的组件分为两种，全局组件和局部组件。局部组件在对应页面import后使用即可，全局组件去掉/dbutton/src/index.js，修改/dbutton/src/install.js的引入，改为import Dbutton from './src/main'; 即可。</p>
-</li>
-<li>
-<p><strong>如何开发插件</strong><br>
-Vue.js 要求插件应该有一个公开方法 install。这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象。<br>
-在 install 方法里面，便可以做相关的处理：<br>
-添加全局方法或者属性<br>
-添加全局资源：指令/过滤器/过渡等，<br>
-通过全局 mixin 方法添加一些组件选项，<br>
-添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。<br>
-一个库，提供自己的 API，同时提供上面提到的一个或多个功能</p>
-</li>
-</ol>
-<pre><code>MyPlugin.install = function (Vue, options) {
-  // 1. 添加全局方法或属性
-  Vue.myGlobalMethod = function () {
-    // 逻辑...
-  }
-
-  // 2. 添加全局资源
-  Vue.directive('my-directive', {
-    bind (el, binding, vnode, oldVnode) {
-      // 逻辑...
-    }
-    ...
-  })
-
-  // 3. 注入组件
-  Vue.mixin({
-    created: function () {
-      // 逻辑...
-    }
-    ...
-  })
-
-  // 4. 添加实例方法
-  Vue.prototype.$myMethod = function (methodOptions) {
-    // 逻辑...
-  }
+                  <p>高版本vue-router在跳转时会有报错。<br>
+解决：在router.js中添加代码</p>
+<pre><code>const originalPush = Router.prototype.push
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) { return originalPush.call(this, location, onResolve, onReject) }
+  return originalPush.call(this, location).catch((err) =&gt; err)
 }
 </code></pre>
 
@@ -302,26 +129,13 @@ Vue.js 要求插件应该有一个公开方法 install。这个方法的第一�
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/1ZVkdNUAB.jpg');"></div>
-                 <a href="https://hviker.github.io/post/gong-cheng-hua-zhu-ce-quan-ju-zu-jian/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-03-20">2021-03-20</time>
-                  <h4 class="title white no-margin">工程化注册Vue全局组件</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/gridea.jpg');"></div>
-                 <a href="https://hviker.github.io/post/vue-qiang-zhi-tiao-zhuan/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/WtDIIxiyz.jpg');"></div>
+                 <a href="https://hviker.github.io/post/layui-kuo-zhan-nei-zhi-mo-kuai/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2021-03-16">2021-03-16</time>
-                  <h4 class="title white no-margin">vue强制跳转</h4>
+                  <time datetime="2021-05-27">2021-05-27</time>
+                  <h4 class="title white no-margin">layui扩展内置模块</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
