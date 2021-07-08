@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>v-model动态绑定实例 | hviker</title>
+<title>桌面通知 Notification API | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,15 +15,12 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="1、需求
-页面样式
-
-前后端传递的数据格式
-
-2、描述
-页面需要在该区域显示当前所有的化学成分，同时前后端传递的数据格式要求是object。
-很无脑费力的一种方法是有N种化学元素，页面绘制N个元素、N*2个input框，然年后data中对应..." />
-    <meta name="keywords" content="vue" />
+    <meta name="description" content="1、介绍
+Notification 是H5新增的桌面通知API，用于向用户通知信息，即使用户没有停留在当前标签页，甚至是最小化了浏览器，该通知信息也会置顶显示出来。
+2、用户权限
+需要获取到用户权限后才能向用户显示。
+Notificatio..." />
+    <meta name="keywords" content="" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -99,16 +96,14 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-09-17"><i class="fa fa-calendar"></i><span class="lately">10 个月前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-07-08"><i class="fa fa-calendar"></i><span class="lately">1 分钟前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/GXfbDeMZV/" class="ctag ctag-0 ctag-GXfbDeMZV" aria-label="">vue</a>
-                    
               </div>
-              <h1 class="title ularge white bold">v-model动态绑定实例</h1>
+              <h1 class="title ularge white bold">桌面通知 Notification API</h1>
             </div>
           </div>
         </div>  
@@ -118,56 +113,90 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <h3 id="1-需求">1、需求</h3>
-<p><strong>页面样式</strong></p>
-<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1607069346983.png" alt="" loading="lazy"></figure>
-<p><strong>前后端传递的数据格式</strong></p>
-<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1607069352844.png" alt="" loading="lazy"></figure>
-<h3 id="2-描述">2、描述</h3>
-<p>页面需要在该区域显示当前所有的化学成分，同时前后端传递的数据格式要求是object。</p>
-<p>很无脑费力的一种方法是有N种化学元素，页面绘制N个元素、N*2个input框，然年后data中对应变量的Composition属性中定义N个max、N个min。有这种做法的人可以考虑把脑子扔掉了。且不说绘制及绑定有多麻烦，后期拓展也是问题。</p>
-<p>第二种，循环遍历化学元素表，动态生成页面。在v-mode绑定属性值时进行动态拼接。例如下面的addMarkInfoForm.Composition[item.type + 'min']。这就提供给我们一个新思路，v-model的值是可以动态绑定的。</p>
-<pre><code>&lt;ul class=&quot;compositionList clearfix&quot;&gt;
-	 &lt;li v-for=&quot;item in tempChemicalElementList&quot; :key=&quot;item.key&quot;	class=&quot;addmaterialInput&quot;&gt;
-     &lt;span&gt;{{ item.value }}:&lt;/span&gt;
-     &lt;el-input type=&quot;number&quot; 
-     v-model=&quot;addMarkInfoForm.Composition[item.type + 'min']&quot; placeholder=&quot;min&quot; /&gt;~
-     &lt;el-input type=&quot;number&quot;
-     v-model=&quot;addMarkInfoForm.Composition[item.type + 'max']&quot; placeholder=&quot;max&quot; /&gt;
-     &lt;/li&gt;
-&lt;/ul&gt;
+                  <h2 id="1-介绍">1、介绍</h2>
+<p>Notification 是H5新增的桌面通知API，用于向用户通知信息，即使用户没有停留在当前标签页，甚至是最小化了浏览器，该通知信息也会置顶显示出来。</p>
+<h2 id="2-用户权限">2、用户权限</h2>
+<p>需要获取到用户权限后才能向用户显示。</p>
+<p>Notification.permission 该属性用户表明当前通知显示的授权状态，值包括：</p>
+<ul>
+<li>
+<p>default: 不知道用户的选择，默认。</p>
+</li>
+<li>
+<p>granted: 用户允许。</p>
+</li>
+<li>
+<p>denied: 用户拒绝。</p>
+</li>
+</ul>
+<pre><code class="language-js">if(Notification.permission === 'granted'){
+    console.log('用户允许通知');
+}else if(Notification.permission === 'denied'){
+    console.log('用户拒绝通知');
+}else{
+    console.log('用户还没选择，去向用户申请权限吧');
+}
 </code></pre>
-<p>同样，在可编辑动态表格(动态表头，可编辑)中，也可以使用v-model绑定动态列的prop</p>
-<pre><code>&lt;el-table :data=&quot;tableData&quot; fit style=&quot;width: 100%;&quot;&gt;
-       &lt;el-table-column label=&quot;序号&quot; align=&quot;center&quot; width=&quot;60&quot;&gt;
-        &lt;template slot-scope=&quot;{ $index }&quot;&gt;
-          {{ $index + 1 }}
-        &lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;el-table-column 
-      v-for=&quot;item in tableLabel&quot;
-      :key=&quot;item.prop&quot;
-      :label=&quot;item.label&quot;
-      align=&quot;center&quot;
-      &gt;
-       &lt;template slot-scope=&quot;{ row }&quot;&gt;
-           &lt;el-input v-model=&quot;row[item.prop]&quot; placeholder=&quot;请输入&quot; clearable&gt;&lt;/el-input&gt;
-       &lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;el-table-column label=&quot;检测结果&quot; width=&quot;90&quot; align=&quot;center&quot;&gt;
-           &lt;template slot-scope=&quot;{ row, $index}&quot;&gt;
-               &lt;el-button
-                size=&quot;mini&quot;
-                type=&quot;danger&quot;
-                @click=&quot;handleDelete(row,$index)&quot;
-                icon=&quot;el-icon-delete&quot;
-                title=&quot;删除&quot;
-                &gt;
-               &lt;/el-button&gt;
-           &lt;/template&gt;
-      &lt;/el-table-column&gt;
-   &lt;/el-table&gt;
+<h2 id="3-请求权限">3、请求权限</h2>
+<p>当不知道用户选择时，我们需要向用户请求权限。Notification提供了requestPermission() 方法请求用户当前来源的权限以显示通知。</p>
+<pre><code class="language-js">Notification.requestPermission().then(permission =&gt; {
+  if(permission === 'granted'){
+          console.log('用户允许通知');
+    }else if(permission === 'denied'){
+          console.log('用户拒绝通知');
+    }
+})
 </code></pre>
+<h2 id="4-推送通知">4、推送通知</h2>
+<p>当获取用户权限后就可以推送通知了。</p>
+<pre><code class="language-js">var notification = new Notification(title, options);
+</code></pre>
+<ul>
+<li>title: 要显示的标题</li>
+<li>options: 通知的设置选项(可选)
+<ul>
+<li>body: 通知的内容。</li>
+<li>tag: 代表通知的一个识别标签，相同tag时只会打开同一个通知窗口。</li>
+<li>icon:要在通知中显示的图标的URL。</li>
+<li>image: 要在通知中显示的图片的URL。</li>
+<li>data：想要和通知关联的任务类型的数据。</li>
+<li>requireInteration: 通知保持有效不自动关闭，默认为false。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-js">var notification = new Notification(NOTIFICATION_TITLE, {
+        body: NOTIFICATION_BODY,
+        icon: 'http://img18.house365.com/newcms/2017/03/16/148964317858ca26aacf7b5.jpg',
+  			data: {
+          url: 'https://www.baidu.com/'
+        }
+        requireInteraction: true, // 不自动关闭通知 
+    })
+</code></pre>
+<h2 id="5-关闭通知">5、关闭通知</h2>
+<p>获取notification实例后，调用.close();</p>
+<h2 id="6-事件触发及data方法获取">6、事件触发及data方法获取</h2>
+<pre><code class="language-js">var notification = new Notification(NOTIFICATION_TITLE, {
+    body: NOTIFICATION_BODY,
+    icon: 'http://img18.house365.com/newcms/2017/03/16/148964317858ca26aacf7b5.jpg',
+    requireInteraction: true, // 不自动关闭通知 
+    data: {
+        url: 'https://www.baidu.com/'
+    }
+}).onclick = () =&gt; {
+    window.open(notification.data.url, '_blank');
+    notification.close();
+}
+</code></pre>
+<h2 id="7-兼容">7、兼容</h2>
+<p>不兼容IE，其他的PC端浏览器几乎全支持。</p>
+<p>移动端浏览器不支持。</p>
+<h2 id="8-显示">8、显示</h2>
+<p>这里以mac为例</p>
+<figure data-type="image" tabindex="1"><img src="https://hviker.github.io/post-images/1625716697901.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://hviker.github.io/post-images/1625716703441.png" alt="" loading="lazy"></figure>
+<h2 id="9-应用场景">9、应用场景</h2>
+<p>消息推送</p>
 
                 </div>
                 <div class="clear"></div>
@@ -177,26 +206,13 @@
 
             <section class="related section">
               
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/z2AsGhmT2.jpg');"></div>
-                 <a href="https://hviker.github.io/post/echarts-di-er-ci-hui-zhi-xian-shi-kong-bai-de-jie-jue-fang-an/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2020-09-19">2020-09-19</time>
-                  <h4 class="title white no-margin">echarts第二次绘制显示空白的解决方案</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/WeNhJHfo1.jpg');"></div>
-                 <a href="https://hviker.github.io/post/element-ui-zu-jian-zheng-li/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/gridea.jpg');"></div>
+                 <a href="https://hviker.github.io/post/jie-jue-vue2x-tiao-zhuan-bao-cuo-redirected-when-going-from-xxx-to-xxxx-via-a-navigation-guardde-wen-ti/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-09-14">2020-09-14</time>
-                  <h4 class="title white no-margin">vue文件上传</h4>
+                  <time datetime="2021-06-29">2021-06-29</time>
+                  <h4 class="title white no-margin">解决vue2.x 跳转报错Redirected when going from &#34;/xxx&#34; to &#34;/XXXX&#34; via a navigation guard.的问题</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
