@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>纯CSS绘制各种三角形 | hviker</title>
+<title>echarts图添加分割线 | hviker</title>
 <meta name="description" content="心游于艺，道不远人。" />
 <link rel="shortcut icon" href="https://hviker.github.io/favicon.ico">
 <link rel="stylesheet" href="https://hviker.github.io/styles/main.css">
@@ -15,10 +15,12 @@
 <script src="https://hviker.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://hviker.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="纯 CSS 实现绘制各种三角形（各种角度）
-一、前言
-三角形实现原理：宽度width为0；height为0；（1）有一条横竖边（上下左右）的设置为border-方向：长度 solid red，这个画的就是底部的直线。其他边使用border-..." />
-    <meta name="keywords" content="CSS" />
+    <meta name="description" content="series: [
+                {
+                type: 'bar',
+                barWidth: 12, // 柱子宽度
+                showBackg..." />
+    <meta name="keywords" content="echarts" />
     <script src="https://hviker.github.io/media/js/waterfall.min.js"></script>
     <script src="https://hviker.github.io/media/js/prism.min.js"></script>
   </head>
@@ -94,16 +96,16 @@
         <div class="center content">
           <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
             <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2020-03-19"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              <time class="meta-info" style="float:left;" datetime="2021-07-14"><i class="fa fa-calendar"></i><span class="lately">12 天前</span></time>
               
             </div>
             <div class="info">
               <div class="tags ">
                 
-                      <a href="https://hviker.github.io/tag/j1qkahhB3/" class="ctag ctag-0 ctag-j1qkahhB3" aria-label="">CSS</a>
+                      <a href="https://hviker.github.io/tag/z2AsGhmT2/" class="ctag ctag-0 ctag-z2AsGhmT2" aria-label="">echarts</a>
                     
               </div>
-              <h1 class="title ularge white bold">纯CSS绘制各种三角形</h1>
+              <h1 class="title ularge white bold">echarts图添加分割线</h1>
             </div>
           </div>
         </div>  
@@ -113,78 +115,44 @@
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>纯 CSS 实现绘制各种三角形（各种角度）<br>
-一、前言</p>
-<p>三角形实现原理：宽度width为0；height为0；（1）有一条横竖边（上下左右）的设置为border-方向：长度 solid red，这个画的就是底部的直线。其他边使用border-方向：长度 solid transparent。（2）有两个横竖边（上下左右）的设置，若斜边是在三角形的右边，这时候设置top或bottom的直线，和右边的斜线。若斜边是在三角形的左边，这时候设置top或bottom的直线，和左边的斜线。</p>
-<p>二、实现</p>
-<p>2.1 Triangle Up</p>
-<p><img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C9.png" alt="" loading="lazy"><br>
-#triangle-up {<br>
-width: 0;<br>
-height: 0;<br>
-border-left: 50px solid transparent;<br>
-border-right: 50px solid transparent;<br>
-border-bottom: 100px solid red;<br>
-}</p>
-<p>2.2 Triangle Down</p>
-<p><img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C10.png" alt="" loading="lazy"><br>
-#triangle-down {<br>
-width: 0;<br>
-height: 0;<br>
-border-left: 50px solid transparent;<br>
-border-right: 50px solid transparent;<br>
-border-top: 100px solid red;<br>
-}</p>
-<p>2.3 Triangle Left</p>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C11.png" alt="" loading="lazy"></figure>
-<p>#triangle-left {<br>
-width: 0;<br>
-height: 0;<br>
-border-top: 50px solid transparent;<br>
-border-right: 100px solid red;<br>
-border-bottom: 50px solid transparent;<br>
-}</p>
-<p>2.4 Triangle Right<br>
-<img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C12.png" alt="img" loading="lazy"><br>
-#triangle-right {<br>
-width: 0;<br>
-height: 0;<br>
-border-top: 50px solid transparent;<br>
-border-left: 100px solid red;<br>
-border-bottom: 50px solid transparent;<br>
-}</p>
-<p>2.5 Triangle Top Left</p>
-<p><img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C13.png" alt="img" loading="lazy"><br>
-#triangle-topleft {<br>
-width: 0;<br>
-height: 0;<br>
-border-top: 100px solid red;<br>
-border-right: 100px solid transparent;<br>
-}</p>
-<p>2.6 Triangle Top Right<br>
-<img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C14.png" alt="img" loading="lazy"></p>
-<p>#triangle-topright {<br>
-width: 0;<br>
-height: 0;<br>
-border-top: 100px solid red;<br>
-border-left: 100px solid transparent;</p>
-<p>}</p>
-<p>2.7 Triangle Bottom Left<br>
-<img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C15.png" alt="" loading="lazy"></p>
-<p>#triangle-bottomleft {<br>
-width: 0;<br>
-height: 0;<br>
-border-bottom: 100px solid red;<br>
-border-right: 100px solid transparent;<br>
-}</p>
-<p>2.8 Triangle Bottom Right<br>
-<img src="C:%5CUsers%5C13298%5CDesktop%5Cgirdea%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%5Cbg%5C16.png" alt="img" loading="lazy"></p>
-<p>#triangle-bottomright {<br>
-width: 0;<br>
-height: 0;<br>
-border-bottom: 100px solid red;<br>
-border-left: 100px solid transparent;<br>
-}</p>
+                  <pre><code>series: [
+                {
+                type: 'bar',
+                barWidth: 12, // 柱子宽度
+                showBackground: true,
+                backgroundStyle: {
+                    color: '#F9FBFC',
+                },
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [6, 6, 0, 0], // 圆角（左上、右上、右下、左下）
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,  [{
+                            offset: 0,
+                            color: '#1283DD' // 0% 处的颜色
+                        }, {
+                            offset: 1,
+                            color: '#ABD8EF' // 100% 处的颜色
+                        }], false), // 渐变
+                    }
+                },
+                data: valData
+            },{
+                    show: true,
+                    type: 'pictorialBar',
+                    symbol: 'rect',
+                    symbolSize: [12, 1], //图形元素的尺寸
+                    symbolMargin: 30,
+                    symbolRepeat: 'repeat',
+                    itemStyle: {
+                        color: '#ffffff'
+                    },
+                    barWidth: 192, // 统计条宽度
+                    z: 3,
+                    data: maxCountArr,
+                }
+]
+</code></pre>
+<p>其中maxCountArr为 柱状图最大值， n条柱为Arr[n]</p>
 
                 </div>
                 <div class="clear"></div>
@@ -195,11 +163,11 @@ border-left: 100px solid transparent;<br>
             <section class="related section">
               
               <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/j1qkahhB3.jpg');"></div>
-                 <a href="https://hviker.github.io/post/css-shi-xian-dan-xing-duo-xing-wen-ben-yi-chu-xian-shi-sheng-lue-hao/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/zSVOYgve1.jpg');"></div>
+                 <a href="https://hviker.github.io/post/dm8-an-zhuang-xie-zai-chuang-jian-shi-li-qi-dong-fu-wu-ke-shi-hua-gong-ju-lian-jie/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-03-20">2020-03-20</time>
-                  <h4 class="title white no-margin">CSS实现单行、多行文本溢出显示省略号</h4>
+                  <time datetime="2021-07-26">2021-07-26</time>
+                  <h4 class="title white no-margin">dm8安装、卸载、创建实例、启动服务、可视化工具连接</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
@@ -209,11 +177,11 @@ border-left: 100px solid transparent;<br>
               
               
               <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/nHH9c42oQ.jpg');"></div>
-                 <a href="https://hviker.github.io/post/ie-xia-duo-ge-tab-ye-qian-tao-iframeda-kai-dao-zhi-nei-cun-yi-zhi-shang-zhang/" class="full-link"></a>
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hviker.github.io/media/images/qian-duan.jpg');"></div>
+                 <a href="https://hviker.github.io/post/zhuo-mian-tong-zhi-notification-api/" class="full-link"></a>
                  <div class="info">
-                  <time datetime="2020-01-13">2020-01-13</time>
-                  <h4 class="title white no-margin">IE下多个tab页(嵌套iframe)打开导致内存一直上涨</h4>
+                  <time datetime="2021-07-08">2021-07-08</time>
+                  <h4 class="title white no-margin">桌面通知 Notification API</h4>
                 </div>
                  <span class="epcl-button red">
                   <img src="https://hviker.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
