@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hviker.github.io</id>
     <title>hviker</title>
-    <updated>2021-07-14T03:25:13.517Z</updated>
+    <updated>2021-07-26T10:06:27.762Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hviker.github.io"/>
     <link rel="self" href="https://hviker.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://hviker.github.io/images/avatar.png</logo>
     <icon>https://hviker.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, hviker</rights>
+    <entry>
+        <title type="html"><![CDATA[dm8安装、卸载、创建实例、启动服务、可视化工具连接]]></title>
+        <id>https://hviker.github.io/post/dm8-an-zhuang-xie-zai-chuang-jian-shi-li-qi-dong-fu-wu-ke-shi-hua-gong-ju-lian-jie/</id>
+        <link href="https://hviker.github.io/post/dm8-an-zhuang-xie-zai-chuang-jian-shi-li-qi-dong-fu-wu-ke-shi-hua-gong-ju-lian-jie/">
+        </link>
+        <updated>2021-07-26T10:00:31.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[桌面通知 Notification API]]></title>
         <id>https://hviker.github.io/post/zhuo-mian-tong-zhi-notification-api/</id>
@@ -72,12 +79,5 @@
         <link href="https://hviker.github.io/post/mo-kuai-re-ti-huan/">
         </link>
         <updated>2021-05-07T08:39:41.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[开发环境]]></title>
-        <id>https://hviker.github.io/post/kai-fa-huan-jing/</id>
-        <link href="https://hviker.github.io/post/kai-fa-huan-jing/">
-        </link>
-        <updated>2021-05-07T07:47:18.000Z</updated>
     </entry>
 </feed>
